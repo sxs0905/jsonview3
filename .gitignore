@@ -1,0 +1,23 @@
+# Common #
+class
+.class
+
+# Maven #
+target/
+
+# IDEA #
+.idea/
+*.iml
+
+# Eclipse #
+.settings/
+.classpath
+.project
+
+# Other #
+logs
+.mymetadata
+.checkstyle
+.war
+.zip
+rebel.xml
