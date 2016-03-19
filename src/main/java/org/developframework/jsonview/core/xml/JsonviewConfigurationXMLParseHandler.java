@@ -2,6 +2,7 @@ package org.developframework.jsonview.core.xml;
 
 import java.util.Stack;
 
+import org.developframework.jsonview.core.element.ArrayElement;
 import org.developframework.jsonview.core.element.ContainerElement;
 import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.core.element.Jsonview;
@@ -34,31 +35,37 @@ public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		super.startElement(uri, localName, qName, attributes);
 		switch (qName) {
-			case "property" : {
+			case "property": {
 				String bind = attributes.getValue("bind").trim();
-				PropertyElement propertyElement = new PropertyElement(bind);
-				if (stack.peek() instanceof ContainerElement) {
-					((ContainerElement) stack.peek()).addElement(propertyElement);
-				}
+				ContainerElement containerElement = (ContainerElement) stack.peek();
+				PropertyElement propertyElement = new PropertyElement(containerElement.getExpression(), bind);
+				containerElement.addElement(propertyElement);
 			}
 			break;
-			case "object" : {
+			case "object": {
 				String bind = attributes.getValue("bind").trim();
-				ObjectElement objectElement = new ObjectElement(bind);
-				if (stack.peek() instanceof ContainerElement) {
-					((ContainerElement) stack.peek()).addElement(objectElement);
-				}
+				ContainerElement containerElement = (ContainerElement) stack.peek();
+				ObjectElement objectElement = new ObjectElement(containerElement.getExpression(), bind);
+				containerElement.addElement(objectElement);
 				stack.push(objectElement);
 			}
 			break;
-			case "jsonview" : {
+			case "array": {
+				String bind = attributes.getValue("bind").trim();
+				ContainerElement containerElement = (ContainerElement) stack.peek();
+				ArrayElement arrayElement = new ArrayElement(containerElement.getExpression(), bind);
+				containerElement.addElement(arrayElement);
+				stack.push(arrayElement);
+			}
+			break;
+			case "jsonview": {
 				String id = attributes.getValue("id").trim();
 				Jsonview jsonview = new Jsonview(id);
 				stack.push(jsonview);
 			}
 			break;
-			case "jsonview-package" : {
-				String namespace = attributes.getValue("namespace");
+			case "jsonview-package": {
+				String namespace = attributes.getValue("namespace").trim();
 				tempJsonviewPackage = new JsonviewPackage(namespace);
 			}
 			break;
@@ -69,11 +76,15 @@ public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		super.endElement(uri, localName, qName);
 		switch (qName) {
-			case "object" : {
+			case "object": {
 				stack.pop();
 			}
 			break;
-			case "jsonview" : {
+			case "array": {
+				stack.pop();
+			}
+			break;
+			case "jsonview": {
 				Jsonview jsonview = (Jsonview) stack.pop();
 				if (tempJsonviewPackage.containsKey(jsonview.getId())) {
 					throw new ResourceNotUniqueException(String.format("Jsonview id \"%s\" already exists.", jsonview.getId()));
@@ -81,7 +92,7 @@ public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 				tempJsonviewPackage.push(jsonview);
 			}
 			break;
-			case "jsonview-package" : {
+			case "jsonview-package": {
 				configuration.addJsonviewPackage(tempJsonviewPackage);
 			}
 			break;
