@@ -1,8 +1,9 @@
 <jsonview-configuration>
-	<jsonview-package namespace="xxx">
+	<jsonview-package namespace="namespace">
 		<jsonview id="id">
-			<array bind="arraybind" alias="">
-				<property bind="pbind"></property>
+			<array bind="users">
+				<property bind="id"></property>
+				<property bind="name"></property>
 			</array>
 		</jsonview>
 	</jsonview-package>

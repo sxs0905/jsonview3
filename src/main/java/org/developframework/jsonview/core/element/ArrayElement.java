@@ -1,6 +1,11 @@
 package org.developframework.jsonview.core.element;
 
-import org.apache.commons.lang3.StringUtils;
+import org.developframework.jsonview.core.processor.ArrayProcessor;
+import org.developframework.jsonview.core.processor.Context;
+import org.developframework.jsonview.core.processor.Processor;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 
 public class ArrayElement extends ContainerElement {
 
@@ -9,10 +14,7 @@ public class ArrayElement extends ContainerElement {
 	}
 
 	@Override
-	protected String createExpression(String parentExpression, String bind) {
-		if (bind.startsWith("#")) {
-			return bind.substring(1) + bind + "[%d]";
-		}
-		return StringUtils.isBlank(parentExpression) ? (bind + "[%d]") : (parentExpression + "." + bind + "[%d]");
+	public Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode) {
+		return new ArrayProcessor(context, this, (ArrayNode) jsonNode);
 	}
 }

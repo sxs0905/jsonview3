@@ -18,4 +18,16 @@ public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> 
 
 	protected abstract void process(Processor<? extends Element, ? extends JsonNode> parentProcessor);
 
+	public Context getContext() {
+		return context;
+	}
+
+	public ELEMENT getElement() {
+		return element;
+	}
+
+	public NODE getNode() {
+		return node;
+	}
+
 }

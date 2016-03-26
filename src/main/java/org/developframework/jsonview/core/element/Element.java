@@ -1,6 +1,10 @@
 package org.developframework.jsonview.core.element;
 
 import org.apache.commons.lang3.StringUtils;
+import org.developframework.jsonview.core.processor.Context;
+import org.developframework.jsonview.core.processor.Processor;
+
+import com.fasterxml.jackson.databind.JsonNode;
 
 public abstract class Element {
 
@@ -14,6 +18,8 @@ public abstract class Element {
 	}
 
 	protected abstract String createExpression(String parentExpression, String bind);
+
+	public abstract Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode);
 
 	public String showName() {
 		if (StringUtils.isNoneBlank(alias)) {
