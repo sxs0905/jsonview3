@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public abstract class ContainerProcessor<ELEMENT extends ContainerElement, NODE extends JsonNode> extends Processor<ELEMENT, NODE> {
 
-	public ContainerProcessor(Context context, ELEMENT element, NODE node) {
-		super(context, element, node);
+	public ContainerProcessor(Context context, ELEMENT element, NODE node, String parentExpression) {
+		super(context, element, node, parentExpression);
 	}
 
 }

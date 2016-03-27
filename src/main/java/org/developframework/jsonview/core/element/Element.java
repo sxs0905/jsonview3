@@ -10,16 +10,12 @@ public abstract class Element {
 
 	protected String bind;
 	protected String alias;
-	protected String expression;
 
-	public Element(String parentExpression, String bind) {
+	public Element(String bind) {
 		this.bind = bind;
-		this.expression = createExpression(parentExpression, bind);
 	}
 
-	protected abstract String createExpression(String parentExpression, String bind);
-
-	public abstract Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode);
+	public abstract Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode, String parentExpression);
 
 	public String showName() {
 		if (StringUtils.isNoneBlank(alias)) {
@@ -42,10 +38,6 @@ public abstract class Element {
 
 	public void setAlias(String alias) {
 		this.alias = alias;
-	}
-
-	public String getExpression() {
-		return expression;
 	}
 
 }

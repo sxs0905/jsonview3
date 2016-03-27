@@ -6,5 +6,8 @@
 				<property bind="name"></property>
 			</array>
 		</jsonview>
+		<jsonview id="test-str">
+			<array bind="str"></array>
+		</jsonview>
 	</jsonview-package>
 </jsonview-configuration>

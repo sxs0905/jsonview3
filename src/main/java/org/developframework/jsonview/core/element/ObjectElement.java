@@ -9,13 +9,17 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ObjectElement extends ContainerElement {
 
-	public ObjectElement(String parentExpression, String bind) {
-		super(parentExpression, bind);
+	public ObjectElement() {
+		super(null);
+	}
+
+	public ObjectElement(String bind) {
+		super(bind);
 	}
 
 	@Override
-	public Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode) {
-		return new ObjectProcessor(context, this, (ObjectNode) jsonNode);
+	public Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode, String expression) {
+		return new ObjectProcessor(context, this, (ObjectNode) jsonNode, expression);
 	}
 
 }

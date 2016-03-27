@@ -10,19 +10,19 @@ public class ImportElement extends Element {
 	private String namespace;
 	private String id;
 
-	public ImportElement(String namespace, String id, String parentExpression) {
-		super(parentExpression, null);
+	public ImportElement(String namespace, String id) {
+		super(null);
 		this.namespace = namespace;
 		this.id = id;
 	}
 
-	@Override
-	protected String createExpression(String parentExpression, String bind) {
-		return parentExpression;
-	}
+	// @Override
+	// protected String createExpression(String parentExpression, String bind) {
+	// return parentExpression;
+	// }
 
 	@Override
-	public Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode) {
+	public Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode, String parentExpression) {
 		return null;
 	}
 

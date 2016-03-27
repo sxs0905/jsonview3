@@ -1,8 +1,9 @@
 package test;
 
+import org.developframework.jsonview.core.JsonCreator;
+import org.developframework.jsonview.core.JsonviewFactory;
 import org.developframework.jsonview.data.DataModel;
 import org.developframework.jsonview.data.HashDataModel;
-import org.developframework.jsonview.utils.ExpressionUtils;
 
 public class Main {
 
@@ -20,16 +21,19 @@ public class Main {
 				}
 		};
 
-		// JsonviewFactory factory = new
-		// JsonviewFactory("/jsonview/jsonview-demo.xml");
-		// JsonCreator jsonCreator = factory.getJsonCreator();
+		String[] str = new String[]{
+				"aaa", "bbb", "ccc"
+		};
+
+		JsonviewFactory factory = new JsonviewFactory("/jsonview/jsonview-demo.xml");
+		JsonCreator jsonCreator = factory.getJsonCreator();
 		DataModel dataModel = new HashDataModel();
 		dataModel.putData("user", user1);
 		dataModel.putData("users", users);
+		dataModel.putData("str", str);
 		// System.out.println(dataModel.getData("users[1].likes[1].name"));
-		System.out.println(ExpressionUtils.getValue(user1, "name"));
-		// String json = jsonCreator.createJson(dataModel, "namespace", "id");
-		// System.out.println(json);
+		String json = jsonCreator.createJson(dataModel, "namespace", "test-str");
+		System.out.println(json);
 	}
 
 }
