@@ -1,23 +1,30 @@
 package org.developframework.jsonview.core.processor;
 
 import org.developframework.jsonview.core.element.JsonviewConfiguration;
+import org.developframework.jsonview.data.DataModel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import ognl.OgnlContext;
 
 public class Context {
 
 	private ObjectMapper objectMapper;
-	private OgnlContext ognlContext;
+	private DataModel dataModel;
 	private JsonviewConfiguration jsonviewConfiguration;
 
-	public OgnlContext getOgnlContext() {
-		return ognlContext;
+	public ObjectMapper getObjectMapper() {
+		return objectMapper;
 	}
 
-	public void setOgnlContext(OgnlContext ognlContext) {
-		this.ognlContext = ognlContext;
+	public void setObjectMapper(ObjectMapper objectMapper) {
+		this.objectMapper = objectMapper;
+	}
+
+	public DataModel getDataModel() {
+		return dataModel;
+	}
+
+	public void setDataModel(DataModel dataModel) {
+		this.dataModel = dataModel;
 	}
 
 	public JsonviewConfiguration getJsonviewConfiguration() {
@@ -26,14 +33,6 @@ public class Context {
 
 	public void setJsonviewConfiguration(JsonviewConfiguration jsonviewConfiguration) {
 		this.jsonviewConfiguration = jsonviewConfiguration;
-	}
-
-	public ObjectMapper getObjectMapper() {
-		return objectMapper;
-	}
-
-	public void setObjectMapper(ObjectMapper objectMapper) {
-		this.objectMapper = objectMapper;
 	}
 
 }

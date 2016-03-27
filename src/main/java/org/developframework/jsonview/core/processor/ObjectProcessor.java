@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import org.developframework.jsonview.core.element.ArrayElement;
 import org.developframework.jsonview.core.element.Element;
+import org.developframework.jsonview.core.element.ImportElement;
 import org.developframework.jsonview.core.element.ObjectElement;
 import org.developframework.jsonview.core.element.PropertyElement;
 
@@ -26,18 +27,17 @@ public class ObjectProcessor extends ContainerProcessor<ObjectElement, ObjectNod
 	}
 
 	private Processor<? extends Element, ? extends JsonNode> checkNextProcessor(Element element, Element childElement) {
-		Processor<? extends Element, ? extends JsonNode> nextProcessor = null;
+		JsonNode jsonNode = null;
 		if (childElement instanceof PropertyElement) {
 
-			nextProcessor = new PropertyProcessor(context, (PropertyElement) childElement);
 		} else if (childElement instanceof ObjectElement) {
-
-			ObjectNode objectNode = node.putObject(childElement.showName());
-			nextProcessor = new ObjectProcessor(context, (ObjectElement) childElement, objectNode);
+			jsonNode = node.putObject(childElement.showName());
 		} else if (childElement instanceof ArrayElement) {
+			jsonNode = node.putArray(childElement.showName());
+		} else if (childElement instanceof ImportElement) {
 
 		}
-		return nextProcessor;
+		return childElement.createProcessor(context, jsonNode);
 	}
 
 }
