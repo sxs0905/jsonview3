@@ -14,7 +14,7 @@ public class PropertyProcessor extends Processor<PropertyElement, JsonNode> {
 	@Override
 	protected void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
 
-		System.out.println("÷¥–– Ù–‘");
+		System.out.println("property");
 	}
 
 }
