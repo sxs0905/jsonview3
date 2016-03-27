@@ -35,7 +35,7 @@ public class ObjectProcessor extends ContainerProcessor<ObjectElement, ObjectNod
 		} else if (childElement instanceof ArrayElement) {
 			jsonNode = node.putArray(childElement.showName());
 		} else if (childElement instanceof ImportElement) {
-
+			jsonNode = node;
 		}
 		return childElement.createProcessor(context, jsonNode, expression);
 	}

@@ -8,11 +8,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 public abstract class Element {
 
-	protected String bind;
+	protected String data;
 	protected String alias;
 
-	public Element(String bind) {
-		this.bind = bind;
+	public Element(String data) {
+		this.data = data;
 	}
 
 	public abstract Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode, String parentExpression);
@@ -21,15 +21,16 @@ public abstract class Element {
 		if (StringUtils.isNoneBlank(alias)) {
 			return alias;
 		}
-		return bind;
+		final int dotLastIndex = data.lastIndexOf(".");
+		return dotLastIndex == -1 ? data : data.substring(dotLastIndex + 1);
 	}
 
-	public String getBind() {
-		return bind;
+	public String getData() {
+		return data;
 	}
 
-	public void setBind(String bind) {
-		this.bind = bind;
+	public void setData(String data) {
+		this.data = data;
 	}
 
 	public String getAlias() {

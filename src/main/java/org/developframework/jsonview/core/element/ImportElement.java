@@ -1,9 +1,11 @@
 package org.developframework.jsonview.core.element;
 
 import org.developframework.jsonview.core.processor.Context;
+import org.developframework.jsonview.core.processor.ImportProcessor;
 import org.developframework.jsonview.core.processor.Processor;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ImportElement extends Element {
 
@@ -16,14 +18,9 @@ public class ImportElement extends Element {
 		this.id = id;
 	}
 
-	// @Override
-	// protected String createExpression(String parentExpression, String bind) {
-	// return parentExpression;
-	// }
-
 	@Override
 	public Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode, String parentExpression) {
-		return null;
+		return new ImportProcessor(context, this, (ObjectNode) jsonNode, parentExpression);
 	}
 
 	public String getId() {

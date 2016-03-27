@@ -39,15 +39,15 @@ public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> 
 		if (element.isChildEmpty()) {
 			empty(index);
 		} else {
-			ObjectNode objectNode = super.context.getObjectMapper().createObjectNode();
-			ObjectInArrayProcessor childProcessor = new ObjectInArrayProcessor(context, element.getChildObjectElement(), objectNode, expression, index);
+			final ObjectNode objectNode = super.context.getObjectMapper().createObjectNode();
+			final ObjectInArrayProcessor childProcessor = new ObjectInArrayProcessor(context, element.getChildObjectElement(), objectNode, expression, index);
 			childProcessor.process(null);
 			node.add(objectNode);
 		}
 	}
 
 	private void empty(int index) {
-		Object object = context.getDataModel().getData(expression + "[" + index + "]");
+		final Object object = context.getDataModel().getData(expression + "[" + index + "]");
 		if (Objects.isNull(object)) {
 			node.addNull();
 		} else if (object instanceof String) {

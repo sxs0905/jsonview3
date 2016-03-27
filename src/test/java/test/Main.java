@@ -31,8 +31,7 @@ public class Main {
 		dataModel.putData("user", user1);
 		dataModel.putData("users", users);
 		dataModel.putData("str", str);
-		// System.out.println(dataModel.getData("users[1].likes[1].name"));
-		String json = jsonCreator.createJson(dataModel, "namespace", "test-str");
+		String json = jsonCreator.createJson(dataModel, "namespace", "test-user");
 		System.out.println(json);
 	}
 

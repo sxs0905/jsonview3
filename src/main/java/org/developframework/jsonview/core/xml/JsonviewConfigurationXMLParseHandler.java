@@ -2,9 +2,11 @@ package org.developframework.jsonview.core.xml;
 
 import java.util.Stack;
 
+import org.apache.commons.lang3.StringUtils;
 import org.developframework.jsonview.core.element.ArrayElement;
 import org.developframework.jsonview.core.element.ContainerElement;
 import org.developframework.jsonview.core.element.Element;
+import org.developframework.jsonview.core.element.ImportElement;
 import org.developframework.jsonview.core.element.Jsonview;
 import org.developframework.jsonview.core.element.JsonviewConfiguration;
 import org.developframework.jsonview.core.element.JsonviewPackage;
@@ -36,36 +38,45 @@ public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 		super.startElement(uri, localName, qName, attributes);
 		switch (qName) {
 			case "property" : {
-				String bind = attributes.getValue("bind").trim();
-				ContainerElement containerElement = (ContainerElement) stack.peek();
-				PropertyElement propertyElement = new PropertyElement(bind);
+				final String data = attributes.getValue("data").trim();
+				final ContainerElement containerElement = (ContainerElement) stack.peek();
+				final PropertyElement propertyElement = new PropertyElement(data);
 				containerElement.addElement(propertyElement);
 			}
 			break;
 			case "object" : {
-				String bind = attributes.getValue("bind").trim();
-				ContainerElement containerElement = (ContainerElement) stack.peek();
-				ObjectElement objectElement = new ObjectElement(bind);
+				final String data = attributes.getValue("data").trim();
+				final ContainerElement containerElement = (ContainerElement) stack.peek();
+				final ObjectElement objectElement = new ObjectElement(data);
 				containerElement.addElement(objectElement);
 				stack.push(objectElement);
 			}
 			break;
 			case "array" : {
-				String bind = attributes.getValue("bind").trim();
-				ContainerElement containerElement = (ContainerElement) stack.peek();
-				ArrayElement arrayElement = new ArrayElement(bind);
+				final String data = attributes.getValue("data").trim();
+				final ContainerElement containerElement = (ContainerElement) stack.peek();
+				final ArrayElement arrayElement = new ArrayElement(data);
 				containerElement.addElement(arrayElement);
 				stack.push(arrayElement);
 			}
 			break;
+			case "import" : {
+				final String id = attributes.getValue("id").trim();
+				String namespace = attributes.getValue("namespace");
+				namespace = StringUtils.isNotBlank(namespace) ? namespace.trim() : tempJsonviewPackage.getNamespace();
+				final ImportElement importElement = new ImportElement(namespace, id);
+				final ContainerElement containerElement = (ContainerElement) stack.peek();
+				containerElement.addElement(importElement);
+			}
+			break;
 			case "jsonview" : {
-				String id = attributes.getValue("id").trim();
+				final String id = attributes.getValue("id").trim();
 				Jsonview jsonview = new Jsonview(id);
 				stack.push(jsonview);
 			}
 			break;
 			case "jsonview-package" : {
-				String namespace = attributes.getValue("namespace").trim();
+				final String namespace = attributes.getValue("namespace").trim();
 				tempJsonviewPackage = new JsonviewPackage(namespace);
 			}
 			break;

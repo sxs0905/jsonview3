@@ -20,7 +20,7 @@ public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> 
 	}
 
 	protected String createExpression(String parentExpression) {
-		return StringUtils.isBlank(parentExpression) ? element.getBind() : (parentExpression + "." + element.getBind());
+		return StringUtils.isBlank(parentExpression) ? element.getData() : (parentExpression + "." + element.getData());
 	}
 
 	protected abstract void process(Processor<? extends Element, ? extends JsonNode> parentProcessor);

@@ -1,13 +1,17 @@
 <jsonview-configuration>
 	<jsonview-package namespace="namespace">
-		<jsonview id="id">
-			<array bind="users">
-				<property bind="id"></property>
-				<property bind="name"></property>
-			</array>
+		<jsonview id="test-user">
+			<object data="user">
+				<import id="user-detail"/>
+			</object>
 		</jsonview>
-		<jsonview id="test-str">
-			<array bind="str"></array>
+
+		<jsonview id="user-detail">
+			<property data="id"></property>
+			<property data="name"></property>
+			<array data="likes">
+				<property data="name"></property>
+			</array>
 		</jsonview>
 	</jsonview-package>
 </jsonview-configuration>
