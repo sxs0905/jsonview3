@@ -1,9 +1,10 @@
 <jsonview-configuration>
 	<jsonview-package namespace="namespace">
 		<jsonview id="test-user">
-			<object data="user">
-				<import id="user-detail"/>
-			</object>
+			<class data="user" class-name="test.User">
+				<ignore-property name="likes" />
+				<ignore-property name="map" />
+			</class>
 		</jsonview>
 		<jsonview id="user-detail">
 			<property data="#strName"></property>

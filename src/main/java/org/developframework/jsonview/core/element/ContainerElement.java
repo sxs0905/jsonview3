@@ -20,15 +20,6 @@ public abstract class ContainerElement extends Element {
 		return childElements.iterator();
 	}
 
-	// @Override
-	// protected String createExpression(String parentExpression, String bind) {
-	// if (bind.startsWith("#")) {
-	// return bind.substring(1) + bind;
-	// }
-	// return StringUtils.isBlank(parentExpression) ? bind : (parentExpression +
-	// "." + bind);
-	// }
-
 	public boolean isChildEmpty() {
 		return childElements.isEmpty();
 	}

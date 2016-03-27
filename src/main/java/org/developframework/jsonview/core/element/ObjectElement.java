@@ -13,8 +13,8 @@ public class ObjectElement extends ContainerElement {
 		super(null);
 	}
 
-	public ObjectElement(String bind) {
-		super(bind);
+	public ObjectElement(String data) {
+		super(data);
 	}
 
 	@Override

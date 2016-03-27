@@ -4,6 +4,7 @@ import java.util.Stack;
 
 import org.apache.commons.lang3.StringUtils;
 import org.developframework.jsonview.core.element.ArrayElement;
+import org.developframework.jsonview.core.element.ClassElement;
 import org.developframework.jsonview.core.element.ContainerElement;
 import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.core.element.ImportElement;
@@ -12,6 +13,7 @@ import org.developframework.jsonview.core.element.JsonviewConfiguration;
 import org.developframework.jsonview.core.element.JsonviewPackage;
 import org.developframework.jsonview.core.element.ObjectElement;
 import org.developframework.jsonview.core.element.PropertyElement;
+import org.developframework.jsonview.exception.JsonviewParseXmlException;
 import org.developframework.jsonview.exception.ResourceNotUniqueException;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -67,6 +69,19 @@ public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 				final ImportElement importElement = new ImportElement(namespace, id);
 				final ContainerElement containerElement = (ContainerElement) stack.peek();
 				containerElement.addElement(importElement);
+			}
+			break;
+			case "class" : {
+				final String data = attributes.getValue("data").trim();
+				final String className = attributes.getValue("class-name").trim();
+				try {
+					Class<?> clazz = Class.forName(className);
+					ClassElement classElement = new ClassElement(data, clazz);
+					final ContainerElement containerElement = (ContainerElement) stack.peek();
+					containerElement.addElement(classElement);
+				} catch (ClassNotFoundException e) {
+					throw new JsonviewParseXmlException(String.format("Class \"%s\" is not found, please check configuration file.", className));
+				}
 			}
 			break;
 			case "jsonview" : {
