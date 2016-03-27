@@ -21,8 +21,34 @@ public abstract class Element {
 		if (StringUtils.isNoneBlank(alias)) {
 			return alias;
 		}
+		String data = ignoreHeadSign(this.data);
 		final int dotLastIndex = data.lastIndexOf(".");
-		return dotLastIndex == -1 ? data : data.substring(dotLastIndex + 1);
+		data = dotLastIndex == -1 ? data : data.substring(dotLastIndex + 1);
+		return camelCaseToUnderline(data);
+	}
+
+	private final String ignoreHeadSign(String data) {
+		if (data.startsWith("#")) {
+			return data.substring(1);
+		}
+		return data;
+	}
+
+	private final String camelCaseToUnderline(String camelCaseStr) {
+		final StringBuffer sb = new StringBuffer();
+		for (int i = 0, size = camelCaseStr.length(); i < size; i++) {
+			char ch = camelCaseStr.charAt(i);
+			if (ch >= 'A' && ch <= 'Z') {
+				if (i == 0) {
+					sb.append((char) (ch + 32));
+				} else {
+					sb.append('_').append((char) (ch + 32));
+				}
+			} else {
+				sb.append(ch);
+			}
+		}
+		return sb.toString();
 	}
 
 	public String getData() {

@@ -21,16 +21,12 @@ public class Main {
 				}
 		};
 
-		String[] str = new String[]{
-				"aaa", "bbb", "ccc"
-		};
-
 		JsonviewFactory factory = new JsonviewFactory("/jsonview/jsonview-demo.xml");
 		JsonCreator jsonCreator = factory.getJsonCreator();
 		DataModel dataModel = new HashDataModel();
 		dataModel.putData("user", user1);
 		dataModel.putData("users", users);
-		dataModel.putData("str", str);
+		dataModel.putData("strName", "xxxxxxxx");
 		String json = jsonCreator.createJson(dataModel, "namespace", "test-user");
 		System.out.println(json);
 	}

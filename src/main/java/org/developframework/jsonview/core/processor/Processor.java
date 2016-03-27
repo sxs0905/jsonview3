@@ -20,6 +20,9 @@ public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> 
 	}
 
 	protected String createExpression(String parentExpression) {
+		if (element.getData().startsWith("#")) {
+			return element.getData().substring(1);
+		}
 		return StringUtils.isBlank(parentExpression) ? element.getData() : (parentExpression + "." + element.getData());
 	}
 

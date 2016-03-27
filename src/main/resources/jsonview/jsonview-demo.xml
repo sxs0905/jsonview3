@@ -5,8 +5,8 @@
 				<import id="user-detail"/>
 			</object>
 		</jsonview>
-
 		<jsonview id="user-detail">
+			<property data="#strName"></property>
 			<property data="id"></property>
 			<property data="name"></property>
 			<array data="likes">
