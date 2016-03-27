@@ -4,58 +4,101 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Objects;
 
+import org.apache.commons.lang3.StringUtils;
 import org.developframework.jsonview.exception.JsonviewException;
 import org.developframework.jsonview.exception.JsonviewExpressionException;
 
+/**
+ * 表达式取值工具
+ * 
+ * @author qiushui
+ *
+ */
 public final class ExpressionUtils {
 
+	private static final String REGEX_ARRAY = "^\\w*(\\[\\d+\\])+$";
+
 	private ExpressionUtils() {
-		throw new AssertionError("No org.developframework.jsonview.utils.ExpressionUtils instances for you!");
+		throw new AssertionError("No " + getClass().getName() + " instances for you!");
 	}
 
+	/**
+	 * 根据表达式从对象中提取值
+	 * 
+	 * @param source
+	 * @param expression
+	 * @return
+	 */
 	public static Object getValue(Object source, String expression) {
 		int dotIndex = expression.indexOf(".");
 		if (dotIndex == -1) {
 			return getPropertyValue(source, expression);
 		}
-		String property = expression.substring(0, dotIndex);
-		String surplusExpression = expression.substring(dotIndex + 1);
-		Object value = getPropertyValue(source, property);
+		final String property = expression.substring(0, dotIndex);
+		final String surplusExpression = expression.substring(dotIndex + 1);
+		final Object value = getPropertyValue(source, property);
 		if (Objects.isNull(value)) {
 			return null;
 		}
 		return getValue(value, surplusExpression);
 	}
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * 根据属性名取值
+	 * 
+	 * @param source
+	 * @param property
+	 * @return
+	 */
 	private static Object getPropertyValue(Object source, String property) {
 		if (Objects.isNull(source))
 			return null;
+		if (property.matches(REGEX_ARRAY)) {
+			Object value = getPropertyValueFromArray(source, property);
+			property = StringUtils.substringAfter(property, "]");
+			if (property.isEmpty()) {
+				return value;
+			}
+			return getValue(value, property);
+		}
+		return getPropertyValueFromObjectOrMap(source, property);
+	}
+
+	/**
+	 * 从数组中取值
+	 * 
+	 * @param source
+	 * @param property
+	 * @return
+	 */
+	private static Object getPropertyValueFromArray(Object source, String property) {
+		final String propertyName = StringUtils.substringBefore(property, "[");
+		final int number = new Integer(StringUtils.substringBetween(property, "[", "]")).intValue();
+		final Object propertyObject = propertyName.isEmpty() ? source : getValue(source, propertyName);
+		if (!propertyObject.getClass().isArray()) {
+			throw new JsonviewExpressionException(String.format("\"%s\" isn't an array type.", propertyName));
+		}
+		return ((Object[]) propertyObject)[number];
+	}
+
+	/**
+	 * 从对象或Map取值
+	 * 
+	 * @param source
+	 * @param property
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	private static Object getPropertyValueFromObjectOrMap(Object source, String property) {
 		if (source instanceof Map) {
-			return getPropertyValueFromMap((Map<String, Object>) source, property);
-		} else if (source.getClass().isArray()) {
-			return getPropertyValueFromArray((Object[]) source, property);
+			return ((Map<String, Object>) source).get(property);
 		}
-		return getPropertyValueFromObject(source, property);
-	}
-
-	private static Object getPropertyValueFromMap(Map<String, Object> map, String property) {
-		return map.get(property);
-	}
-
-	private static Object getPropertyValueFromArray(Object[] array, String property) {
-		if (!property.matches("^.+\\[\\d+\\]$")) {
-			throw new JsonviewExpressionException(String.format("\"%s\" isn't a valid array's expression.", property));
-		}
-		int number = new Integer(property.substring(property.lastIndexOf("[") + 1, property.lastIndexOf("]"))).intValue();
-		return array[number];
-	}
-
-	private static Object getPropertyValueFromObject(Object source, String property) {
 		try {
-			Field field = source.getClass().getDeclaredField(property);
+			final Field field = source.getClass().getDeclaredField(property);
 			field.setAccessible(true);
 			return field.get(source);
+		} catch (NoSuchFieldException e) {
+			throw new JsonviewExpressionException(String.format("No such field \"%s\" in source instance.", property));
 		} catch (Exception e) {
 			throw new JsonviewException("ExpressionUtils.getValue() is Error.", e);
 		}

@@ -8,4 +8,8 @@ public class JsonviewExpressionException extends JsonviewException {
 		super(message);
 	}
 
+	public JsonviewExpressionException(String message, Throwable throwable) {
+		super(message, throwable);
+	}
+
 }

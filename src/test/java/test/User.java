@@ -7,7 +7,9 @@ public class User {
 
 	private int id;
 	private String name;
-	private Like[] likes = new Like[] { new Like("aaa"), new Like("bbb") };
+	private Like[] likes = new Like[]{
+			new Like("aaa"), new Like("bbb")
+	};
 	private Map<String, String> map = new HashMap<String, String>();
 
 	public User(int id, String name) {
@@ -47,6 +49,11 @@ public class User {
 
 	public void setMap(Map<String, String> map) {
 		this.map = map;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + "]";
 	}
 
 }

@@ -12,14 +12,22 @@ public class Main {
 		User[] users = new User[]{
 				user1, user2
 		};
+		Integer[][] arr = new Integer[][]{
+				{
+						1, 2, 3
+				}, {
+						4, 5, 6
+				}
+		};
+
 		// JsonviewFactory factory = new
 		// JsonviewFactory("/jsonview/jsonview-demo.xml");
 		// JsonCreator jsonCreator = factory.getJsonCreator();
 		DataModel dataModel = new HashDataModel();
 		dataModel.putData("user", user1);
 		dataModel.putData("users", users);
-		System.out.println(dataModel.getData("users[1].name"));
-		System.out.println(ExpressionUtils.getValue(users, "users[1].name"));
+		// System.out.println(dataModel.getData("users[1].likes[1].name"));
+		System.out.println(ExpressionUtils.getValue(user1, "name"));
 		// String json = jsonCreator.createJson(dataModel, "namespace", "id");
 		// System.out.println(json);
 	}
