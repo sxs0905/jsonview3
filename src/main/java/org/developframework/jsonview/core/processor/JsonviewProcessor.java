@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class JsonviewProcessor extends ObjectProcessor {
 
 	public JsonviewProcessor(Context context, Jsonview jsonview, ObjectNode node) {
-		super(context, jsonview, node, null);
+		super(context, jsonview, node, jsonview.getData());
 	}
 
 	public JsonviewProcessor(Context context, Jsonview jsonview, ObjectNode node, String parentExpression, String data) {

@@ -80,10 +80,14 @@ public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 			break;
 			case "jsonview" : {
 				final String id = attributes.getValue("id").trim();
+				final String data = attributes.getValue("data");
 				final Jsonview jsonview = new Jsonview(id);
+				if (StringUtils.isNotBlank(data)) {
+					jsonview.setData(data.trim());
+				}
 				final String className = attributes.getValue("for-class");
 				forClass(jsonview, className);
-				stack.push(new Jsonview(id));
+				stack.push(jsonview);
 			}
 			break;
 			case "jsonview-package" : {

@@ -7,7 +7,6 @@ import org.developframework.jsonview.core.element.JsonviewConfiguration;
 import org.developframework.jsonview.core.processor.Context;
 import org.developframework.jsonview.core.processor.JsonviewProcessor;
 import org.developframework.jsonview.data.DataModel;
-import org.developframework.jsonview.exception.JsonviewNotFoundException;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -28,9 +27,6 @@ public class JsonCreator {
 
 	private ObjectNode constructJson(DataModel dataModel, String namespace, String id) {
 		Jsonview jsonview = this.jsonviewConfiguration.extractJsonview(namespace, id);
-		if (jsonview == null) {
-			throw new JsonviewNotFoundException(String.format("Jsonview \"%s\" is not found in namespace \"%s\".", id, namespace));
-		}
 		ObjectNode root = objectMapper.createObjectNode();
 		Context context = new Context();
 		context.setDataModel(dataModel);
