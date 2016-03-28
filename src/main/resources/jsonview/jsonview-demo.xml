@@ -7,12 +7,8 @@
 		</jsonview>
 
 		<jsonview id="user-detail">
-			<property data="#strName"></property>
 			<property data="id"></property>
 			<property data="name"></property>
-			<array data="likes">
-				<property data="name"></property>
-			</array>
 			<property-date data="birthday"/>
 		</jsonview>
 
