@@ -9,7 +9,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
+class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 
 	private JsonviewConfiguration configuration;
 	private JsonviewPackage jsonviewPackage;

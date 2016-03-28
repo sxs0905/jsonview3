@@ -10,7 +10,7 @@ import org.developframework.jsonview.core.element.NormalPropertyElement;
 import org.developframework.jsonview.core.element.PropertyElement;
 import org.xml.sax.Attributes;
 
-public class PropertyElementSaxHandler implements ElementSaxHandler {
+class PropertyElementSaxHandler implements ElementSaxHandler {
 
 	@Override
 	public String qName() {

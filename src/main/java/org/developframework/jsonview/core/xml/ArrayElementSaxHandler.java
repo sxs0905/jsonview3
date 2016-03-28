@@ -9,7 +9,7 @@ import org.developframework.jsonview.core.element.JsonviewConfiguration;
 import org.developframework.jsonview.core.element.JsonviewPackage;
 import org.xml.sax.Attributes;
 
-public class ArrayElementSaxHandler extends ContainerElementSaxHandler implements ElementSaxHandler {
+class ArrayElementSaxHandler extends ContainerElementSaxHandler implements ElementSaxHandler {
 
 	@Override
 	public String qName() {

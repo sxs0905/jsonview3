@@ -8,7 +8,7 @@ import org.developframework.jsonview.core.element.JsonviewConfiguration;
 import org.developframework.jsonview.core.element.JsonviewPackage;
 import org.xml.sax.Attributes;
 
-public class IgnorePropertyElementSaxHandler implements ElementSaxHandler {
+class IgnorePropertyElementSaxHandler implements ElementSaxHandler {
 
 	@Override
 	public String qName() {

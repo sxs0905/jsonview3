@@ -10,7 +10,7 @@ import org.developframework.jsonview.core.element.JsonviewPackage;
 import org.developframework.jsonview.core.element.PropertyElement;
 import org.xml.sax.Attributes;
 
-public class DatePropertyElementSaxHandler implements ElementSaxHandler {
+class DatePropertyElementSaxHandler implements ElementSaxHandler {
 
 	@Override
 	public String qName() {

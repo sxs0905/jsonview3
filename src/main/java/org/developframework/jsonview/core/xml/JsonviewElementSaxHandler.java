@@ -10,7 +10,7 @@ import org.developframework.jsonview.core.element.JsonviewPackage;
 import org.developframework.jsonview.exception.ResourceNotUniqueException;
 import org.xml.sax.Attributes;
 
-public class JsonviewElementSaxHandler extends ContainerElementSaxHandler implements ElementSaxHandler {
+class JsonviewElementSaxHandler extends ContainerElementSaxHandler implements ElementSaxHandler {
 
 	@Override
 	public String qName() {

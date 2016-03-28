@@ -7,7 +7,7 @@ import org.developframework.jsonview.core.element.JsonviewConfiguration;
 import org.developframework.jsonview.core.element.JsonviewPackage;
 import org.xml.sax.Attributes;
 
-public interface ElementSaxHandler {
+interface ElementSaxHandler {
 
 	public String qName();
 
