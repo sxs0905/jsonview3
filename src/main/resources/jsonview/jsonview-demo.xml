@@ -2,7 +2,7 @@
 	<jsonview-package namespace="namespace">
 		<jsonview id="test-user">
 			<array data="users">
-				<import id="test"/>
+				<import id="user-detail"/>
 			</array>
 		</jsonview>
 
@@ -13,6 +13,7 @@
 			<array data="likes">
 				<property data="name"></property>
 			</array>
+			<property-date data="birthday"/>
 		</jsonview>
 
 		<jsonview id="test" data="user" for-class="test.User">

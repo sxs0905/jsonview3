@@ -1,5 +1,6 @@
 package test;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ public class User {
 
 	private int id;
 	private String name;
+	private Date birthday;
 	private Like[] likes = new Like[]{
 			new Like("aaa"), new Like("bbb")
 	};
@@ -15,6 +17,7 @@ public class User {
 	public User(int id, String name) {
 		this.id = id;
 		this.name = name;
+		this.birthday = new Date();
 		map.put("key1", "value1");
 		map.put("key2", "value2");
 	}
@@ -51,9 +54,12 @@ public class User {
 		this.map = map;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + "]";
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
 	}
 
 }

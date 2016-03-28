@@ -33,7 +33,7 @@ public abstract class ContainerElement extends Element {
 			Field[] fields = clazz.getDeclaredFields();
 			for (Field field : fields) {
 				if (!ignorePropertyNames.contains(field.getName())) {
-					PropertyElement propertyElement = new PropertyElement(field.getName(), null);
+					PropertyElement propertyElement = new NormalPropertyElement(field.getName(), null);
 					if (!childElements.contains(propertyElement)) {
 						addElement(propertyElement);
 					}

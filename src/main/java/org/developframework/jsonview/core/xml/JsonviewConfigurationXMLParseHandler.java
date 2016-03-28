@@ -5,11 +5,13 @@ import java.util.Stack;
 import org.apache.commons.lang3.StringUtils;
 import org.developframework.jsonview.core.element.ArrayElement;
 import org.developframework.jsonview.core.element.ContainerElement;
+import org.developframework.jsonview.core.element.DatePropertyElement;
 import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.core.element.ImportElement;
 import org.developframework.jsonview.core.element.Jsonview;
 import org.developframework.jsonview.core.element.JsonviewConfiguration;
 import org.developframework.jsonview.core.element.JsonviewPackage;
+import org.developframework.jsonview.core.element.NormalPropertyElement;
 import org.developframework.jsonview.core.element.ObjectElement;
 import org.developframework.jsonview.core.element.PropertyElement;
 import org.developframework.jsonview.exception.JsonviewParseXmlException;
@@ -41,7 +43,15 @@ public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 			case "property" : {
 				final String data = attributes.getValue("data").trim();
 				final String alias = attributes.getValue("alias");
-				final PropertyElement propertyElement = new PropertyElement(data, alias);
+				final PropertyElement propertyElement = new NormalPropertyElement(data, alias);
+				((ContainerElement) stack.peek()).addElement(propertyElement);
+			}
+			break;
+			case "property-date" : {
+				final String data = attributes.getValue("data").trim();
+				final String alias = attributes.getValue("alias");
+				final String pattern = attributes.getValue("pattern");
+				final PropertyElement propertyElement = new DatePropertyElement(data, alias, pattern);
 				((ContainerElement) stack.peek()).addElement(propertyElement);
 			}
 			break;
