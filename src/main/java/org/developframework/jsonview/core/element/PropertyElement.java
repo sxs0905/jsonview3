@@ -10,8 +10,8 @@ public class PropertyElement extends Element {
 
 	private Class<?> handler;
 
-	public PropertyElement(String data) {
-		super(data);
+	public PropertyElement(String data, String alias) {
+		super(data, alias);
 	}
 
 	@Override

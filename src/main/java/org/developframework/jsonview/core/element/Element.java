@@ -11,14 +11,15 @@ public abstract class Element {
 	protected String data;
 	protected String alias;
 
-	public Element(String data) {
+	public Element(String data, String alias) {
 		this.data = data;
+		this.alias = alias;
 	}
 
 	public abstract Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode, String parentExpression);
 
 	public String showName() {
-		if (StringUtils.isNoneBlank(alias)) {
+		if (StringUtils.isNotBlank(alias)) {
 			return alias;
 		}
 		String data = ignoreHeadSign(this.data);
@@ -63,8 +64,12 @@ public abstract class Element {
 		return alias;
 	}
 
-	public void setAlias(String alias) {
-		this.alias = alias;
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Element) {
+			return data.equals(((Element) obj).getData());
+		}
+		return false;
 	}
 
 }

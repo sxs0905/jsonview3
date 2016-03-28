@@ -4,7 +4,6 @@ import java.util.Stack;
 
 import org.apache.commons.lang3.StringUtils;
 import org.developframework.jsonview.core.element.ArrayElement;
-import org.developframework.jsonview.core.element.ClassElement;
 import org.developframework.jsonview.core.element.ContainerElement;
 import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.core.element.ImportElement;
@@ -41,24 +40,33 @@ public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 		switch (qName) {
 			case "property" : {
 				final String data = attributes.getValue("data").trim();
-				final ContainerElement containerElement = (ContainerElement) stack.peek();
-				final PropertyElement propertyElement = new PropertyElement(data);
-				containerElement.addElement(propertyElement);
+				final String alias = attributes.getValue("alias");
+				final PropertyElement propertyElement = new PropertyElement(data, alias);
+				((ContainerElement) stack.peek()).addElement(propertyElement);
+			}
+			break;
+			case "ignore-property" : {
+				final String data = attributes.getValue("data").trim();
+				((ContainerElement) stack.peek()).addIgnoreProperty(data);
 			}
 			break;
 			case "object" : {
 				final String data = attributes.getValue("data").trim();
-				final ContainerElement containerElement = (ContainerElement) stack.peek();
-				final ObjectElement objectElement = new ObjectElement(data);
-				containerElement.addElement(objectElement);
+				final String alias = attributes.getValue("alias");
+				final ObjectElement objectElement = new ObjectElement(data, alias);
+				final String className = attributes.getValue("for-class");
+				forClass(objectElement, className);
+				((ContainerElement) stack.peek()).addElement(objectElement);
 				stack.push(objectElement);
 			}
 			break;
 			case "array" : {
 				final String data = attributes.getValue("data").trim();
-				final ContainerElement containerElement = (ContainerElement) stack.peek();
-				final ArrayElement arrayElement = new ArrayElement(data);
-				containerElement.addElement(arrayElement);
+				final String alias = attributes.getValue("alias");
+				final ArrayElement arrayElement = new ArrayElement(data, alias);
+				final String className = attributes.getValue("for-class");
+				forClass(arrayElement, className);
+				((ContainerElement) stack.peek()).addElement(arrayElement);
 				stack.push(arrayElement);
 			}
 			break;
@@ -67,27 +75,15 @@ public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 				String namespace = attributes.getValue("namespace");
 				namespace = StringUtils.isNotBlank(namespace) ? namespace.trim() : tempJsonviewPackage.getNamespace();
 				final ImportElement importElement = new ImportElement(namespace, id);
-				final ContainerElement containerElement = (ContainerElement) stack.peek();
-				containerElement.addElement(importElement);
-			}
-			break;
-			case "class" : {
-				final String data = attributes.getValue("data").trim();
-				final String className = attributes.getValue("class-name").trim();
-				try {
-					Class<?> clazz = Class.forName(className);
-					ClassElement classElement = new ClassElement(data, clazz);
-					final ContainerElement containerElement = (ContainerElement) stack.peek();
-					containerElement.addElement(classElement);
-				} catch (ClassNotFoundException e) {
-					throw new JsonviewParseXmlException(String.format("Class \"%s\" is not found, please check configuration file.", className));
-				}
+				((ContainerElement) stack.peek()).addElement(importElement);
 			}
 			break;
 			case "jsonview" : {
 				final String id = attributes.getValue("id").trim();
-				Jsonview jsonview = new Jsonview(id);
-				stack.push(jsonview);
+				final Jsonview jsonview = new Jsonview(id);
+				final String className = attributes.getValue("for-class");
+				forClass(jsonview, className);
+				stack.push(new Jsonview(id));
 			}
 			break;
 			case "jsonview-package" : {
@@ -102,12 +98,9 @@ public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	public void endElement(String uri, String localName, String qName) throws SAXException {
 		super.endElement(uri, localName, qName);
 		switch (qName) {
-			case "object" : {
-				stack.pop();
-			}
-			break;
+			case "object" :
 			case "array" : {
-				stack.pop();
+				((ContainerElement) stack.pop()).loadClassProperty();
 			}
 			break;
 			case "jsonview" : {
@@ -115,9 +108,9 @@ public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 				if (tempJsonviewPackage.containsKey(jsonview.getId())) {
 					throw new ResourceNotUniqueException(String.format("Jsonview id \"%s\" already exists.", jsonview.getId()));
 				}
+				jsonview.loadClassProperty();
 				tempJsonviewPackage.push(jsonview);
 			}
-			break;
 			case "jsonview-package" : {
 				configuration.addJsonviewPackage(tempJsonviewPackage);
 			}
@@ -127,6 +120,16 @@ public class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 
 	public JsonviewConfiguration getConfiguration() {
 		return configuration;
+	}
+
+	private void forClass(ContainerElement element, String className) {
+		if (StringUtils.isNotBlank(className)) {
+			try {
+				element.setClazz(Class.forName(className));
+			} catch (ClassNotFoundException e) {
+				throw new JsonviewParseXmlException(String.format("Class \"%s\" is not found, please check configuration file.", className));
+			}
+		}
 	}
 
 }

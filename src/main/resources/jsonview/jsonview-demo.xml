@@ -1,11 +1,13 @@
 <jsonview-configuration>
 	<jsonview-package namespace="namespace">
 		<jsonview id="test-user">
-			<class data="user" class-name="test.User">
-				<ignore-property name="likes" />
-				<ignore-property name="map" />
-			</class>
+			<array data="users" for-class="test.User">
+				<ignore-property data="likes" />
+				<ignore-property data="map" />
+				<property data="name" alias="userName"></property>
+			</array>
 		</jsonview>
+
 		<jsonview id="user-detail">
 			<property data="#strName"></property>
 			<property data="id"></property>
@@ -13,6 +15,12 @@
 			<array data="likes">
 				<property data="name"></property>
 			</array>
+		</jsonview>
+
+		<jsonview id="test" data="user" for-class="test.User">
+			<ignore-property data="likes" />
+			<ignore-property data="map" />
+			<property data="name" alias="userName"></property>
 		</jsonview>
 	</jsonview-package>
 </jsonview-configuration>

@@ -13,7 +13,7 @@ public class ImportElement extends Element {
 	private String id;
 
 	public ImportElement(String namespace, String id) {
-		super(null);
+		super(null, null);
 		this.namespace = namespace;
 		this.id = id;
 	}

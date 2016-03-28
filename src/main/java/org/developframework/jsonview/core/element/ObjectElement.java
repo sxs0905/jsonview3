@@ -10,11 +10,11 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class ObjectElement extends ContainerElement {
 
 	public ObjectElement() {
-		super(null);
+		super(null, null);
 	}
 
-	public ObjectElement(String data) {
-		super(data);
+	public ObjectElement(String data, String alias) {
+		super(data, alias);
 	}
 
 	@Override
