@@ -5,5 +5,7 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 		http://www.developframework.org/schema/jsonview http://www.developframework.org/schema/jsonview/jsonview-spring-namespace.xsd">	
 	
-	<jsonview:scan locations="classpath:jsonview/*.xml" />
+	<jsonview:scan id="jsonviewFactory" locations="classpath:jsonview/*.xml" />
+	
+	
 </beans>
