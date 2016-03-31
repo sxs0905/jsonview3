@@ -4,12 +4,12 @@ public class JsonviewParseXmlException extends JsonviewException {
 
 	private static final long serialVersionUID = 6131701003042352198L;
 
-	public JsonviewParseXmlException(String message) {
-		super(message);
+	public JsonviewParseXmlException(String filename) {
+		super("Jsonview framework parse XML Error for configuration file: " + filename);
 	}
 
-	public JsonviewParseXmlException(String message, Throwable e) {
-		super(message, e);
+	public JsonviewParseXmlException(String filename, Throwable e) {
+		super("Jsonview framework parse XML Error for configuration file: " + filename, e);
 	}
 
 }
