@@ -2,28 +2,47 @@ package org.developframework.jsonview.spring;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.xml.BeanDefinitionParser;
-import org.springframework.beans.factory.xml.ParserContext;
+import org.developframework.jsonview.core.JsonviewFactory;
+import org.developframework.jsonview.core.element.JsonviewConfiguration;
+import org.developframework.jsonview.core.xml.ConfigurationSource;
+import org.developframework.jsonview.core.xml.JsonviewConfigurationSaxReader;
+import org.springframework.beans.factory.support.BeanDefinitionBuilder;
+import org.springframework.beans.factory.xml.AbstractSingleBeanDefinitionParser;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
+import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
 
-public class JsonviewScanBeanDefinitionParser implements BeanDefinitionParser {
+public class JsonviewScanBeanDefinitionParser extends AbstractSingleBeanDefinitionParser {
 
 	@Override
-	public BeanDefinition parse(Element element, ParserContext parserContext) {
+	protected Class<?> getBeanClass(Element element) {
+		return JsonviewFactory.class;
+	}
+
+	@Override
+	protected void doParse(Element element, BeanDefinitionBuilder builder) {
 		String locations = element.getAttribute("locations");
-		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+		if (StringUtils.hasText(locations)) {
+			JsonviewConfiguration jsonviewConfiguration = createJsonviewConfiguration(locations);
+			builder.addConstructorArgValue(jsonviewConfiguration);
+		}
+	}
+
+	private JsonviewConfiguration createJsonviewConfiguration(String locations) {
+		final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 		try {
-			Resource[] resources = resolver.getResources(locations);
-			for (Resource resource : resources) {
-				System.out.println(resource.getFilename());
+			final Resource[] resources = resolver.getResources(locations);
+			final ConfigurationSource[] sources = new ConfigurationSource[resources.length];
+			for (int i = 0; i < resources.length; i++) {
+				sources[i] = new SpringResourceConfigurationSource(resources[i]);
 			}
+			final JsonviewConfigurationSaxReader reader = new JsonviewConfigurationSaxReader(sources);
+			return reader.readConfiguration();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return null;
 		}
-		return null;
 	}
 }

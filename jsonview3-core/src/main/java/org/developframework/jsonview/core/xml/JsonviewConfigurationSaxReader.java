@@ -1,13 +1,11 @@
 package org.developframework.jsonview.core.xml;
 
 import java.io.InputStream;
-import java.util.Objects;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.developframework.jsonview.core.element.JsonviewConfiguration;
-import org.developframework.jsonview.exception.ConfigurationFileNotFoundException;
 import org.developframework.jsonview.exception.JsonviewParseXmlException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +13,29 @@ import org.slf4j.LoggerFactory;
 public class JsonviewConfigurationSaxReader {
 
 	private static final Logger logger = LoggerFactory.getLogger(JsonviewConfigurationSaxReader.class);
-	private String[] configs;
+	private ConfigurationSource[] sources;
+
+	public JsonviewConfigurationSaxReader(String config) {
+		this.sources = new ConfigurationSource[]{
+				new FileConfigurationSource(config)
+		};
+	}
 
 	public JsonviewConfigurationSaxReader(String[] configs) {
-		this.configs = configs;
+		this.sources = new ConfigurationSource[configs.length];
+		for (int i = 0; i < configs.length; i++) {
+			sources[i] = new FileConfigurationSource(configs[i]);
+		}
+	}
+
+	public JsonviewConfigurationSaxReader(ConfigurationSource source) {
+		this.sources = new ConfigurationSource[]{
+				source
+		};
+	}
+
+	public JsonviewConfigurationSaxReader(ConfigurationSource[] sources) {
+		this.sources = sources;
 	}
 
 	public JsonviewConfiguration readConfiguration() {
@@ -26,30 +43,29 @@ public class JsonviewConfigurationSaxReader {
 		ElementSaxHandler[] elementSaxHandlers = new ElementSaxHandler[]{
 				new PropertyElementSaxHandler(), new DatePropertyElementSaxHandler(), new IgnorePropertyElementSaxHandler(), new ObjectElementSaxHandler(), new ArrayElementSaxHandler(), new JsonviewElementSaxHandler(), new ImportElementSaxHandler(), new JsonviewPackageElementSaxHandler(),
 		};
-		for (String config : configs) {
-			InputStream is = this.getClass().getResourceAsStream(config);
-			if (Objects.isNull(is)) {
-				throw new ConfigurationFileNotFoundException("Jsonview framework load the configuration is failed, because not found: " + config);
-			} else {
-				logger.info(String.format("Jsonview framework load the configuration file \"%s\" is success.", config));
-			}
-			try {
-				readOneFile(jsonviewConfiguration, is, elementSaxHandlers);
-				is.close();
-			} catch (Exception e) {
-				throw new JsonviewParseXmlException("Jsonview framework parse XML Error for configuration file: " + config, e);
-			}
+		for (ConfigurationSource source : sources) {
+			readOneFile(jsonviewConfiguration, source, elementSaxHandlers);
+			logger.info("Jsonview framework load the configuration file \"{0}\" is success.", source.getSourceName());
 		}
 		elementSaxHandlers = null;
 		return jsonviewConfiguration;
 	}
 
-	private void readOneFile(JsonviewConfiguration jsonviewConfiguration, InputStream is, ElementSaxHandler[] elementSaxHandlers) throws Exception {
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		SAXParser saxParser = factory.newSAXParser();
-		JsonviewConfigurationXMLParseHandler handler = new JsonviewConfigurationXMLParseHandler(jsonviewConfiguration, elementSaxHandlers);
-		saxParser.parse(is, handler);
-		is.close();
+	private void readOneFile(JsonviewConfiguration jsonviewConfiguration, ConfigurationSource source, ElementSaxHandler[] elementSaxHandlers) {
+		try {
+			InputStream is = source.getInputStream();
+			SAXParserFactory factory = SAXParserFactory.newInstance();
+			SAXParser saxParser = factory.newSAXParser();
+			JsonviewConfigurationXMLParseHandler handler = new JsonviewConfigurationXMLParseHandler(jsonviewConfiguration, elementSaxHandlers);
+			saxParser.parse(is, handler);
+			is.close();
+		} catch (Exception e) {
+			throw new JsonviewParseXmlException(source.getSourceName(), e);
+		}
+	}
+
+	public ConfigurationSource[] getSources() {
+		return sources;
 	}
 
 }
