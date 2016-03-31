@@ -7,7 +7,7 @@
 		<version>3.0.0-SNAPSHOT</version>
 	</parent>
 	<artifactId>jsonview3-spring-support</artifactId>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.developframework</groupId>
@@ -16,6 +16,16 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 </project>
