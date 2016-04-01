@@ -2,6 +2,7 @@ package org.developframework.jsonview.data;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.developframework.jsonview.utils.ExpressionUtils;
 
@@ -22,8 +23,9 @@ public class HashDataModel implements DataModel {
 	}
 
 	@Override
-	public Object getData(String expression) {
-		return ExpressionUtils.getValue(dataMap, expression);
+	public Optional<Object> getData(String expression) {
+		final Object value = ExpressionUtils.getValue(dataMap, expression);
+		return Optional.ofNullable(value);
 	}
 
 }

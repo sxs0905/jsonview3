@@ -29,10 +29,12 @@ public class ObjectProcessor extends ContainerProcessor<ObjectElement, ObjectNod
 	private Processor<? extends Element, ? extends JsonNode> checkNextProcessor(Element childElement) {
 		JsonNode jsonNode = null;
 		if (childElement instanceof PropertyElement) {
-
+			// no operation.
 		} else if (childElement instanceof ObjectElement) {
+			// put object node in json tree.
 			jsonNode = node.putObject(childElement.showName());
 		} else if (childElement instanceof ArrayElement) {
+			// put array node in json tree.
 			jsonNode = node.putArray(childElement.showName());
 		} else if (childElement instanceof ImportElement) {
 			jsonNode = node;

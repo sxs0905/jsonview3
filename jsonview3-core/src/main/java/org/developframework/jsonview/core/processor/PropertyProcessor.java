@@ -1,6 +1,6 @@
 package org.developframework.jsonview.core.processor;
 
-import java.util.Objects;
+import java.util.Optional;
 
 import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.core.element.PropertyElement;
@@ -18,13 +18,16 @@ public abstract class PropertyProcessor<T> extends Processor<PropertyElement, Js
 	@Override
 	protected final void process(Processor<? extends Element, ? extends JsonNode> parentNodeProcessor) {
 		DataModel dataModel = parentNodeProcessor.getContext().getDataModel();
-		Object value = dataModel.getData(expression);
+		Optional<Object> valueOptional = dataModel.getData(expression);
 		ObjectNode parentNode = (ObjectNode) parentNodeProcessor.getNode();
 		final String showName = super.element.showName();
-		if (Objects.isNull(value)) {
-			parentNode.putNull(showName);
+		if (!valueOptional.isPresent()) {
+			if (!element.isNullHidden()) {
+				parentNode.putNull(showName);
+			}
 			return;
 		}
+		final Object value = valueOptional.get();
 		Class<?> valueClass = value.getClass();
 		if (support(valueClass)) {
 			handle(parentNode, value, showName);

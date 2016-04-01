@@ -3,6 +3,7 @@ package org.developframework.jsonview.core.processor;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.developframework.jsonview.core.element.ArrayElement;
 import org.developframework.jsonview.core.element.Element;
@@ -21,17 +22,18 @@ public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> 
 	@Override
 	protected void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
 		final DataModel dataModel = parentProcessor.getContext().getDataModel();
-		final Object obj = dataModel.getData(expression);
-		if (Objects.isNull(obj))
-			return;
-		int size = 0;
-		if (obj.getClass().isArray()) {
-			size = ((Object[]) obj).length;
-		} else if (obj instanceof Collection<?>) {
-			size = ((Collection<?>) obj).size();
-		}
-		for (int i = 0; i < size; i++) {
-			sinple(i);
+		final Optional<Object> objOptional = dataModel.getData(expression);
+		if (objOptional.isPresent()) {
+			Object obj = objOptional.get();
+			int size = 0;
+			if (obj.getClass().isArray()) {
+				size = ((Object[]) obj).length;
+			} else if (obj instanceof Collection<?>) {
+				size = ((Collection<?>) obj).size();
+			}
+			for (int i = 0; i < size; i++) {
+				sinple(i);
+			}
 		}
 	}
 

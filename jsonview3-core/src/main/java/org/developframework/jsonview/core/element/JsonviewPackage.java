@@ -1,6 +1,7 @@
 package org.developframework.jsonview.core.element;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 public class JsonviewPackage extends HashMap<String, Jsonview> {
 
@@ -16,8 +17,9 @@ public class JsonviewPackage extends HashMap<String, Jsonview> {
 		return namespace;
 	}
 
-	public Jsonview getJsonviewById(String id) {
-		return get(id);
+	public Optional<Jsonview> getJsonviewById(String id) {
+		Optional<Jsonview> jsonviewOptional = Optional.ofNullable(get(id));
+		return jsonviewOptional;
 	}
 
 	public void push(Jsonview jsonview) {

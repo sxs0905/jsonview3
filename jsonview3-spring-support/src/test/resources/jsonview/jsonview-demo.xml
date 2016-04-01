@@ -9,7 +9,7 @@
 		<jsonview id="user-detail" data="user">
 			<property data="id" />
 			<property data="name"/>
-			<property-date data="birthday"/>
+			<property-date data="birthday" null-hidden="true"/>
 			<array data="likes">
 				<property data="name"/>
 			</array>

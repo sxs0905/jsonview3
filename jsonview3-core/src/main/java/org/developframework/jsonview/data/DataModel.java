@@ -1,8 +1,10 @@
 package org.developframework.jsonview.data;
 
+import java.util.Optional;
+
 public interface DataModel {
 
 	public void putData(String dataName, Object data);
 
-	public Object getData(String expression);
+	public Optional<Object> getData(String expression);
 }

@@ -18,6 +18,7 @@ abstract class DescribeContentElementSaxHandler<T extends Element> implements El
 
 	@Override
 	public void handleAtEndElement(ParserContext context) {
+		// no operation
 	}
 
 	protected abstract T getElementInstance(String data, String alias);

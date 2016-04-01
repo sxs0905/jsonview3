@@ -30,6 +30,7 @@
 	<xs:attributeGroup name="attrGroupForElement">
 		<xs:attribute name="data" type="xs:string" use="required"/>
 		<xs:attribute name="alias" type="xs:string"/>
+		<xs:attribute name="null-hidden" type="xs:boolean" default="true"/>
 	</xs:attributeGroup>
 	<xs:group name="elementGroup">
 		<xs:sequence>
