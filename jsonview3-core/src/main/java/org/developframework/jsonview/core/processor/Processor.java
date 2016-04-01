@@ -12,10 +12,9 @@ public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> 
 	protected NODE node;
 	protected String expression;
 
-	public Processor(Context context, ELEMENT element, NODE node, String parentExpression) {
+	public Processor(Context context, ELEMENT element, String parentExpression) {
 		this.context = context;
 		this.element = element;
-		this.node = node;
 		this.expression = createExpression(parentExpression);
 	}
 
@@ -34,6 +33,10 @@ public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> 
 
 	public ELEMENT getElement() {
 		return element;
+	}
+
+	public void setNode(NODE node) {
+		this.node = node;
 	}
 
 	public NODE getNode() {

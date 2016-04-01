@@ -1,5 +1,7 @@
 package org.developframework.jsonview.core.element;
 
+import java.util.Optional;
+
 import org.developframework.jsonview.core.processor.Context;
 import org.developframework.jsonview.core.processor.ObjectProcessor;
 import org.developframework.jsonview.core.processor.Processor;
@@ -18,8 +20,18 @@ public class ObjectElement extends ContainerElement {
 	}
 
 	@Override
-	public Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode, String expression) {
-		return new ObjectProcessor(context, this, (ObjectNode) jsonNode, expression);
+	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, String parentExpression) {
+		ObjectProcessor processor = new ObjectProcessor(context, this, parentExpression);
+		Optional<Object> optional = context.getDataModel().getData(processor.getExpression());
+		if (optional.isPresent()) {
+			final ObjectNode objectNode = parentNode.putObject(this.showName());
+			processor.setNode(objectNode);
+			return Optional.of(processor);
+		}
+		if (!nullHidden) {
+			parentNode.putNull(this.showName());
+		}
+		return Optional.empty();
 	}
 
 }

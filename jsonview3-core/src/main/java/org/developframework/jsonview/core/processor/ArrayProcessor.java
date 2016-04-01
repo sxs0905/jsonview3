@@ -15,8 +15,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> {
 
-	public ArrayProcessor(Context context, ArrayElement element, ArrayNode node, String parentExpression) {
-		super(context, element, node, parentExpression);
+	public ArrayProcessor(Context context, ArrayElement element, String parentExpression) {
+		super(context, element, parentExpression);
 	}
 
 	@Override
@@ -41,8 +41,9 @@ public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> 
 		if (element.isChildEmpty()) {
 			empty(index);
 		} else {
+			final ObjectInArrayProcessor childProcessor = new ObjectInArrayProcessor(context, element.getChildObjectElement(), expression, index);
 			final ObjectNode objectNode = super.context.getObjectMapper().createObjectNode();
-			final ObjectInArrayProcessor childProcessor = new ObjectInArrayProcessor(context, element.getChildObjectElement(), objectNode, expression, index);
+			childProcessor.setNode(objectNode);
 			childProcessor.process(null);
 			node.add(objectNode);
 		}

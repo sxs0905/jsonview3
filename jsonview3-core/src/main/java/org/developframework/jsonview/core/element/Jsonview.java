@@ -11,10 +11,4 @@ public class Jsonview extends ObjectElement {
 	public String getId() {
 		return id;
 	}
-
-	// @Override
-	// protected String createExpression(String parentExpression, String bind) {
-	// return null;
-	// }
-
 }

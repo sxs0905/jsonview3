@@ -1,5 +1,7 @@
 package org.developframework.jsonview.core.element;
 
+import java.util.Optional;
+
 import org.developframework.jsonview.core.processor.Context;
 import org.developframework.jsonview.core.processor.ImportProcessor;
 import org.developframework.jsonview.core.processor.Processor;
@@ -19,8 +21,10 @@ public class ImportElement extends Element {
 	}
 
 	@Override
-	public Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode, String parentExpression) {
-		return new ImportProcessor(context, this, (ObjectNode) jsonNode, parentExpression);
+	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, String parentExpression) {
+		ImportProcessor processor = new ImportProcessor(context, this, parentExpression);
+		processor.setNode(parentNode);
+		return Optional.of(processor);
 	}
 
 	public String getId() {

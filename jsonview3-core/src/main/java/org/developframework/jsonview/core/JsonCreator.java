@@ -32,7 +32,8 @@ public class JsonCreator {
 		context.setDataModel(dataModel);
 		context.setObjectMapper(objectMapper);
 		context.setJsonviewConfiguration(jsonviewConfiguration);
-		JsonviewProcessor processor = new JsonviewProcessor(context, jsonview, root);
+		JsonviewProcessor processor = new JsonviewProcessor(context, jsonview);
+		processor.setNode(root);
 		processor.process(null);
 		return root;
 	}

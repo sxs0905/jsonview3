@@ -1,10 +1,13 @@
 package org.developframework.jsonview.core.element;
 
+import java.util.Optional;
+
 import org.developframework.jsonview.core.processor.Context;
 import org.developframework.jsonview.core.processor.DatePropertyProcessor;
 import org.developframework.jsonview.core.processor.Processor;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class DatePropertyElement extends PropertyElement {
 
@@ -15,8 +18,10 @@ public class DatePropertyElement extends PropertyElement {
 	}
 
 	@Override
-	public Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode, String parentExpression) {
-		return new DatePropertyProcessor(context, this, parentExpression, pattern);
+	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, String parentExpression) {
+		DatePropertyProcessor processor = new DatePropertyProcessor(context, this, parentExpression, pattern);
+		processor.setNode(parentNode);
+		return Optional.of(processor);
 	}
 
 	public String getPattern() {

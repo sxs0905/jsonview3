@@ -7,9 +7,7 @@ public class User {
 	private int id;
 	private String name;
 	private Date birthday;
-	private Like[] likes = new Like[]{
-			new Like("aaa"), new Like("bbb")
-	};
+	private Like[] likes = null;
 
 	public User(int id, String name) {
 		this.id = id;

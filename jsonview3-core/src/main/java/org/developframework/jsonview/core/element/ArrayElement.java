@@ -1,11 +1,14 @@
 package org.developframework.jsonview.core.element;
 
+import java.util.Optional;
+
 import org.developframework.jsonview.core.processor.ArrayProcessor;
 import org.developframework.jsonview.core.processor.Context;
 import org.developframework.jsonview.core.processor.Processor;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ArrayElement extends ContainerElement {
 
@@ -17,8 +20,18 @@ public class ArrayElement extends ContainerElement {
 	}
 
 	@Override
-	public Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode, String parentExpression) {
-		return new ArrayProcessor(context, this, (ArrayNode) jsonNode, parentExpression);
+	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, String parentExpression) {
+		ArrayProcessor processor = new ArrayProcessor(context, this, parentExpression);
+		Optional<Object> optional = context.getDataModel().getData(processor.getExpression());
+		if (optional.isPresent()) {
+			final ArrayNode arrayNode = parentNode.putArray(this.showName());
+			processor.setNode(arrayNode);
+			return Optional.of(processor);
+		}
+		if (!nullHidden) {
+			parentNode.putNull(this.showName());
+		}
+		return Optional.empty();
 	}
 
 	@Override

@@ -14,6 +14,7 @@ final class ParserContext {
 
 	public ParserContext(JsonviewConfiguration configuration) {
 		this.configuration = configuration;
+		this.stack = new Stack<>();
 	}
 
 	public JsonviewConfiguration getConfiguration() {

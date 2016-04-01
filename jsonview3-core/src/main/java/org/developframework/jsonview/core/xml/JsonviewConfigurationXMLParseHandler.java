@@ -1,6 +1,7 @@
 package org.developframework.jsonview.core.xml;
 
-import java.util.Stack;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.developframework.jsonview.core.element.JsonviewConfiguration;
 import org.xml.sax.Attributes;
@@ -9,20 +10,33 @@ import org.xml.sax.helpers.DefaultHandler;
 
 class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 
-	private JsonviewConfiguration configuration;
-	private final ElementSaxHandler[] elementSaxHandlers;
+	private List<ElementSaxHandler> elementSaxHandlers;
 	private ParserContext context;
 
-	public JsonviewConfigurationXMLParseHandler(JsonviewConfiguration configuration, ElementSaxHandler[] elementSaxHandlers) {
-		this.configuration = configuration;
-		this.elementSaxHandlers = elementSaxHandlers;
+	public JsonviewConfigurationXMLParseHandler(JsonviewConfiguration configuration) {
+		this.elementSaxHandlers = new LinkedList<>();
 		this.context = new ParserContext(configuration);
+		init();
+	}
+
+	private void init() {
+		registerElementSaxHandler(new PropertyElementSaxHandler());
+		registerElementSaxHandler(new DatePropertyElementSaxHandler());
+		registerElementSaxHandler(new IgnorePropertyElementSaxHandler());
+		registerElementSaxHandler(new ObjectElementSaxHandler());
+		registerElementSaxHandler(new ArrayElementSaxHandler());
+		registerElementSaxHandler(new JsonviewElementSaxHandler());
+		registerElementSaxHandler(new ImportElementSaxHandler());
+		registerElementSaxHandler(new JsonviewPackageElementSaxHandler());
+	}
+
+	private void registerElementSaxHandler(ElementSaxHandler handler) {
+		elementSaxHandlers.add(handler);
 	}
 
 	@Override
 	public void startDocument() throws SAXException {
-		super.startDocument();
-		context.setStack(new Stack<>());
+		context.getStack().clear();
 	}
 
 	@Override
@@ -42,9 +56,4 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 			}
 		}
 	}
-
-	public JsonviewConfiguration getConfiguration() {
-		return configuration;
-	}
-
 }

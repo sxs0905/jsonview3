@@ -36,7 +36,7 @@ public class JunitTest {
 		DataModel dataModel = new HashDataModel();
 		dataModel.putData("user", users[0]);
 		dataModel.putData("users", users);
-		String json = jsonCreator.createJson(dataModel, "jsonview-demo", "user-list");
+		String json = jsonCreator.createJson(dataModel, "jsonview-demo", "user-detail");
 		System.out.println(json);
 
 	}

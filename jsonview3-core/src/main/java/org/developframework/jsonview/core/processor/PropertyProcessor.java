@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public abstract class PropertyProcessor<T> extends Processor<PropertyElement, JsonNode> {
 
 	public PropertyProcessor(Context context, PropertyElement element, String parentExpression) {
-		super(context, element, null, parentExpression);
+		super(context, element, parentExpression);
 	}
 
 	@Override

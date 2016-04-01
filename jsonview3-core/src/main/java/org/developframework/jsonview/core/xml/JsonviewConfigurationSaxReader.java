@@ -40,23 +40,19 @@ public class JsonviewConfigurationSaxReader {
 
 	public JsonviewConfiguration readConfiguration() {
 		JsonviewConfiguration jsonviewConfiguration = new JsonviewConfiguration();
-		ElementSaxHandler[] elementSaxHandlers = new ElementSaxHandler[]{
-				new PropertyElementSaxHandler(), new DatePropertyElementSaxHandler(), new IgnorePropertyElementSaxHandler(), new ObjectElementSaxHandler(), new ArrayElementSaxHandler(), new JsonviewElementSaxHandler(), new ImportElementSaxHandler(), new JsonviewPackageElementSaxHandler(),
-		};
+		JsonviewConfigurationXMLParseHandler handler = new JsonviewConfigurationXMLParseHandler(jsonviewConfiguration);
 		for (ConfigurationSource source : sources) {
-			readOneFile(jsonviewConfiguration, source, elementSaxHandlers);
+			readOneFile(handler, source);
 			logger.info("Jsonview framework load the configuration file \"{0}\" is success.", source.getSourceName());
 		}
-		elementSaxHandlers = null;
 		return jsonviewConfiguration;
 	}
 
-	private void readOneFile(JsonviewConfiguration jsonviewConfiguration, ConfigurationSource source, ElementSaxHandler[] elementSaxHandlers) {
+	private void readOneFile(JsonviewConfigurationXMLParseHandler handler, ConfigurationSource source) {
 		try {
 			InputStream is = source.getInputStream();
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
-			JsonviewConfigurationXMLParseHandler handler = new JsonviewConfigurationXMLParseHandler(jsonviewConfiguration, elementSaxHandlers);
 			saxParser.parse(is, handler);
 			is.close();
 		} catch (Exception e) {

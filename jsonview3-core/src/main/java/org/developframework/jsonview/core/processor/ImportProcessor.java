@@ -10,8 +10,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ImportProcessor extends Processor<ImportElement, ObjectNode> {
 
-	public ImportProcessor(Context context, ImportElement element, ObjectNode node, String parentExpression) {
-		super(context, element, node, parentExpression);
+	public ImportProcessor(Context context, ImportElement element, String parentExpression) {
+		super(context, element, parentExpression);
 	}
 
 	@Override
