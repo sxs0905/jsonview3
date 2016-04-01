@@ -1,15 +1,9 @@
 package org.developframework.jsonview.core.xml;
 
-import java.util.Stack;
-
 import org.developframework.jsonview.core.element.ArrayElement;
-import org.developframework.jsonview.core.element.ContainerElement;
-import org.developframework.jsonview.core.element.Element;
-import org.developframework.jsonview.core.element.JsonviewConfiguration;
-import org.developframework.jsonview.core.element.JsonviewPackage;
 import org.xml.sax.Attributes;
 
-class ArrayElementSaxHandler extends ContainerElementSaxHandler implements ElementSaxHandler {
+class ArrayElementSaxHandler extends ContainerElementSaxHandler<ArrayElement> {
 
 	@Override
 	public String qName() {
@@ -17,21 +11,14 @@ class ArrayElementSaxHandler extends ContainerElementSaxHandler implements Eleme
 	}
 
 	@Override
-	public JsonviewPackage handleAtStartElement(JsonviewConfiguration configuration, JsonviewPackage jsonviewPackage, Stack<Element> stack, Attributes attributes) {
-		final String data = attributes.getValue("data").trim();
-		final String alias = attributes.getValue("alias");
-		final ArrayElement arrayElement = new ArrayElement(data, alias);
-		final String className = attributes.getValue("for-class");
-		forClass(arrayElement, className);
-		((ContainerElement) stack.peek()).addElement(arrayElement);
-		stack.push(arrayElement);
-		return jsonviewPackage;
+	protected ArrayElement getElementInstance(String data, String alias) {
+		return new ArrayElement(data, alias);
 	}
 
 	@Override
-	public JsonviewPackage handleAtEndElement(JsonviewConfiguration configuration, JsonviewPackage jsonviewPackage, Stack<Element> stack) {
-		((ContainerElement) stack.pop()).loadClassProperty();
-		return jsonviewPackage;
+	protected void addOtherAttributes(ArrayElement arrayElement, Attributes attributes) {
+		arrayElement.setNullHidden(attributes.getValue("null-hidden"));
+		forClass(arrayElement, attributes);
 	}
 
 }

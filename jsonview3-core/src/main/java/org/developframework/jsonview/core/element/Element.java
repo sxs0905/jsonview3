@@ -10,6 +10,7 @@ public abstract class Element {
 
 	protected String data;
 	protected String alias;
+	protected boolean nullHidden;
 
 	public Element(String data, String alias) {
 		this.data = data;
@@ -64,10 +65,18 @@ public abstract class Element {
 		return alias;
 	}
 
+	public boolean isNullHidden() {
+		return nullHidden;
+	}
+
+	public void setNullHidden(String nullHiddenStr) {
+		this.nullHidden = StringUtils.isBlank(nullHiddenStr) ? false : new Boolean(nullHiddenStr).booleanValue();
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Element) {
-			return data.equals(((Element) obj).getData());
+			return data.equals(((Element) obj).getData()) || this == obj;
 		}
 		return false;
 	}

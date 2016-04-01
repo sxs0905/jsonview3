@@ -1,11 +1,6 @@
 package org.developframework.jsonview.core.xml;
 
-import java.util.Stack;
-
 import org.developframework.jsonview.core.element.ContainerElement;
-import org.developframework.jsonview.core.element.Element;
-import org.developframework.jsonview.core.element.JsonviewConfiguration;
-import org.developframework.jsonview.core.element.JsonviewPackage;
 import org.xml.sax.Attributes;
 
 class IgnorePropertyElementSaxHandler implements ElementSaxHandler {
@@ -16,15 +11,13 @@ class IgnorePropertyElementSaxHandler implements ElementSaxHandler {
 	}
 
 	@Override
-	public JsonviewPackage handleAtStartElement(JsonviewConfiguration configuration, JsonviewPackage jsonviewPackage, Stack<Element> stack, Attributes attributes) {
+	public void handleAtStartElement(ParserContext context, Attributes attributes) {
 		final String data = attributes.getValue("data").trim();
-		((ContainerElement) stack.peek()).addIgnoreProperty(data);
-		return jsonviewPackage;
+		((ContainerElement) context.getStack().peek()).addIgnoreProperty(data);
 	}
 
 	@Override
-	public JsonviewPackage handleAtEndElement(JsonviewConfiguration configuration, JsonviewPackage jsonviewPackage, Stack<Element> stack) {
-		return jsonviewPackage;
+	public void handleAtEndElement(ParserContext context) {
 	}
 
 }

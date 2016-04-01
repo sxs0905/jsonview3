@@ -10,14 +10,21 @@ public class DatePropertyElement extends PropertyElement {
 
 	private String pattern;
 
-	public DatePropertyElement(String data, String alias, String pattern) {
+	public DatePropertyElement(String data, String alias) {
 		super(data, alias);
-		this.pattern = pattern;
 	}
 
 	@Override
 	public Processor<? extends Element, ? extends JsonNode> createProcessor(Context context, JsonNode jsonNode, String parentExpression) {
 		return new DatePropertyProcessor(context, this, parentExpression, pattern);
+	}
+
+	public String getPattern() {
+		return pattern;
+	}
+
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
 	}
 
 }

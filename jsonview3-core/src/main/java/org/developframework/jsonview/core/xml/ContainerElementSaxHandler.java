@@ -3,10 +3,12 @@ package org.developframework.jsonview.core.xml;
 import org.apache.commons.lang3.StringUtils;
 import org.developframework.jsonview.core.element.ContainerElement;
 import org.developframework.jsonview.exception.JsonviewParseXmlException;
+import org.xml.sax.Attributes;
 
-abstract class ContainerElementSaxHandler {
+abstract class ContainerElementSaxHandler<T extends ContainerElement> extends DescribeContentElementSaxHandler<T> {
 
-	protected void forClass(ContainerElement element, String className) {
+	protected void forClass(ContainerElement element, Attributes attributes) {
+		final String className = attributes.getValue("for-class");
 		if (StringUtils.isNotBlank(className)) {
 			try {
 				element.setClazz(Class.forName(className));
@@ -14,5 +16,15 @@ abstract class ContainerElementSaxHandler {
 				throw new JsonviewParseXmlException(String.format("Class \"%s\" is not found, please check configuration file.", className));
 			}
 		}
+	}
+
+	@Override
+	public void handleAtEndElement(ParserContext context) {
+		((ContainerElement) context.getStack().pop()).loadClassProperty();
+	}
+
+	@Override
+	protected void otherOperation(ParserContext context, T element) {
+		context.getStack().push(element);
 	}
 }
