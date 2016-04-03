@@ -19,7 +19,7 @@ public class ObjectProcessor extends ContainerProcessor<ObjectElement, ObjectNod
 	public void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
 		for (Iterator<Element> iterator = element.elementIterator(); iterator.hasNext();) {
 			final Element childElement = iterator.next();
-			Optional<Processor<? extends Element, ? extends JsonNode>> nextProcessorOptional = childElement.createProcessor(context, node, expression);
+			final Optional<Processor<? extends Element, ? extends JsonNode>> nextProcessorOptional = childElement.createProcessor(context, node, expression);
 			nextProcessorOptional.ifPresent((nextProcessor) -> nextProcessor.process(this));
 		}
 	}
