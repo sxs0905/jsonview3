@@ -33,16 +33,16 @@ public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> 
 				size = ((List<?>) obj).size();
 			}
 			for (int i = 0; i < size; i++) {
-				sinple(i);
+				sinple(i, size);
 			}
 		}
 	}
 
-	private void sinple(int index) {
+	private void sinple(int index, int size) {
 		if (element.isChildEmpty()) {
 			empty(index);
 		} else {
-			final ObjectInArrayProcessor childProcessor = new ObjectInArrayProcessor(context, element.getChildObjectElement(), expression, index);
+			final ObjectInArrayProcessor childProcessor = new ObjectInArrayProcessor(context, element.getChildObjectElement(), expression, index, size);
 			final ObjectNode objectNode = super.context.getObjectMapper().createObjectNode();
 			childProcessor.setNode(objectNode);
 			childProcessor.process(null);

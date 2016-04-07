@@ -1,5 +1,8 @@
 package test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.developframework.jsonview.core.JsonCreator;
@@ -20,6 +23,7 @@ public class JunitTest {
 	private JsonviewFactory jsonviewFactory;
 
 	private User[] users;
+	private List<Favorite> favorites = new ArrayList<>(2);
 
 	@Before
 	public void init() {
@@ -28,6 +32,8 @@ public class JunitTest {
 		users = new User[]{
 				user1, user2
 		};
+		favorites.add(new Favorite(1, "football"));
+		favorites.add(new Favorite(2, "basketball"));
 	}
 
 	@Test
@@ -36,6 +42,7 @@ public class JunitTest {
 		DataModel dataModel = new HashDataModel();
 		dataModel.putData("user", users[0]);
 		dataModel.putData("users", users);
+		dataModel.putData("favorites", favorites);
 		String json = jsonCreator.createJson(dataModel, "jsonview-demo", "user-detail");
 		System.out.println(json);
 

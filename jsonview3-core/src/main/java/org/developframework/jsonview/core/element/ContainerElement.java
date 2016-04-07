@@ -12,8 +12,8 @@ public abstract class ContainerElement extends Element {
 	protected Class<?> clazz;
 	protected List<String> ignorePropertyNames = new ArrayList<>();
 
-	public ContainerElement(String bind, String alias) {
-		super(bind, alias);
+	public ContainerElement(String data, String alias) {
+		super(data, alias);
 	}
 
 	public void addElement(Element element) {

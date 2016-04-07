@@ -3,26 +3,23 @@
 	xsi:schemaLocation="
 	http://www.developframework.org/schema/jsonview3 
 	http://www.developframework.org/schema/jsonview3/jsonview-configuration-3.0.xsd">
-	
+
 	<jsonview-package namespace="jsonview-demo">
-		
-		<jsonview id="user-detail" data="user">
-			<property data="id" />
-			<property data="name"/>
-			<property-date data="birthday" null-hidden="true"/>
-			<array data="likes">
-				<property data="name"/>
-			</array>
-		</jsonview>
-		
-		<jsonview id="user-detail2" data="user" for-class="test.User">
-			<ignore-property data="likes"/>
-		</jsonview>
-		
+
 		<jsonview id="user-list">
 			<array data="users">
-				<import id="user-detail"/>
+				<property data="id" />
+				<property data="name" />
+				
+				<link-object data="#favorites">
+					<property data="item" />
+				</link-object>
 			</array>
+		</jsonview>
+		
+		<jsonview id="user-detail" data="user" for-class="test.User">
+			<property-date data="birthday" pattern="yyyy-MM-dd"/>
+			<array data="likes" for-class="test.Like"/>
 		</jsonview>
 	</jsonview-package>
 </jsonview-configuration>

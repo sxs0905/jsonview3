@@ -51,6 +51,13 @@
 						</xs:complexContent>
 					</xs:complexType>
 				</xs:element>
+				<xs:element name="link-object">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="containerElementType"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
 				<xs:element name="array">
 					<xs:complexType>
 						<xs:complexContent>
