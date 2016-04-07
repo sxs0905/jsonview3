@@ -1,6 +1,7 @@
 package org.developframework.jsonview.utils;
 
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -75,10 +76,12 @@ public final class ExpressionUtils {
 		final String propertyName = StringUtils.substringBefore(property, "[");
 		final int number = new Integer(StringUtils.substringBetween(property, "[", "]")).intValue();
 		final Object propertyObject = propertyName.isEmpty() ? source : getValue(source, propertyName);
-		if (!propertyObject.getClass().isArray()) {
-			throw new JsonviewExpressionException(String.format("\"%s\" isn't an array type.", propertyName));
+		if (propertyObject instanceof List<?>) {
+			return ((List<?>) propertyObject).get(number);
+		} else if (propertyObject.getClass().isArray()) {
+			return ((Object[]) propertyObject)[number];
 		}
-		return ((Object[]) propertyObject)[number];
+		throw new JsonviewExpressionException(String.format("\"%s\" isn't an array or list type.", propertyName));
 	}
 
 	/**

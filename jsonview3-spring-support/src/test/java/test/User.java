@@ -1,18 +1,22 @@
 package test;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class User {
 
 	private int id;
 	private String name;
 	private Date birthday;
-	private Like[] likes = null;
+	private List<Like> likes = new ArrayList<>();
 
 	public User(int id, String name) {
 		this.id = id;
 		this.name = name;
 		this.birthday = new Date();
+		likes.add(new Like("aaa"));
+		likes.add(new Like("bbb"));
 	}
 
 	public int getId() {
@@ -31,11 +35,11 @@ public class User {
 		this.name = name;
 	}
 
-	public Like[] getLikes() {
+	public List<Like> getLikes() {
 		return likes;
 	}
 
-	public void setLikes(Like[] likes) {
+	public void setLikes(List<Like> likes) {
 		this.likes = likes;
 	}
 

@@ -2,6 +2,7 @@ package org.developframework.jsonview.core.processor;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> 
 			if (obj.getClass().isArray()) {
 				size = ((Object[]) obj).length;
 			} else if (obj instanceof Collection<?>) {
-				size = ((Collection<?>) obj).size();
+				size = ((List<?>) obj).size();
 			}
 			for (int i = 0; i < size; i++) {
 				sinple(i);
