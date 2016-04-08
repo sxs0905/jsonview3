@@ -58,4 +58,8 @@ public abstract class ContainerElement extends Element {
 		this.clazz = clazz;
 	}
 
+	public void copyChildElement(ContainerElement containerElement) {
+		this.childElements.addAll(containerElement.childElements);
+	}
+
 }

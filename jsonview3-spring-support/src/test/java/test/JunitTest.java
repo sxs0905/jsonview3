@@ -34,6 +34,7 @@ public class JunitTest {
 		};
 		favorites.add(new Favorite(1, "football"));
 		favorites.add(new Favorite(2, "basketball"));
+		favorites.add(new Favorite(2, "xxxball"));
 	}
 
 	@Test
@@ -43,8 +44,10 @@ public class JunitTest {
 		dataModel.putData("user", users[0]);
 		dataModel.putData("users", users);
 		dataModel.putData("favorites", favorites);
-		String json = jsonCreator.createJson(dataModel, "jsonview-demo", "user-detail");
+		String json = jsonCreator.createJson(dataModel, "jsonview-demo", "user-list");
 		System.out.println(json);
+		// dataModel.getData("favorites", "userId",
+		// 1).ifPresent(System.out::println);
 
 	}
 

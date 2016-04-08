@@ -1,13 +1,16 @@
 package org.developframework.jsonview.core.processor;
 
-import java.util.Iterator;
-import java.util.Optional;
-
 import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.core.element.ObjectElement;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+/**
+ * 数组内的对象类型节点处理器
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class ObjectInArrayProcessor extends ObjectProcessor {
 
 	protected int index;
@@ -19,24 +22,21 @@ public class ObjectInArrayProcessor extends ObjectProcessor {
 		this.size = size;
 	}
 
+	/**
+	 * 扩展： 需要处理LinkObjectProcessor和MappingObjectProcessor
+	 */
 	@Override
-	public void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
-		for (Iterator<Element> iterator = element.elementIterator(); iterator.hasNext();) {
-			final Element childElement = iterator.next();
-			final Optional<Processor<? extends Element, ? extends JsonNode>> nextProcessorOptional = childElement.createProcessor(context, node, expression);
-			nextProcessorOptional.ifPresent((nextProcessor) -> {
-				if (nextProcessor instanceof LinkObjectProcessor) {
-					LinkObjectProcessor linkObjectProcessor = (LinkObjectProcessor) nextProcessor;
-					linkObjectProcessor.checkSize(size);
-					linkObjectProcessor.setIndex(index);
-				}
-				nextProcessor.process(this);
-			});
+	protected void nextProcessorOtherOperate(Processor<? extends Element, ? extends JsonNode> nextProcessor) {
+		super.nextProcessorOtherOperate(nextProcessor);
+		if (nextProcessor instanceof LinkObjectProcessor) {
+			LinkObjectProcessor linkObjectProcessor = (LinkObjectProcessor) nextProcessor;
+			linkObjectProcessor.checkSize(size);
+			linkObjectProcessor.setIndex(index);
 		}
 	}
 
 	@Override
-	public String createExpression(String parentExpression) {
+	protected String createExpression(String parentExpression) {
 		return parentExpression;
 	}
 

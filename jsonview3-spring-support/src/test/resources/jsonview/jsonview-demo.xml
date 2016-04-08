@@ -8,18 +8,17 @@
 
 		<jsonview id="user-list">
 			<array data="users">
-				<property data="id" />
-				<property data="name" />
-				
-				<link-object data="#favorites">
-					<property data="item" />
-				</link-object>
+				<property data="id"/>
+				<import id="user-detail"/>
 			</array>
 		</jsonview>
-		
-		<jsonview id="user-detail" data="user" for-class="test.User">
-			<property-date data="birthday" pattern="yyyy-MM-dd"/>
-			<array data="likes" for-class="test.Like"/>
+
+		<jsonview id="user-detail">
+			<mapping-object data="#favorites" source="id" target="userId"
+				alias="favorite" type="multiple">
+				<property data="userId" />
+				<property data="item" />
+			</mapping-object>
 		</jsonview>
 	</jsonview-package>
 </jsonview-configuration>

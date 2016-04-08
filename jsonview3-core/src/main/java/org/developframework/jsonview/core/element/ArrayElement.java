@@ -14,9 +14,9 @@ public class ArrayElement extends ContainerElement {
 
 	private ObjectElement childObjectElement;
 
-	public ArrayElement(String bind, String alias) {
-		super(bind, alias);
-		this.childObjectElement = new ObjectElement(bind, alias);
+	public ArrayElement(String data, String alias) {
+		super(data, alias);
+		this.childObjectElement = new ObjectElement(data, alias);
 	}
 
 	@Override

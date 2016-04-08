@@ -26,4 +26,9 @@ public class Favorite {
 		this.item = item;
 	}
 
+	@Override
+	public String toString() {
+		return "Favorite [userId=" + userId + ", item=" + item + "]";
+	}
+
 }

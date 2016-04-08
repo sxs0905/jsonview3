@@ -1,15 +1,11 @@
 package org.developframework.jsonview.core.processor;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.core.element.ObjectElement;
 import org.developframework.jsonview.exception.LinkObjectSizeNotEqualException;
-
-import com.fasterxml.jackson.databind.JsonNode;
 
 public class LinkObjectProcessor extends ObjectProcessor {
 
@@ -17,10 +13,6 @@ public class LinkObjectProcessor extends ObjectProcessor {
 
 	public LinkObjectProcessor(Context context, ObjectElement element, String parentExpression) {
 		super(context, element, parentExpression);
-	}
-
-	public int getIndex() {
-		return index;
 	}
 
 	public void checkSize(int parentArraySize) {
@@ -39,18 +31,13 @@ public class LinkObjectProcessor extends ObjectProcessor {
 		}
 	}
 
+	public int getIndex() {
+		return index;
+	}
+
 	public void setIndex(int index) {
 		this.index = index;
 		this.expression += "[" + index + "]";
-	}
-
-	@Override
-	public void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
-		for (Iterator<Element> iterator = element.elementIterator(); iterator.hasNext();) {
-			final Element childElement = iterator.next();
-			final Optional<Processor<? extends Element, ? extends JsonNode>> nextProcessorOptional = childElement.createProcessor(context, node, expression);
-			nextProcessorOptional.ifPresent((nextProcessor) -> nextProcessor.process(this));
-		}
 	}
 
 }

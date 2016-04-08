@@ -15,6 +15,7 @@ public class JsonviewProcessor extends ObjectProcessor {
 	public JsonviewProcessor(Context context, Jsonview jsonview, ObjectNode node, String parentExpression, String data) {
 		super(context, jsonview, parentExpression);
 		jsonview.setData(data);
+		this.node = node;
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import java.util.Objects;
 import org.apache.commons.lang3.StringUtils;
 import org.developframework.jsonview.exception.JsonviewException;
 import org.developframework.jsonview.exception.JsonviewExpressionException;
+import org.developframework.jsonview.exception.JsonviewNoSuchFieldException;
 
 /**
  * 表达式取值工具
@@ -101,7 +102,7 @@ public final class ExpressionUtils {
 			field.setAccessible(true);
 			return field.get(source);
 		} catch (NoSuchFieldException e) {
-			throw new JsonviewExpressionException(String.format("No such field \"%s\" in source instance.", property));
+			throw new JsonviewNoSuchFieldException(property);
 		} catch (Exception e) {
 			throw new JsonviewException("ExpressionUtils.getValue() is Error.", e);
 		}

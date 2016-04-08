@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.developframework.jsonview.core.element.ArrayElement;
 import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.data.DataModel;
+import org.developframework.jsonview.data.Expression;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -33,12 +34,19 @@ public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> 
 				size = ((List<?>) obj).size();
 			}
 			for (int i = 0; i < size; i++) {
-				sinple(i, size);
+				sinple(expression, i, size);
 			}
 		}
 	}
 
-	private void sinple(int index, int size) {
+	protected void process(Processor<? extends Element, ? extends JsonNode> parentProcessor, List<Expression> expressionList) {
+		int size = expressionList.size();
+		for (Expression expression : expressionList) {
+			sinple(expression.getProperty(), expression.getIndex(), size);
+		}
+	}
+
+	private void sinple(String expression, int index, int size) {
 		if (element.isChildEmpty()) {
 			empty(index);
 		} else {

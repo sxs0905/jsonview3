@@ -1,9 +1,13 @@
 package org.developframework.jsonview.data;
 
+import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.developframework.jsonview.exception.JsonviewNoSuchFieldException;
 import org.developframework.jsonview.utils.ExpressionUtils;
 
 public class HashDataModel implements DataModel {
@@ -26,6 +30,46 @@ public class HashDataModel implements DataModel {
 	public Optional<Object> getData(String expression) {
 		final Object value = ExpressionUtils.getValue(dataMap, expression);
 		return Optional.ofNullable(value);
+	}
+
+	@Override
+	public Optional<List<Expression>> getData(String property, String target, Object sourceValue) {
+		Optional<Object> objOptional = getData(property);
+		if (objOptional.isPresent()) {
+			Object obj = objOptional.get();
+			List<Expression> expressionList = new LinkedList<>();
+			if (obj.getClass().isArray()) {
+				Object[] array = (Object[]) obj;
+				for (int i = 0; i < array.length; i++) {
+					sinple(target, sourceValue, expressionList, array[i], property, i);
+
+				}
+			} else if (obj instanceof List<?>) {
+				List<?> list = (List<?>) obj;
+				for (int i = 0, size = list.size(); i < size; i++) {
+					sinple(target, sourceValue, expressionList, list.get(i), property, i);
+				}
+			} else {
+				return Optional.empty();
+			}
+			return Optional.of(expressionList);
+		}
+		return Optional.empty();
+	}
+
+	private void sinple(String target, Object sourceValue, List<Expression> expressionList, Object object, String property, int index) {
+		try {
+			Field field = object.getClass().getDeclaredField(target);
+			field.setAccessible(true);
+			Object o = field.get(object);
+			if (o == sourceValue || o.equals(sourceValue)) {
+				expressionList.add(new Expression(property, index));
+			}
+		} catch (NoSuchFieldException e) {
+			throw new JsonviewNoSuchFieldException(target);
+		} catch (SecurityException | IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
