@@ -5,6 +5,12 @@ import org.developframework.jsonview.data.DataModel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * 环境上下文
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class Context {
 
 	private ObjectMapper objectMapper;

@@ -5,6 +5,14 @@ import org.developframework.jsonview.data.Expression;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
+/**
+ * 抽象处理器
+ * 
+ * @author qiuzhenhao
+ *
+ * @param <ELEMENT>
+ * @param <NODE>
+ */
 public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> {
 
 	protected Context context;
@@ -18,6 +26,13 @@ public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> 
 		this.expression = createExpression(parentExpression);
 	}
 
+	/**
+	 * 创建表达式
+	 * 
+	 * @param parentExpression
+	 *            父节点表达式
+	 * @return
+	 */
 	protected Expression createExpression(Expression parentExpression) {
 		if (element.getData().startsWith("#")) {
 			return Expression.buildObjectExpression(element.getData().substring(1));
@@ -25,6 +40,12 @@ public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> 
 		return Expression.concatExpression(parentExpression, element.getData());
 	}
 
+	/**
+	 * 处理子节点的操作
+	 * 
+	 * @param parentProcessor
+	 *            父节点处理器对象
+	 */
 	protected abstract void process(Processor<? extends Element, ? extends JsonNode> parentProcessor);
 
 	public Context getContext() {

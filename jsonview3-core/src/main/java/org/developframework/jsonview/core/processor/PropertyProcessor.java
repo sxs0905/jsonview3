@@ -10,12 +10,22 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * 抽象的属性型节点处理器
+ * 
+ * @author qiuzhenhao
+ *
+ * @param <T>
+ */
 public abstract class PropertyProcessor<T> extends Processor<PropertyElement, JsonNode> {
 
 	public PropertyProcessor(Context context, PropertyElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
 	}
 
+	/**
+	 * 实现属性节点处理流程
+	 */
 	@Override
 	protected final void process(Processor<? extends Element, ? extends JsonNode> parentNodeProcessor) {
 		DataModel dataModel = parentNodeProcessor.getContext().getDataModel();
@@ -23,6 +33,7 @@ public abstract class PropertyProcessor<T> extends Processor<PropertyElement, Js
 		ObjectNode parentNode = (ObjectNode) parentNodeProcessor.getNode();
 		final String showName = super.element.showName();
 		if (!valueOptional.isPresent()) {
+			// 假如节点支持null时隐藏
 			if (!element.isNullHidden()) {
 				parentNode.putNull(showName);
 			}
@@ -40,8 +51,21 @@ public abstract class PropertyProcessor<T> extends Processor<PropertyElement, Js
 
 	}
 
+	/**
+	 * 扩展点： 判断是否支持某一类型的值
+	 * 
+	 * @param sourceClass
+	 * @return
+	 */
 	protected abstract boolean support(Class<?> sourceClass);
 
+	/**
+	 * 扩展点：在Json树状结构上构造Node
+	 * 
+	 * @param parentNode
+	 * @param value
+	 * @param showName
+	 */
 	protected abstract void handle(ObjectNode parentNode, Object value, String showName);
 
 }
