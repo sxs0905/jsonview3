@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.developframework.jsonview.core.processor.Context;
 import org.developframework.jsonview.core.processor.DatePropertyProcessor;
 import org.developframework.jsonview.core.processor.Processor;
+import org.developframework.jsonview.data.Expression;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -18,7 +19,7 @@ public class DatePropertyElement extends PropertyElement {
 	}
 
 	@Override
-	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, String parentExpression) {
+	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression) {
 		DatePropertyProcessor processor = new DatePropertyProcessor(context, this, parentExpression, pattern);
 		processor.setNode(parentNode);
 		return Optional.of(processor);

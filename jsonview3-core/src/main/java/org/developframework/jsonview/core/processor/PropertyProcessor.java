@@ -5,13 +5,14 @@ import java.util.Optional;
 import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.core.element.PropertyElement;
 import org.developframework.jsonview.data.DataModel;
+import org.developframework.jsonview.data.Expression;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public abstract class PropertyProcessor<T> extends Processor<PropertyElement, JsonNode> {
 
-	public PropertyProcessor(Context context, PropertyElement element, String parentExpression) {
+	public PropertyProcessor(Context context, PropertyElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
 	}
 

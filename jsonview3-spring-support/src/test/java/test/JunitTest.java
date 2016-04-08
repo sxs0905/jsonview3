@@ -46,8 +46,6 @@ public class JunitTest {
 		dataModel.putData("favorites", favorites);
 		String json = jsonCreator.createJson(dataModel, "jsonview-demo", "user-list");
 		System.out.println(json);
-		// dataModel.getData("favorites", "userId",
-		// 1).ifPresent(System.out::println);
 
 	}
 

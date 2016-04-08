@@ -7,7 +7,7 @@ public interface DataModel {
 
 	public void putData(String dataName, Object data);
 
-	public Optional<Object> getData(String expression);
+	public Optional<Object> getData(Expression expression);
 
-	public Optional<List<Expression>> getData(String expression, String target, Object sourceValue);
+	public Optional<List<Expression>> getData(Expression expression, String target, Object sourceValue);
 }

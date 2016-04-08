@@ -18,14 +18,14 @@ public class MappingObjectProcessor extends ObjectProcessor {
 	private String target;
 	private Object sourceValue;
 
-	public MappingObjectProcessor(Context context, MappingObjectElement element, String parentExpression) {
+	public MappingObjectProcessor(Context context, MappingObjectElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
 		this.target = element.getTarget();
 	}
 
-	public void setParentArrayExpression(String parentArrayExpression) {
+	public void setParentArrayExpression(Expression parentArrayExpression) {
 		MappingObjectElement mappingObjectElement = (MappingObjectElement) element;
-		final String expression = parentArrayExpression + "." + mappingObjectElement.getSource();
+		final Expression expression = Expression.concatExpression(parentArrayExpression, mappingObjectElement.getSource());
 		Optional<Object> valueOptional = context.getDataModel().getData(expression);
 		valueOptional.ifPresent(v -> sourceValue = v);
 	}

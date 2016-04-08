@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> {
 
-	public ArrayProcessor(Context context, ArrayElement element, String parentExpression) {
+	public ArrayProcessor(Context context, ArrayElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
 	}
 
@@ -34,7 +34,7 @@ public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> 
 				size = ((List<?>) obj).size();
 			}
 			for (int i = 0; i < size; i++) {
-				sinple(expression, i, size);
+				sinple(Expression.buildArrayExpression(expression, i), size);
 			}
 		}
 	}
@@ -42,15 +42,15 @@ public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> 
 	protected void process(Processor<? extends Element, ? extends JsonNode> parentProcessor, List<Expression> expressionList) {
 		int size = expressionList.size();
 		for (Expression expression : expressionList) {
-			sinple(expression.getProperty(), expression.getIndex(), size);
+			sinple(expression, size);
 		}
 	}
 
-	private void sinple(String expression, int index, int size) {
+	private void sinple(Expression expression, int size) {
 		if (element.isChildEmpty()) {
-			empty(index);
+			empty(expression.getIndex());
 		} else {
-			final ObjectInArrayProcessor childProcessor = new ObjectInArrayProcessor(context, element.getChildObjectElement(), expression, index, size);
+			final ObjectInArrayProcessor childProcessor = new ObjectInArrayProcessor(context, element.getChildObjectElement(), expression, size);
 			final ObjectNode objectNode = super.context.getObjectMapper().createObjectNode();
 			childProcessor.setNode(objectNode);
 			childProcessor.process(null);
@@ -59,7 +59,7 @@ public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> 
 	}
 
 	private void empty(int index) {
-		final Object object = context.getDataModel().getData(expression + "[" + index + "]");
+		final Object object = context.getDataModel().getData(Expression.buildArrayExpression(expression, index));
 		if (Objects.isNull(object)) {
 			node.addNull();
 		} else if (object instanceof String) {

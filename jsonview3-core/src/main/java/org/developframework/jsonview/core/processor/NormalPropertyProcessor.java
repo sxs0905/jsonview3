@@ -3,12 +3,13 @@ package org.developframework.jsonview.core.processor;
 import java.math.BigDecimal;
 
 import org.developframework.jsonview.core.element.PropertyElement;
+import org.developframework.jsonview.data.Expression;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class NormalPropertyProcessor extends PropertyProcessor<Object> {
 
-	public NormalPropertyProcessor(Context context, PropertyElement element, String parentExpression) {
+	public NormalPropertyProcessor(Context context, PropertyElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
 	}
 

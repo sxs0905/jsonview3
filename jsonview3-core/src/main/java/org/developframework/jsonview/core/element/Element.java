@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.developframework.jsonview.core.processor.Context;
 import org.developframework.jsonview.core.processor.Processor;
+import org.developframework.jsonview.data.Expression;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -20,7 +21,7 @@ public abstract class Element {
 		this.alias = alias;
 	}
 
-	public abstract Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, String parentExpression);
+	public abstract Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression);
 
 	public String showName() {
 		if (StringUtils.isNotBlank(alias)) {

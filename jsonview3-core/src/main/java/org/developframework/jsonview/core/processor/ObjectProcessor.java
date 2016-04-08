@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.core.element.ObjectElement;
+import org.developframework.jsonview.data.Expression;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -17,7 +18,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class ObjectProcessor extends ContainerProcessor<ObjectElement, ObjectNode> {
 
-	public ObjectProcessor(Context context, ObjectElement element, String parentExpression) {
+	public ObjectProcessor(Context context, ObjectElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
 	}
 

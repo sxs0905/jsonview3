@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
+import org.developframework.jsonview.data.Expression;
 import org.developframework.jsonview.exception.JsonviewException;
 import org.developframework.jsonview.exception.JsonviewExpressionException;
 import org.developframework.jsonview.exception.JsonviewNoSuchFieldException;
@@ -31,7 +32,11 @@ public final class ExpressionUtils {
 	 * @param expression
 	 * @return
 	 */
-	public static Object getValue(Object source, String expression) {
+	public static Object getValue(Object source, Expression expression) {
+		return getValue(source, expression.toString());
+	}
+
+	private static Object getValue(Object source, String expression) {
 		int dotIndex = expression.indexOf(".");
 		if (dotIndex == -1) {
 			return getPropertyValue(source, expression);

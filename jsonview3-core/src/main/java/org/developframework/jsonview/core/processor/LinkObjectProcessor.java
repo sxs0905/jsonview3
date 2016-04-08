@@ -5,13 +5,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.developframework.jsonview.core.element.ObjectElement;
+import org.developframework.jsonview.data.Expression;
 import org.developframework.jsonview.exception.LinkObjectSizeNotEqualException;
 
 public class LinkObjectProcessor extends ObjectProcessor {
 
 	private int index;
 
-	public LinkObjectProcessor(Context context, ObjectElement element, String parentExpression) {
+	public LinkObjectProcessor(Context context, ObjectElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
 	}
 
@@ -37,7 +38,7 @@ public class LinkObjectProcessor extends ObjectProcessor {
 
 	public void setIndex(int index) {
 		this.index = index;
-		this.expression += "[" + index + "]";
+		this.expression = Expression.buildArrayExpression(expression, index);
 	}
 
 }

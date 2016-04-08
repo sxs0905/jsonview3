@@ -27,13 +27,13 @@ public class HashDataModel implements DataModel {
 	}
 
 	@Override
-	public Optional<Object> getData(String expression) {
+	public Optional<Object> getData(Expression expression) {
 		final Object value = ExpressionUtils.getValue(dataMap, expression);
 		return Optional.ofNullable(value);
 	}
 
 	@Override
-	public Optional<List<Expression>> getData(String property, String target, Object sourceValue) {
+	public Optional<List<Expression>> getData(Expression property, String target, Object sourceValue) {
 		Optional<Object> objOptional = getData(property);
 		if (objOptional.isPresent()) {
 			Object obj = objOptional.get();
@@ -57,13 +57,13 @@ public class HashDataModel implements DataModel {
 		return Optional.empty();
 	}
 
-	private void sinple(String target, Object sourceValue, List<Expression> expressionList, Object object, String property, int index) {
+	private void sinple(String target, Object sourceValue, List<Expression> expressionList, Object object, Expression property, int index) {
 		try {
 			Field field = object.getClass().getDeclaredField(target);
 			field.setAccessible(true);
 			Object o = field.get(object);
 			if (o == sourceValue || o.equals(sourceValue)) {
-				expressionList.add(new Expression(property, index));
+				expressionList.add(Expression.buildArrayExpression(property, index));
 			}
 		} catch (NoSuchFieldException e) {
 			throw new JsonviewNoSuchFieldException(target);

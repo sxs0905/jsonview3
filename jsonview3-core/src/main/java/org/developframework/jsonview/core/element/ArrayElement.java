@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.developframework.jsonview.core.processor.ArrayProcessor;
 import org.developframework.jsonview.core.processor.Context;
 import org.developframework.jsonview.core.processor.Processor;
+import org.developframework.jsonview.data.Expression;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -20,7 +21,7 @@ public class ArrayElement extends ContainerElement {
 	}
 
 	@Override
-	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, String parentExpression) {
+	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression) {
 		ArrayProcessor processor = new ArrayProcessor(context, this, parentExpression);
 		Optional<Object> optional = context.getDataModel().getData(processor.getExpression());
 		if (optional.isPresent()) {

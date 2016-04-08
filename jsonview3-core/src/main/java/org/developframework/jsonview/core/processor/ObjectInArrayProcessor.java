@@ -2,6 +2,7 @@ package org.developframework.jsonview.core.processor;
 
 import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.core.element.ObjectElement;
+import org.developframework.jsonview.data.Expression;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -13,12 +14,10 @@ import com.fasterxml.jackson.databind.JsonNode;
  */
 public class ObjectInArrayProcessor extends ObjectProcessor {
 
-	protected int index;
 	protected int size;
 
-	public ObjectInArrayProcessor(Context context, ObjectElement element, String parentExpression, int index, int size) {
-		super(context, element, parentExpression + "[" + index + "]");
-		this.index = index;
+	public ObjectInArrayProcessor(Context context, ObjectElement element, Expression parentExpression, int size) {
+		super(context, element, parentExpression);
 		this.size = size;
 	}
 
@@ -31,17 +30,13 @@ public class ObjectInArrayProcessor extends ObjectProcessor {
 		if (nextProcessor instanceof LinkObjectProcessor) {
 			LinkObjectProcessor linkObjectProcessor = (LinkObjectProcessor) nextProcessor;
 			linkObjectProcessor.checkSize(size);
-			linkObjectProcessor.setIndex(index);
+			linkObjectProcessor.setIndex(expression.getIndex());
 		}
 	}
 
 	@Override
-	protected String createExpression(String parentExpression) {
+	protected Expression createExpression(Expression parentExpression) {
 		return parentExpression;
-	}
-
-	public int getIndex() {
-		return index;
 	}
 
 	public int getSize() {
