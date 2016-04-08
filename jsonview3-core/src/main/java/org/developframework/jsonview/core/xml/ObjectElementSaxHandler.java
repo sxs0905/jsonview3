@@ -16,9 +16,9 @@ class ObjectElementSaxHandler extends ContainerElementSaxHandler<ObjectElement> 
 	}
 
 	@Override
-	protected void addOtherAttributes(ObjectElement objectElement, Attributes attributes) {
-		objectElement.setNullHidden(attributes.getValue("null-hidden"));
-		forClass(objectElement, attributes);
+	protected void addOtherAttributes(ObjectElement element, Attributes attributes) {
+		element.setNullHidden(attributes.getValue("null-hidden"));
+		forClass(element, attributes);
 	}
 
 }

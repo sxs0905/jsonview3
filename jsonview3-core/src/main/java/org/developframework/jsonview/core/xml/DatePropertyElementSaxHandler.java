@@ -19,6 +19,7 @@ class DatePropertyElementSaxHandler extends DescribeContentElementSaxHandler<Dat
 	protected void addOtherAttributes(DatePropertyElement element, Attributes attributes) {
 		element.setPattern(attributes.getValue("pattern"));
 		element.setNullHidden(attributes.getValue("null-hidden"));
+		element.setHandler(attributes.getValue("handler"));
 	}
 
 	@Override

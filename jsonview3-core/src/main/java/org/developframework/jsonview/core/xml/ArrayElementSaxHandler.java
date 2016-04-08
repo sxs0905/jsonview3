@@ -16,9 +16,9 @@ class ArrayElementSaxHandler extends ContainerElementSaxHandler<ArrayElement> {
 	}
 
 	@Override
-	protected void addOtherAttributes(ArrayElement arrayElement, Attributes attributes) {
-		arrayElement.setNullHidden(attributes.getValue("null-hidden"));
-		forClass(arrayElement, attributes);
+	protected void addOtherAttributes(ArrayElement element, Attributes attributes) {
+		element.setNullHidden(attributes.getValue("null-hidden"));
+		forClass(element, attributes);
 	}
 
 }

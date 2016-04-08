@@ -28,11 +28,16 @@ public abstract class PropertyProcessor<T> extends Processor<PropertyElement, Js
 			}
 			return;
 		}
-		final Object value = valueOptional.get();
-		Class<?> valueClass = value.getClass();
-		if (support(valueClass)) {
-			handle(parentNode, value, showName);
-		}
+		valueOptional.ifPresent(value -> {
+			// 处理handler
+			Optional<Object> optional = element.getHandler().map(handler -> handler.handle(value));
+			final Object newValue = optional.orElse(value);
+			Class<?> valueClass = newValue.getClass();
+			if (support(valueClass)) {
+				handle(parentNode, newValue, showName);
+			}
+		});
+
 	}
 
 	protected abstract boolean support(Class<?> sourceClass);

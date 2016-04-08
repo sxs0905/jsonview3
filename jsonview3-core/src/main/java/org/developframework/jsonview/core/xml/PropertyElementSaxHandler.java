@@ -17,8 +17,9 @@ class PropertyElementSaxHandler extends DescribeContentElementSaxHandler<Propert
 	}
 
 	@Override
-	protected void addOtherAttributes(PropertyElement propertyElement, Attributes attributes) {
-		propertyElement.setNullHidden(attributes.getValue("null-hidden"));
+	protected void addOtherAttributes(PropertyElement element, Attributes attributes) {
+		element.setNullHidden(attributes.getValue("null-hidden"));
+		element.setHandler(attributes.getValue("handler"));
 	}
 
 	@Override
