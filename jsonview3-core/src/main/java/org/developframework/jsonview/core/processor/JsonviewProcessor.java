@@ -1,10 +1,8 @@
 package org.developframework.jsonview.core.processor;
 
-import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.core.element.Jsonview;
 import org.developframework.jsonview.data.Expression;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class JsonviewProcessor extends ObjectProcessor {
@@ -23,10 +21,4 @@ public class JsonviewProcessor extends ObjectProcessor {
 	protected Expression createExpression(Expression parentExpression) {
 		return parentExpression;
 	}
-
-	@Override
-	public void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
-		super.process(parentProcessor);
-	}
-
 }
