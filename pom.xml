@@ -49,6 +49,8 @@
 				<artifactId>jsonview3-spring-support</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			
+			<!-- spring-framework begin -->
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-context</artifactId>
@@ -56,9 +58,21 @@
 			</dependency>
 			<dependency>
 				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${version.spring}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
 				<artifactId>spring-test</artifactId>
 				<version>${version.spring}</version>
 			</dependency>
+			<!-- spring-framework end -->
+			
 			<dependency>
 				<groupId>junit</groupId>
 				<artifactId>junit</artifactId>
