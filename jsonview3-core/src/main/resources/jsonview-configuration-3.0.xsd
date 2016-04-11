@@ -92,7 +92,7 @@
 				<xs:element name="property">
 					<xs:complexType>
 						<xs:attributeGroup ref="attrGroupForElement" />
-						<xs:attribute name="handler" type="xs:string" />
+						<xs:attribute name="convertor" type="xs:string" />
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="property-date">

@@ -4,12 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-public class UtilDatePropertyHandler implements PropertyHandler<String> {
+public class UtilDatePropertyConvertor implements PropertyConvertor<String> {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	@Override
-	public String handle(Object source) {
+	public String convert(Object source) {
 		if (Objects.isNull(source)) {
 			return null;
 		}

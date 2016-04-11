@@ -31,7 +31,7 @@ class PropertyElementSaxHandler extends DescribeContentElementSaxHandler<Propert
 	@Override
 	protected void addOtherAttributes(PropertyElement element, Attributes attributes) {
 		element.setNullHidden(attributes.getValue("null-hidden"));
-		element.setHandler(attributes.getValue("handler"));
+		element.setConvertor(attributes.getValue("convertor"));
 	}
 
 	/**

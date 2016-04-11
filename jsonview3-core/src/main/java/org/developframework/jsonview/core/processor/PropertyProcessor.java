@@ -41,7 +41,7 @@ public abstract class PropertyProcessor<T> extends Processor<PropertyElement, Js
 		}
 		valueOptional.ifPresent(value -> {
 			// 处理handler
-			Optional<Object> optional = element.getHandler().map(handler -> handler.handle(value));
+			Optional<Object> optional = element.getConvertor().map(convertor -> convertor.convert(value));
 			final Object newValue = optional.orElse(value);
 			Class<?> valueClass = newValue.getClass();
 			if (support(valueClass)) {
