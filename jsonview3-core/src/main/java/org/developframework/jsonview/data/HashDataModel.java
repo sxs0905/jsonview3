@@ -10,6 +10,12 @@ import java.util.Optional;
 import org.developframework.jsonview.exception.JsonviewNoSuchFieldException;
 import org.developframework.jsonview.utils.ExpressionUtils;
 
+/**
+ * 哈希数据模型
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class HashDataModel implements DataModel {
 
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
