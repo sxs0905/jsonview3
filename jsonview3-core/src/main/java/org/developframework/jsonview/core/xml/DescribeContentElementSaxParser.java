@@ -11,7 +11,7 @@ import org.xml.sax.Attributes;
  *
  * @param <T>
  */
-abstract class DescribeContentElementSaxHandler<T extends Element> implements ElementSaxHandler {
+abstract class DescribeContentElementSaxParser<T extends Element> implements ElementSaxParser {
 
 	/**
 	 * 实现：处理SAX节点开始时的操作

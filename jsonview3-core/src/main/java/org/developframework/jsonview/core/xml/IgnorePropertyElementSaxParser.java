@@ -9,7 +9,7 @@ import org.xml.sax.Attributes;
  * @author qiuzhenhao
  *
  */
-class IgnorePropertyElementSaxHandler implements ElementSaxHandler {
+class IgnorePropertyElementSaxParser implements ElementSaxParser {
 
 	@Override
 	public String qName() {

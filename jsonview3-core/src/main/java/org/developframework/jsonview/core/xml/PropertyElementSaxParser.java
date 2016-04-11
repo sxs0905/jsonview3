@@ -10,7 +10,7 @@ import org.xml.sax.Attributes;
  * @author qiuzhenhao
  *
  */
-class PropertyElementSaxHandler extends DescribeContentElementSaxHandler<PropertyElement> {
+class PropertyElementSaxParser extends DescribeContentElementSaxParser<PropertyElement> {
 
 	@Override
 	public String qName() {

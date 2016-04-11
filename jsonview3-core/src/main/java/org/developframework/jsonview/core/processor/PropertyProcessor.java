@@ -40,7 +40,7 @@ public abstract class PropertyProcessor<T> extends Processor<PropertyElement, Js
 			return;
 		}
 		valueOptional.ifPresent(value -> {
-			// 处理handler
+			// 处理转换器
 			Optional<Object> optional = element.getConvertor().map(convertor -> convertor.convert(value));
 			final Object newValue = optional.orElse(value);
 			Class<?> valueClass = newValue.getClass();

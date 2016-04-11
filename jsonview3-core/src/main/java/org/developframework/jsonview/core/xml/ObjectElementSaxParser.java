@@ -1,34 +1,34 @@
 package org.developframework.jsonview.core.xml;
 
-import org.developframework.jsonview.core.element.ArrayElement;
+import org.developframework.jsonview.core.element.ObjectElement;
 import org.xml.sax.Attributes;
 
 /**
- * 数组节点解析器
+ * 对象节点解析器
  * 
  * @author qiuzhenhao
  *
  */
-class ArrayElementSaxHandler extends ContainerElementSaxHandler<ArrayElement> {
+class ObjectElementSaxParser extends ContainerElementSaxParser<ObjectElement> {
 
 	@Override
 	public String qName() {
-		return "array";
+		return "object";
 	}
 
 	/**
 	 * 实现： 获取节点实例
 	 */
 	@Override
-	protected ArrayElement getElementInstance(String data, String alias) {
-		return new ArrayElement(data, alias);
+	protected ObjectElement getElementInstance(String data, String alias) {
+		return new ObjectElement(data, alias);
 	}
 
 	/**
 	 * 实现：增加其它属性处理
 	 */
 	@Override
-	protected void addOtherAttributes(ArrayElement element, Attributes attributes) {
+	protected void addOtherAttributes(ObjectElement element, Attributes attributes) {
 		element.setNullHidden(attributes.getValue("null-hidden"));
 		forClass(element, attributes);
 	}

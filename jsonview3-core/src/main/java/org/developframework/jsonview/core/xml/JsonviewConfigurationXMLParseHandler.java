@@ -17,12 +17,12 @@ import org.xml.sax.helpers.DefaultHandler;
 class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 
 	// 解析器组
-	private List<ElementSaxHandler> elementSaxHandlers;
+	private List<ElementSaxParser> elementSaxParsers;
 	// 解析器上下文
 	private ParserContext context;
 
 	public JsonviewConfigurationXMLParseHandler(JsonviewConfiguration configuration) {
-		this.elementSaxHandlers = new LinkedList<>();
+		this.elementSaxParsers = new LinkedList<>();
 		this.context = new ParserContext(configuration);
 		init();
 	}
@@ -31,25 +31,25 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	 * 初始化
 	 */
 	private void init() {
-		registerElementSaxHandler(new PropertyElementSaxHandler());
-		registerElementSaxHandler(new DatePropertyElementSaxHandler());
-		registerElementSaxHandler(new IgnorePropertyElementSaxHandler());
-		registerElementSaxHandler(new ObjectElementSaxHandler());
-		registerElementSaxHandler(new ArrayElementSaxHandler());
-		registerElementSaxHandler(new MappingObjectElementSaxHandler());
-		registerElementSaxHandler(new LinkObjectElementSaxHandler());
-		registerElementSaxHandler(new JsonviewElementSaxHandler());
-		registerElementSaxHandler(new ImportElementSaxHandler());
-		registerElementSaxHandler(new JsonviewPackageElementSaxHandler());
+		registerElementSaxParser(new PropertyElementSaxParser());
+		registerElementSaxParser(new DatePropertyElementSaxParser());
+		registerElementSaxParser(new IgnorePropertyElementSaxParser());
+		registerElementSaxParser(new ObjectElementSaxParser());
+		registerElementSaxParser(new ArrayElementSaxParser());
+		registerElementSaxParser(new MappingObjectElementSaxParser());
+		registerElementSaxParser(new LinkObjectElementSaxParser());
+		registerElementSaxParser(new JsonviewElementSaxParser());
+		registerElementSaxParser(new ImportElementSaxParser());
+		registerElementSaxParser(new JsonviewPackageElementSaxParser());
 	}
 
 	/**
 	 * 注册解析器
 	 * 
-	 * @param handler
+	 * @param parser
 	 */
-	private void registerElementSaxHandler(ElementSaxHandler handler) {
-		elementSaxHandlers.add(handler);
+	private void registerElementSaxParser(ElementSaxParser parser) {
+		elementSaxParsers.add(parser);
 	}
 
 	/**
@@ -65,9 +65,9 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	 */
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-		for (ElementSaxHandler elementSaxHandler : elementSaxHandlers) {
-			if (elementSaxHandler.qName().equals(qName)) {
-				elementSaxHandler.handleAtStartElement(context, attributes);
+		for (ElementSaxParser parser : elementSaxParsers) {
+			if (parser.qName().equals(qName)) {
+				parser.handleAtStartElement(context, attributes);
 			}
 		}
 	}
@@ -77,9 +77,9 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	 */
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {
-		for (ElementSaxHandler elementSaxHandler : elementSaxHandlers) {
-			if (elementSaxHandler.qName().equals(qName)) {
-				elementSaxHandler.handleAtEndElement(context);
+		for (ElementSaxParser parser : elementSaxParsers) {
+			if (parser.qName().equals(qName)) {
+				parser.handleAtEndElement(context);
 			}
 		}
 	}

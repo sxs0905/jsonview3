@@ -8,7 +8,7 @@ import org.xml.sax.Attributes;
  * @author qiuzhenhao
  *
  */
-interface ElementSaxHandler {
+interface ElementSaxParser {
 
 	/**
 	 * 获取节点qName

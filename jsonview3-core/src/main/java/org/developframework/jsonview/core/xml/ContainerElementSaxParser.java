@@ -12,7 +12,7 @@ import org.xml.sax.Attributes;
  *
  * @param <T>
  */
-abstract class ContainerElementSaxHandler<T extends ContainerElement> extends DescribeContentElementSaxHandler<T> {
+abstract class ContainerElementSaxParser<T extends ContainerElement> extends DescribeContentElementSaxParser<T> {
 
 	/**
 	 * 添加forclass处理

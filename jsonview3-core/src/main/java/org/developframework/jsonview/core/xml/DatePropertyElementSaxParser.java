@@ -9,7 +9,7 @@ import org.xml.sax.Attributes;
  * @author qiuzhenhao
  *
  */
-class DatePropertyElementSaxHandler extends DescribeContentElementSaxHandler<DatePropertyElement> {
+class DatePropertyElementSaxParser extends DescribeContentElementSaxParser<DatePropertyElement> {
 
 	@Override
 	public String qName() {
@@ -31,6 +31,7 @@ class DatePropertyElementSaxHandler extends DescribeContentElementSaxHandler<Dat
 	protected void addOtherAttributes(DatePropertyElement element, Attributes attributes) {
 		element.setPattern(attributes.getValue("pattern"));
 		element.setNullHidden(attributes.getValue("null-hidden"));
+		element.setConvertor(attributes.getValue("convertor"));
 	}
 
 	/**

@@ -9,7 +9,7 @@ import org.xml.sax.Attributes;
  * @author qiuzhenhao
  *
  */
-public class LinkObjectElementSaxHandler extends ContainerElementSaxHandler<LinkObjectElement> {
+public class LinkObjectElementSaxParser extends ContainerElementSaxParser<LinkObjectElement> {
 
 	@Override
 	public String qName() {

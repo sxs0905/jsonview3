@@ -11,7 +11,7 @@ import org.xml.sax.Attributes;
  * @author qiuzhenhao
  *
  */
-class JsonviewElementSaxHandler extends ContainerElementSaxHandler<Jsonview> {
+class JsonviewElementSaxParser extends ContainerElementSaxParser<Jsonview> {
 
 	@Override
 	public String qName() {

@@ -11,7 +11,7 @@ import org.xml.sax.Attributes;
  * @author qiuzhenhao
  *
  */
-class ImportElementSaxHandler implements ElementSaxHandler {
+class ImportElementSaxParser implements ElementSaxParser {
 
 	@Override
 	public String qName() {

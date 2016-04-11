@@ -10,7 +10,7 @@ import org.xml.sax.Attributes;
  * @author qiuzhenhao
  *
  */
-public class MappingObjectElementSaxHandler extends ContainerElementSaxHandler<MappingObjectElement> {
+public class MappingObjectElementSaxParser extends ContainerElementSaxParser<MappingObjectElement> {
 
 	@Override
 	public String qName() {

@@ -9,7 +9,7 @@ import org.xml.sax.Attributes;
  * @author qiuzhenhao
  *
  */
-class JsonviewPackageElementSaxHandler implements ElementSaxHandler {
+class JsonviewPackageElementSaxParser implements ElementSaxParser {
 
 	@Override
 	public String qName() {
