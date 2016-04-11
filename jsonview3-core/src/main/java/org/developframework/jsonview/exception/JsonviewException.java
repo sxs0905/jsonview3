@@ -3,6 +3,12 @@ package org.developframework.jsonview.exception;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * jsonview总异常
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class JsonviewException extends RuntimeException {
 
 	private static final long serialVersionUID = 1748720914783312577L;
