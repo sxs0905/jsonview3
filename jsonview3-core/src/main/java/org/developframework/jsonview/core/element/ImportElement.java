@@ -10,9 +10,17 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * 导入功能节点
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class ImportElement extends Element {
 
+	// 命名空间
 	private String namespace;
+	// jsonview id
 	private String id;
 
 	public ImportElement(String namespace, String id) {
@@ -21,6 +29,9 @@ public class ImportElement extends Element {
 		this.id = id;
 	}
 
+	/**
+	 * 实现：创建处理器
+	 */
 	@Override
 	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression) {
 		ImportProcessor processor = new ImportProcessor(context, this, parentExpression);

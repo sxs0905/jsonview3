@@ -10,6 +10,12 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * 基本对象节点
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class ObjectElement extends ContainerElement {
 
 	public ObjectElement() {
@@ -20,6 +26,9 @@ public class ObjectElement extends ContainerElement {
 		super(data, alias);
 	}
 
+	/**
+	 * 实现： 创建处理器
+	 */
 	@Override
 	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression) {
 		ObjectProcessor processor = new ObjectProcessor(context, this, parentExpression);

@@ -11,6 +11,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * 数组节点
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class ArrayElement extends ContainerElement {
 
 	private ObjectElement childObjectElement;
@@ -36,9 +42,9 @@ public class ArrayElement extends ContainerElement {
 	}
 
 	@Override
-	public void addElement(Element element) {
-		super.addElement(element);
-		this.childObjectElement.addElement(element);
+	public void addChildElement(Element element) {
+		super.addChildElement(element);
+		this.childObjectElement.addChildElement(element);
 	}
 
 	public ObjectElement getChildObjectElement() {

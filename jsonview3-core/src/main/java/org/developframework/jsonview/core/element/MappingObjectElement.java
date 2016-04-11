@@ -11,10 +11,24 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * 一对多映射型功能节点
+ * 
+ * @author qiuhenhao
+ *
+ */
 public class MappingObjectElement extends ObjectElement {
 
+	/**
+	 * 映射类型枚举
+	 * 
+	 * @author qiuzhenhao
+	 *
+	 */
 	public enum MappingType {
-		AUTO, SINPLE, MULTIPLE;
+		AUTO, // 自动
+		SINPLE, // 单个
+		MULTIPLE;// 多个
 
 		public static MappingType parse(String typeStr) {
 			if (StringUtils.isBlank(typeStr)) {
@@ -25,10 +39,15 @@ public class MappingObjectElement extends ObjectElement {
 		}
 	}
 
+	// 条件源
 	private String source;
+	// 目标
 	private String target;
+	// 子对象节点
 	private ObjectElement childObjectElement;
+	// 子数组节点
 	private ArrayElement childArrayElement;
+	// 映射类型
 	private MappingType mappingType;
 
 	public MappingObjectElement(String data, String alias) {
@@ -37,13 +56,19 @@ public class MappingObjectElement extends ObjectElement {
 		childArrayElement = new ArrayElement(data, alias);
 	}
 
+	/**
+	 * 重写： 增加节点
+	 */
 	@Override
-	public void addElement(Element element) {
-		super.addElement(element);
-		this.childObjectElement.addElement(element);
-		this.childArrayElement.addElement(element);
+	public void addChildElement(Element element) {
+		super.addChildElement(element);
+		this.childObjectElement.addChildElement(element);
+		this.childArrayElement.addChildElement(element);
 	}
 
+	/**
+	 * 实现： 创建处理器
+	 */
 	@Override
 	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression) {
 		MappingObjectProcessor processor = new MappingObjectProcessor(context, this, parentExpression);

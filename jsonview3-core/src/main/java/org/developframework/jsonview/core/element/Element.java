@@ -10,10 +10,19 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * 抽象节点
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public abstract class Element {
 
+	// 绑定数据
 	protected String data;
+	// 别名
 	protected String alias;
+	// null时是否隐藏
 	protected boolean nullHidden;
 
 	public Element(String data, String alias) {
@@ -21,8 +30,24 @@ public abstract class Element {
 		this.alias = alias;
 	}
 
+	/**
+	 * 为节点创建处理器
+	 * 
+	 * @param context
+	 *            上下文
+	 * @param parentNode
+	 *            父树节点
+	 * @param parentExpression
+	 *            父表达式
+	 * @return
+	 */
 	public abstract Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression);
 
+	/**
+	 * 显示的名称
+	 * 
+	 * @return
+	 */
 	public String showName() {
 		if (StringUtils.isNotBlank(alias)) {
 			return alias;

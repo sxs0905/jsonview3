@@ -10,12 +10,21 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * 一对一链接型功能节点
+ * 
+ * @author qiuhenhao
+ *
+ */
 public class LinkObjectElement extends ObjectElement {
 
 	public LinkObjectElement(String data, String alias) {
 		super(data, alias);
 	}
 
+	/**
+	 * 实现： 创建处理器
+	 */
 	@Override
 	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression) {
 		LinkObjectProcessor processor = new LinkObjectProcessor(context, this, parentExpression);

@@ -6,8 +6,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.developframework.jsonview.core.handler.PropertyHandler;
 import org.developframework.jsonview.exception.JsonviewExpressionException;
 
+/**
+ * 基本属性节点
+ * 
+ * @author qiuhenhao
+ *
+ */
 public abstract class PropertyElement extends Element {
 
+	// handler对象
 	protected PropertyHandler<?> handler;
 
 	public PropertyElement(String data, String alias) {

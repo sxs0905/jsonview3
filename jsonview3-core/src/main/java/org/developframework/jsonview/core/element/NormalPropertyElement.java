@@ -10,12 +10,21 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * 普通型属性节点
+ * 
+ * @author qiuhenhao
+ *
+ */
 public class NormalPropertyElement extends PropertyElement {
 
 	public NormalPropertyElement(String data, String alias) {
 		super(data, alias);
 	}
 
+	/**
+	 * 实现： 创建处理器
+	 */
 	@Override
 	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression) {
 		NormalPropertyProcessor processor = new NormalPropertyProcessor(context, this, parentExpression);
