@@ -36,6 +36,7 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 		registerElementSaxParser(new IgnorePropertyElementSaxParser());
 		registerElementSaxParser(new ObjectElementSaxParser());
 		registerElementSaxParser(new ArrayElementSaxParser());
+		registerElementSaxParser(new VirtualObjectElementSaxParser());
 		registerElementSaxParser(new MappingObjectElementSaxParser());
 		registerElementSaxParser(new LinkObjectElementSaxParser());
 		registerElementSaxParser(new JsonviewElementSaxParser());

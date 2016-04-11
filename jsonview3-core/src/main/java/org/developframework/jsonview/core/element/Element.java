@@ -1,5 +1,6 @@
 package org.developframework.jsonview.core.element;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -59,6 +60,7 @@ public abstract class Element {
 	}
 
 	private final String ignoreHeadSign(String data) {
+		Objects.requireNonNull(data);
 		if (data.startsWith("#")) {
 			return data.substring(1);
 		}

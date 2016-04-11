@@ -8,19 +8,17 @@
 
 		<jsonview id="user-list">
 			<array data="users">
-				<property data="birthday" convertor="org.developframework.jsonview.core.handler.UtilDatePropertyConvertor"/>
+				<property data="birthday"
+					convertor="org.developframework.jsonview.core.handler.UtilDatePropertyConvertor" />
 			</array>
 		</jsonview>
 
-		<jsonview id="user-detail">
-			<property data="id" />
-			<property data="name" />
-			<property-date data="birthday" />
-			<mapping-object data="#favorites" source="id" target="userId"
-				alias="favorite" type="multiple">
-				<property data="userId" />
-				<property data="item" />
-			</mapping-object>
+		<jsonview id="user-detail" data="user">
+			<virtual-object alias="vuser">
+				<property data="id" />
+				<property data="name" />
+				<property-date data="birthday" />
+			</virtual-object>
 		</jsonview>
 	</jsonview-package>
 </jsonview-configuration>

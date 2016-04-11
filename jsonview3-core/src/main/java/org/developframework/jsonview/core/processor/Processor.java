@@ -1,5 +1,7 @@
 package org.developframework.jsonview.core.processor;
 
+import java.util.Objects;
+
 import org.developframework.jsonview.core.element.Element;
 import org.developframework.jsonview.data.Expression;
 
@@ -38,7 +40,8 @@ public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> 
 	 * @return
 	 */
 	protected Expression createExpression(Expression parentExpression) {
-		if (element.getData().startsWith("#")) {
+		final String data = element.getData();
+		if (Objects.nonNull(data) && data.startsWith("#")) {
 			return Expression.buildObjectExpression(element.getData().substring(1));
 		}
 		return Expression.concatExpression(parentExpression, element.getData());

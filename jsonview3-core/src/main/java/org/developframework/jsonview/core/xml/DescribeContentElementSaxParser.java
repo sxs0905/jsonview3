@@ -18,7 +18,7 @@ abstract class DescribeContentElementSaxParser<T extends Element> implements Ele
 	 */
 	@Override
 	public void handleAtStartElement(ParserContext context, Attributes attributes) {
-		final String data = attributes.getValue("data").trim();
+		final String data = attributes.getValue("data");
 		final String alias = attributes.getValue("alias");
 		// 扩展点 获取节点实例
 		T element = getElementInstance(data, alias);
