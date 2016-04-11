@@ -99,6 +99,7 @@
 					<xs:complexType>
 						<xs:attributeGroup ref="attrGroupForElement" />
 						<xs:attribute name="pattern" type="xs:string" />
+						<xs:attribute name="convertor" type="xs:string" />
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="ignore-property">
