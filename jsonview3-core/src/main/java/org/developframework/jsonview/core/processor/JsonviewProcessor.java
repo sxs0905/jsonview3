@@ -5,6 +5,12 @@ import org.developframework.jsonview.data.Expression;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * jsonview处理器
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class JsonviewProcessor extends ObjectProcessor {
 
 	public JsonviewProcessor(Context context, Jsonview jsonview) {

@@ -15,9 +15,13 @@ import com.fasterxml.jackson.databind.JsonNode;
  */
 public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> {
 
+	// 上下文
 	protected Context context;
+	// 节点信息
 	protected ELEMENT element;
+	// 树节点
 	protected NODE node;
+	// 表达式
 	protected Expression expression;
 
 	public Processor(Context context, ELEMENT element, Expression parentExpression) {

@@ -13,6 +13,12 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * 一对多映射型处理器
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class MappingObjectProcessor extends ObjectProcessor {
 
 	private String target;
@@ -23,6 +29,11 @@ public class MappingObjectProcessor extends ObjectProcessor {
 		this.target = element.getTarget();
 	}
 
+	/**
+	 * 设置父数组表达式
+	 * 
+	 * @param parentArrayExpression
+	 */
 	public void setParentArrayExpression(Expression parentArrayExpression) {
 		MappingObjectElement mappingObjectElement = (MappingObjectElement) element;
 		final Expression expression = Expression.concatExpression(parentArrayExpression, mappingObjectElement.getSource());
@@ -30,6 +41,9 @@ public class MappingObjectProcessor extends ObjectProcessor {
 		valueOptional.ifPresent(v -> sourceValue = v);
 	}
 
+	/**
+	 * 实现： 处理子节点的操作
+	 */
 	@Override
 	public void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
 		if (Objects.nonNull(sourceValue)) {

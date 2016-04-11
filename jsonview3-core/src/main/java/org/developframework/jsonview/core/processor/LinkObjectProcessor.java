@@ -8,14 +8,26 @@ import org.developframework.jsonview.core.element.ObjectElement;
 import org.developframework.jsonview.data.Expression;
 import org.developframework.jsonview.exception.LinkObjectSizeNotEqualException;
 
+/**
+ * 一对一链接型处理器
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class LinkObjectProcessor extends ObjectProcessor {
 
+	// 数组索引号
 	private int index;
 
 	public LinkObjectProcessor(Context context, ObjectElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
 	}
 
+	/**
+	 * 检查数组元素个数是否相同
+	 * 
+	 * @param parentArraySize
+	 */
 	public void checkSize(int parentArraySize) {
 		Optional<Object> objOptional = context.getDataModel().getData(expression);
 		if (objOptional.isPresent()) {
