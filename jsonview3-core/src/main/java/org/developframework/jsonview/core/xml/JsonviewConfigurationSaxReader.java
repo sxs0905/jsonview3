@@ -10,9 +10,16 @@ import org.developframework.jsonview.exception.JsonviewParseXmlException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 配置解析读取器
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class JsonviewConfigurationSaxReader {
 
 	private static final Logger logger = LoggerFactory.getLogger(JsonviewConfigurationSaxReader.class);
+	// 配置源数组
 	private ConfigurationSource[] sources;
 
 	public JsonviewConfigurationSaxReader(String config) {
@@ -38,10 +45,16 @@ public class JsonviewConfigurationSaxReader {
 		this.sources = sources;
 	}
 
+	/**
+	 * 读取配置
+	 * 
+	 * @return
+	 */
 	public JsonviewConfiguration readConfiguration() {
 		JsonviewConfiguration jsonviewConfiguration = new JsonviewConfiguration();
 		JsonviewConfigurationXMLParseHandler handler = new JsonviewConfigurationXMLParseHandler(jsonviewConfiguration);
 		for (ConfigurationSource source : sources) {
+			// 读单个配置源
 			readOneFile(handler, source);
 			logger.info("Jsonview framework load the configuration file \"{0}\" is success.", source.getSourceName());
 		}

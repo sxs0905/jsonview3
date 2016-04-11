@@ -4,6 +4,12 @@ import org.developframework.jsonview.core.element.MappingObjectElement;
 import org.developframework.jsonview.core.element.MappingObjectElement.MappingType;
 import org.xml.sax.Attributes;
 
+/**
+ * 一对多映射型解析器
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class MappingObjectElementSaxHandler extends ContainerElementSaxHandler<MappingObjectElement> {
 
 	@Override
@@ -11,11 +17,17 @@ public class MappingObjectElementSaxHandler extends ContainerElementSaxHandler<M
 		return "mapping-object";
 	}
 
+	/**
+	 * 实现：处理SAX节点开始时的操作
+	 */
 	@Override
 	protected MappingObjectElement getElementInstance(String data, String alias) {
 		return new MappingObjectElement(data, alias);
 	}
 
+	/**
+	 * 实现：处理SAX节点关闭时的操作
+	 */
 	@Override
 	protected void addOtherAttributes(MappingObjectElement element, Attributes attributes) {
 		element.setSource(attributes.getValue("source"));

@@ -5,9 +5,22 @@ import org.developframework.jsonview.core.element.ContainerElement;
 import org.developframework.jsonview.exception.JsonviewParseXmlException;
 import org.xml.sax.Attributes;
 
+/**
+ * 容器节点解析器
+ * 
+ * @author qiuzhenhao
+ *
+ * @param <T>
+ */
 abstract class ContainerElementSaxHandler<T extends ContainerElement> extends DescribeContentElementSaxHandler<T> {
 
-	protected void forClass(ContainerElement element, Attributes attributes) {
+	/**
+	 * 添加forclass处理
+	 * 
+	 * @param element
+	 * @param attributes
+	 */
+	protected final void forClass(ContainerElement element, Attributes attributes) {
 		final String className = attributes.getValue("for-class");
 		if (StringUtils.isNotBlank(className)) {
 			try {
@@ -18,11 +31,17 @@ abstract class ContainerElementSaxHandler<T extends ContainerElement> extends De
 		}
 	}
 
+	/**
+	 * 实现：处理SAX节点关闭时的操作
+	 */
 	@Override
 	public void handleAtEndElement(ParserContext context) {
 		((ContainerElement) context.getStack().pop()).loadClassProperty();
 	}
 
+	/**
+	 * 实现：其它操作
+	 */
 	@Override
 	protected void otherOperation(ParserContext context, T element) {
 		context.getStack().push(element);
