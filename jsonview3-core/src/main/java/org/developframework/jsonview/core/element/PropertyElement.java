@@ -33,7 +33,7 @@ public abstract class PropertyElement extends Element {
 			Class<?> clazz = Class.forName(convertor);
 			this.convertor = (PropertyConvertor<?>) clazz.newInstance();
 		} catch (ClassNotFoundException e) {
-			throw new JsonviewExpressionException(e.getMessage());
+			throw new JsonviewExpressionException(e.getMessage() + " is not found.");
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {

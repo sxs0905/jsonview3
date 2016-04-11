@@ -8,7 +8,7 @@
 
 		<jsonview id="user-list">
 			<array data="users">
-				<property data="birthday" convertor="org.developframework.jsonview.core.handler.UtilDatePropertyHandler"/>
+				<property data="birthday" convertor="org.developframework.jsonview.core.handler.UtilDatePropertyConvertor"/>
 			</array>
 		</jsonview>
 
