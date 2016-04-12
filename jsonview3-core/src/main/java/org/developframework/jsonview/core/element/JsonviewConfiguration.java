@@ -2,9 +2,8 @@ package org.developframework.jsonview.core.element;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Objects;
 
-import org.developframework.jsonview.exception.JsonviewNotFoundException;
 import org.developframework.jsonview.exception.JsonviewPackageNotFoundException;
 
 /**
@@ -37,8 +36,12 @@ public class JsonviewConfiguration {
 	 * @param namespace
 	 * @return
 	 */
-	public Optional<JsonviewPackage> getJsonviewPackageByNamespace(String namespace) {
-		return Optional.ofNullable(jsonviewPackages.get(namespace));
+	public JsonviewPackage getJsonviewPackageByNamespace(String namespace) {
+		JsonviewPackage jsonviewPackage = jsonviewPackages.get(namespace);
+		if (Objects.isNull(jsonviewPackage)) {
+			throw new JsonviewPackageNotFoundException(namespace);
+		}
+		return jsonviewPackage;
 	}
 
 	/**
@@ -49,9 +52,7 @@ public class JsonviewConfiguration {
 	 * @return
 	 */
 	public Jsonview extractJsonview(String namespace, String id) {
-		Optional<JsonviewPackage> jsonviewPackageOptional = getJsonviewPackageByNamespace(namespace);
-		Optional<Jsonview> jsonviewOptional = jsonviewPackageOptional.orElseThrow(() -> new JsonviewPackageNotFoundException(namespace)).getJsonviewById(id);
-		return jsonviewOptional.orElseThrow(() -> new JsonviewNotFoundException(id, namespace));
+		return getJsonviewPackageByNamespace(namespace).getJsonviewById(id);
 	}
 
 }

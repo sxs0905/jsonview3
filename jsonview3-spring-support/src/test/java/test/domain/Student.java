@@ -1,22 +1,25 @@
-package test;
+package test.domain;
 
-import java.util.ArrayList;
+import java.text.ParseException;
 import java.util.Date;
-import java.util.List;
 
-public class User {
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
+
+public class Student {
 
 	private int id;
 	private String name;
 	private Date birthday;
-	private List<Like> likes = new ArrayList<>();
 
-	public User(int id, String name) {
+	public Student(int id, String name, String birthday) {
 		this.id = id;
 		this.name = name;
-		this.birthday = new Date();
-		likes.add(new Like("aaa"));
-		likes.add(new Like("bbb"));
+		try {
+			this.birthday = StringUtils.isBlank(birthday) ? null : DateUtils.parseDate(birthday, "yyyy-MM-dd");
+		} catch (ParseException e) {
+			this.birthday = new Date();
+		}
 	}
 
 	public int getId() {
@@ -33,14 +36,6 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<Like> getLikes() {
-		return likes;
-	}
-
-	public void setLikes(List<Like> likes) {
-		this.likes = likes;
 	}
 
 	public Date getBirthday() {

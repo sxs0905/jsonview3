@@ -39,6 +39,11 @@ public class HashDataModel implements DataModel {
 	}
 
 	@Override
+	public Optional<Object> getData(String expression) {
+		return getData(Expression.buildObjectExpression(expression));
+	}
+
+	@Override
 	public Optional<List<Expression>> getData(Expression property, String target, Object sourceValue) {
 		Optional<Object> objOptional = getData(property);
 		if (objOptional.isPresent()) {
@@ -77,5 +82,4 @@ public class HashDataModel implements DataModel {
 			e.printStackTrace();
 		}
 	}
-
 }

@@ -1,4 +1,4 @@
-package org.developframework.jsonview.core.handler;
+package org.developframework.jsonview.core.convertor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,5 +15,4 @@ public class UtilDatePropertyConvertor implements PropertyConvertor<String> {
 		}
 		return sdf.format((Date) source);
 	}
-
 }

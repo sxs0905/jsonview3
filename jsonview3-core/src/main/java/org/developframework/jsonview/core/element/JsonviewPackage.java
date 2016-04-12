@@ -1,7 +1,9 @@
 package org.developframework.jsonview.core.element;
 
 import java.util.HashMap;
-import java.util.Optional;
+import java.util.Objects;
+
+import org.developframework.jsonview.exception.JsonviewNotFoundException;
 
 /**
  * jsonview的分包（命名空间）
@@ -30,9 +32,12 @@ public class JsonviewPackage extends HashMap<String, Jsonview> {
 	 * @param id
 	 * @return
 	 */
-	public Optional<Jsonview> getJsonviewById(String id) {
-		Optional<Jsonview> jsonviewOptional = Optional.ofNullable(get(id));
-		return jsonviewOptional;
+	public Jsonview getJsonviewById(String id) {
+		Jsonview jsonview = get(id);
+		if (Objects.isNull(jsonview)) {
+			new JsonviewNotFoundException(id, namespace);
+		}
+		return jsonview;
 	}
 
 	/**

@@ -31,6 +31,14 @@ public interface DataModel {
 	 * 获取数据
 	 * 
 	 * @param expression
+	 * @return
+	 */
+	public Optional<Object> getData(String expression);
+
+	/**
+	 * 获取数据
+	 * 
+	 * @param expression
 	 * @param target
 	 * @param sourceValue
 	 * @return

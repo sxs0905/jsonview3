@@ -1,8 +1,8 @@
-package org.developframework.jsonview.core.handler;
+package org.developframework.jsonview.core.convertor;
 /**
  * 属性转换器
  * 
- * @author Administrator
+ * @author qiuzhenhao
  *
  * @param <TARGET>
  */

@@ -3,7 +3,7 @@ package org.developframework.jsonview.core.element;
 import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
-import org.developframework.jsonview.core.handler.PropertyConvertor;
+import org.developframework.jsonview.core.convertor.PropertyConvertor;
 import org.developframework.jsonview.exception.JsonviewExpressionException;
 
 /**

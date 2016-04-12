@@ -1,6 +1,7 @@
 package org.developframework.jsonview.core;
 
 import org.developframework.jsonview.core.element.JsonviewConfiguration;
+import org.developframework.jsonview.core.xml.JsonviewConfigurationSaxReader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -14,6 +15,12 @@ public class JsonviewFactory {
 
 	private JsonviewConfiguration jsonviewConfiguration;
 	private ObjectMapper objectMapper;
+
+	public JsonviewFactory(String... configs) {
+		JsonviewConfigurationSaxReader reader = new JsonviewConfigurationSaxReader(configs);
+		jsonviewConfiguration = reader.readConfiguration();
+		this.objectMapper = new ObjectMapper();
+	}
 
 	public JsonviewFactory(JsonviewConfiguration jsonviewConfiguration) {
 		this.jsonviewConfiguration = jsonviewConfiguration;

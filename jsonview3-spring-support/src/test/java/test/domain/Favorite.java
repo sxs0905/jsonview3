@@ -1,4 +1,4 @@
-package test;
+package test.domain;
 
 public class Favorite {
 
