@@ -848,3 +848,68 @@ System.out.println(json);
   } ]
 }
 ```
+## **6. 日志**
+Jsonview框架使用slf4j-api日志接口，提供内部日志打印功能。可以使用log4j或者logback打印日志。
+以下示例使用logback
+logback.xml
+```
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+	<contextName>jsonview-log</contextName>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-5level - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	<logger name="org.developframework.jsonview" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+</configuration>
+```
+项目启动日志：
+```
+19:26:24.115 INFO  - Jsonview framework loaded the configuration file "/jsonview/jsonview-class.xml".
+19:26:24.122 INFO  - Jsonview framework loaded the configuration file "/jsonview/jsonview-account.xml".
+19:26:24.128 INFO  - Jsonview framework loaded the configuration file "/jsonview/jsonview-student.xml".
+```
+## **7. 整合Spring**
+### **7.1. 使用方式**
+maven
+```
+<dependency>
+	<groupId>org.developframework</groupId>
+	<artifactId>jsonview3-spring-support</artifactId>
+	<version>${jsonview.version}</version>
+</dependency>
+```
+### **7.2. 加载JsonviewFactory**
+使用spring加载JsonviewFactory对象。
+applicationContext.xml
+```
+<bean id="jsonviewFactory" class="org.developframework.jsonview.spring.JsonviewFactoryBean">
+	<property name="configs">
+		<set>
+			<value>/jsonview/jsonview-student.xml</value>
+			<value>/jsonview/jsonview-account.xml</value>
+			<value>/jsonview/jsonview-class.xml</value>
+		</set>
+	</property>
+</bean>
+```
+在配置文件较多时，上述方法比较麻烦，可以采用以下扫描配置文件包的方法缩减代码量。
+
+使用`<jsonview:scan>`扫描文件包加载Jsonview configuration文件。
+```
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jsonview="http://www.developframework.org/schema/jsonview"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.developframework.org/schema/jsonview http://www.developframework.org/schema/jsonview/jsonview-spring-namespace.xsd">	
+	
+	<jsonview:scan id="jsonviewFactory" locations="classpath:jsonview/*.xml" />
+	
+</beans>
+```
+此方法需要添加命名空间`xmlns:jsonview="http://www.developframework.org/schema/jsonview"`
+`classpath:jsonview/*.xml`为通配加载jsonview文件夹下的所有配置文件。
