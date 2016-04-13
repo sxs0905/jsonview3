@@ -1,6 +1,11 @@
 package org.developframework.jsonview.core;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.developframework.jsonview.core.element.JsonviewConfiguration;
+import org.developframework.jsonview.core.xml.ConfigurationSource;
+import org.developframework.jsonview.core.xml.FileConfigurationSource;
 import org.developframework.jsonview.core.xml.JsonviewConfigurationSaxReader;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,7 +22,21 @@ public class JsonviewFactory {
 	private ObjectMapper objectMapper;
 
 	public JsonviewFactory(String... configs) {
-		JsonviewConfigurationSaxReader reader = new JsonviewConfigurationSaxReader(configs);
+		Set<ConfigurationSource> sources = new HashSet<>();
+		for (String config : configs) {
+			sources.add(new FileConfigurationSource(config));
+		}
+		JsonviewConfigurationSaxReader reader = new JsonviewConfigurationSaxReader(sources);
+		jsonviewConfiguration = reader.readConfiguration();
+		this.objectMapper = new ObjectMapper();
+	}
+
+	public JsonviewFactory(Set<String> configs) {
+		Set<ConfigurationSource> sources = new HashSet<>();
+		for (String config : configs) {
+			sources.add(new FileConfigurationSource(config));
+		}
+		JsonviewConfigurationSaxReader reader = new JsonviewConfigurationSaxReader(sources);
 		jsonviewConfiguration = reader.readConfiguration();
 		this.objectMapper = new ObjectMapper();
 	}
@@ -33,7 +52,7 @@ public class JsonviewFactory {
 	 * @return
 	 */
 	public JsonCreator getJsonCreator() {
-		return new JsonCreator(jsonviewConfiguration, objectMapper);
+		return new JsonCreatorImpl(jsonviewConfiguration, objectMapper);
 	}
 
 	/**
@@ -43,7 +62,7 @@ public class JsonviewFactory {
 	 * @return
 	 */
 	public JsonCreator getJsonCreator(ObjectMapper objectMapper) {
-		return new JsonCreator(jsonviewConfiguration, objectMapper);
+		return new JsonCreatorImpl(jsonviewConfiguration, objectMapper);
 	}
 
 	public JsonviewConfiguration getJsonviewConfiguration() {

@@ -1,10 +1,10 @@
-package org.developframework.jsonview.web;
+package org.developframework.jsonview.support.web;
 
 import java.io.IOException;
 
 import org.developframework.jsonview.core.JsonCreator;
 import org.developframework.jsonview.core.JsonviewFactory;
-import org.developframework.jsonview.web.res.JsonviewResponse;
+import org.developframework.jsonview.support.web.res.JsonviewResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.converter.HttpMessageNotWritableException;

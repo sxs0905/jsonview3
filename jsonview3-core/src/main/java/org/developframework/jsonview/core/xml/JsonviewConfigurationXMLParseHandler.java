@@ -33,6 +33,8 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	private void init() {
 		registerElementSaxParser(new PropertyElementSaxParser());
 		registerElementSaxParser(new DatePropertyElementSaxParser());
+		registerElementSaxParser(new BooleanPropertyElementSaxParser());
+		registerElementSaxParser(new UnixTimestampPropertyElementSaxParser());
 		registerElementSaxParser(new IgnorePropertyElementSaxParser());
 		registerElementSaxParser(new ObjectElementSaxParser());
 		registerElementSaxParser(new ArrayElementSaxParser());

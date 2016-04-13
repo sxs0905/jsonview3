@@ -1,4 +1,4 @@
-package org.developframework.jsonview.web.res;
+package org.developframework.jsonview.support.web.res;
 
 import org.developframework.jsonview.data.DataModel;
 

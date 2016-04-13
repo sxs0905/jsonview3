@@ -23,30 +23,59 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:attributeGroup name="attrGroupForElement">
+		<xs:attribute name="data" type="xs:string" use="required" />
+		<xs:attribute name="alias" type="xs:string" />
+		<xs:attribute name="null-hidden" type="xs:boolean" default="true" />
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attrGroupForPropertyElement">
+		<xs:attributeGroup ref="attrGroupForElement"></xs:attributeGroup>
+		<xs:attribute name="convertor" type="xs:string" />
+	</xs:attributeGroup>
 	<xs:complexType name="containerElementType">
 		<xs:group ref="elementGroup"></xs:group>
 		<xs:attributeGroup ref="attrGroupForElement" />
 		<xs:attribute name="for-class" type="xs:string" />
 	</xs:complexType>
-	<xs:attributeGroup name="attrGroupForElement">
-		<xs:attribute name="data" type="xs:string" use="required" />
-		<xs:attribute name="alias" type="xs:string" />
-		<xs:attribute name="null-hidden" type="xs:boolean"
-			default="true" />
-	</xs:attributeGroup>
 	<xs:group name="elementGroup">
 		<xs:sequence>
 			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element name="property">
+					<xs:complexType>
+						<xs:attributeGroup ref="attrGroupForPropertyElement" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="property-date">
+					<xs:complexType>
+						<xs:attributeGroup ref="attrGroupForPropertyElement" />
+						<xs:attribute name="pattern" type="xs:string" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="property-boolean">
+					<xs:complexType>
+						<xs:attributeGroup ref="attrGroupForPropertyElement" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="property-unixtimestamp">
+					<xs:complexType>
+						<xs:attributeGroup ref="attrGroupForPropertyElement" />
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ignore-property">
+					<xs:complexType>
+						<xs:attribute name="name" type="xs:string" use="required" />
+					</xs:complexType>
+				</xs:element>
 				<xs:element name="object">
 					<xs:complexType>
 						<xs:complexContent>
-							<xs:extension base="containerElementType">
-							</xs:extension>
+							<xs:extension base="containerElementType"/>
 						</xs:complexContent>
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="virtual-object">
 					<xs:complexType>
+						<xs:group ref="elementGroup"></xs:group>
 						<xs:attribute name="alias" type="xs:string" use="required"/>
 					</xs:complexType>
 				</xs:element>
@@ -84,24 +113,6 @@
 								</xs:sequence>
 							</xs:extension>
 						</xs:complexContent>
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="property">
-					<xs:complexType>
-						<xs:attributeGroup ref="attrGroupForElement" />
-						<xs:attribute name="convertor" type="xs:string" />
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="property-date">
-					<xs:complexType>
-						<xs:attributeGroup ref="attrGroupForElement" />
-						<xs:attribute name="pattern" type="xs:string" />
-						<xs:attribute name="convertor" type="xs:string" />
-					</xs:complexType>
-				</xs:element>
-				<xs:element name="ignore-property">
-					<xs:complexType>
-						<xs:attribute name="data" type="xs:string" use="required" />
 					</xs:complexType>
 				</xs:element>
 				<xs:element name="import">

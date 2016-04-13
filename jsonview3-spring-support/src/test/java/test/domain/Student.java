@@ -10,11 +10,13 @@ public class Student {
 
 	private int id;
 	private String name;
+	private int classId;
 	private Date birthday;
 
-	public Student(int id, String name, String birthday) {
+	public Student(int id, String name, int classId, String birthday) {
 		this.id = id;
 		this.name = name;
+		this.classId = classId;
 		try {
 			this.birthday = StringUtils.isBlank(birthday) ? null : DateUtils.parseDate(birthday, "yyyy-MM-dd");
 		} catch (ParseException e) {
@@ -36,6 +38,14 @@ public class Student {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getClassId() {
+		return classId;
+	}
+
+	public void setClassId(int classId) {
+		this.classId = classId;
 	}
 
 	public Date getBirthday() {

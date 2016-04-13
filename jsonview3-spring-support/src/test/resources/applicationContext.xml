@@ -5,7 +5,13 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 		http://www.developframework.org/schema/jsonview http://www.developframework.org/schema/jsonview/jsonview-spring-namespace.xsd">	
 	
-	<jsonview:scan id="jsonviewFactory" locations="classpath:jsonview/*.xml" />
-	
-	
+	<bean id="jsonviewFactory" class="org.developframework.jsonview.spring.JsonviewFactoryBean">
+		<property name="configs">
+			<set>
+				<value>/jsonview/jsonview-student.xml</value>
+				<value>/jsonview/jsonview-account.xml</value>
+				<value>/jsonview/jsonview-class.xml</value>
+			</set>
+		</property>
+	</bean>
 </beans>

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  * @author qiuzhenhao
  *
  */
-public class NormalPropertyProcessor extends PropertyProcessor<Object> {
+public class NormalPropertyProcessor extends PropertyProcessor {
 
 	public NormalPropertyProcessor(Context context, PropertyElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
@@ -31,20 +31,20 @@ public class NormalPropertyProcessor extends PropertyProcessor<Object> {
 	 * 实现扩展点：在Json树状结构上构造Node
 	 */
 	@Override
-	protected void handle(ObjectNode parentNode, Object value, String showName) {
-		if (value instanceof String) {
+	protected void handle(ObjectNode parentNode, Class<?> clazz, Object value, String showName) {
+		if (clazz == String.class) {
 			parentNode.put(showName, (String) value);
-		} else if (value instanceof Integer) {
+		} else if (clazz == Integer.class) {
 			parentNode.put(showName, (Integer) value);
-		} else if (value instanceof Long) {
+		} else if (clazz == Long.class) {
 			parentNode.put(showName, (Long) value);
-		} else if (value instanceof Boolean) {
+		} else if (clazz == Boolean.class) {
 			parentNode.put(showName, (Boolean) value);
-		} else if (value instanceof Float) {
+		} else if (clazz == Float.class) {
 			parentNode.put(showName, (Float) value);
-		} else if (value instanceof Double) {
+		} else if (clazz == Double.class) {
 			parentNode.put(showName, (Double) value);
-		} else if (value instanceof BigDecimal) {
+		} else if (clazz == BigDecimal.class) {
 			parentNode.put(showName, (BigDecimal) value);
 		} else {
 			parentNode.put(showName, value.toString());

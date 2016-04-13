@@ -1,6 +1,8 @@
 package org.developframework.jsonview.core.xml;
 
 import java.io.InputStream;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -20,28 +22,19 @@ public class JsonviewConfigurationSaxReader {
 
 	private static final Logger logger = LoggerFactory.getLogger(JsonviewConfigurationSaxReader.class);
 	// 配置源数组
-	private ConfigurationSource[] sources;
+	private Set<ConfigurationSource> sources;
 
 	public JsonviewConfigurationSaxReader(String config) {
-		this.sources = new ConfigurationSource[]{
-				new FileConfigurationSource(config)
-		};
-	}
-
-	public JsonviewConfigurationSaxReader(String[] configs) {
-		this.sources = new ConfigurationSource[configs.length];
-		for (int i = 0; i < configs.length; i++) {
-			sources[i] = new FileConfigurationSource(configs[i]);
-		}
+		this.sources = new HashSet<>(1);
+		sources.add(new FileConfigurationSource(config));
 	}
 
 	public JsonviewConfigurationSaxReader(ConfigurationSource source) {
-		this.sources = new ConfigurationSource[]{
-				source
-		};
+		this.sources = new HashSet<>(1);
+		sources.add(source);
 	}
 
-	public JsonviewConfigurationSaxReader(ConfigurationSource[] sources) {
+	public JsonviewConfigurationSaxReader(Set<ConfigurationSource> sources) {
 		this.sources = sources;
 	}
 
@@ -56,7 +49,7 @@ public class JsonviewConfigurationSaxReader {
 		for (ConfigurationSource source : sources) {
 			// 读单个配置源
 			readOneFile(handler, source);
-			logger.info("Jsonview framework load the configuration file \"{0}\" is success.", source.getSourceName());
+			logger.info("Jsonview framework loaded the configuration file \"{}\".", source.getSourceName());
 		}
 		return jsonviewConfiguration;
 	}
@@ -73,7 +66,7 @@ public class JsonviewConfigurationSaxReader {
 		}
 	}
 
-	public ConfigurationSource[] getSources() {
+	public Set<ConfigurationSource> getSources() {
 		return sources;
 	}
 

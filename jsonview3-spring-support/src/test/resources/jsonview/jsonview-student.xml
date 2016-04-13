@@ -4,12 +4,36 @@
 	http://www.developframework.org/schema/jsonview3 
 	http://www.developframework.org/schema/jsonview3/jsonview-configuration-3.0.xsd">
 	<jsonview-package namespace="jsonview-student">
-		<jsonview id="student-list">
+		<jsonview id="student-detail-view" data="student">
+			<import id="student-detail"/>
+		</jsonview>
+		
+		<jsonview id="student-list-view">
 			<array data="students">
-				<property data="id"/>
-				<property data="name"/>
-				<property data="birthday" convertor="org.developframework.jsonview.core.convertor.UtilDatePropertyConvertor"/>
+				<import id="student-detail"/>
 			</array>
 		</jsonview>
+		
+		<jsonview id="student-detail">
+			<property data="id"/>
+			<property data="name"/>
+			<property data="classId"/>
+			<property-date data="birthday" pattern="yyyy-MM-dd"/>
+		</jsonview>
+		
+		<jsonview id="virtual-student-view">
+			<property-unixtimestamp data="datetime"/>
+		</jsonview>
+		
+		<jsonview id="user-base">
+			<property data="id"/>
+			<property data="username"/>
+		</jsonview>
+		
+		<jsonview id="user-detail">
+			<import id="user-base"/>
+			<property data="password"/>
+		</jsonview>
+		
 	</jsonview-package>
 </jsonview-configuration>

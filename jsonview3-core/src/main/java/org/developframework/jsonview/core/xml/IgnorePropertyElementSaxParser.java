@@ -21,8 +21,8 @@ class IgnorePropertyElementSaxParser implements ElementSaxParser {
 	 */
 	@Override
 	public void handleAtStartElement(ParserContext context, Attributes attributes) {
-		final String data = attributes.getValue("data").trim();
-		((ContainerElement) context.getStack().peek()).addIgnoreProperty(data);
+		final String name = attributes.getValue("name").trim();
+		((ContainerElement) context.getStack().peek()).addIgnoreProperty(name);
 	}
 
 	/**

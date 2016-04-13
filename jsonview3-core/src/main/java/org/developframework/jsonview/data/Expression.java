@@ -64,7 +64,7 @@ public class Expression {
 	 * @return
 	 */
 	public static Expression concatExpression(Expression expression1, Expression expression2) {
-		String expression1Str = expression1.toString();
+		String expression1Str = Objects.isNull(expression1) ? null : expression1.toString();
 		return new Expression(Objects.isNull(expression1Str) ? expression2.toString() : (expression1Str + "." + expression2.toString()));
 	}
 
@@ -76,7 +76,7 @@ public class Expression {
 	 * @return
 	 */
 	public static Expression concatExpression(Expression expression1, String expression2) {
-		String expression1Str = expression1.toString();
+		String expression1Str = Objects.isNull(expression1) ? null : expression1.toString();
 		return new Expression(Objects.isNull(expression1Str) ? expression2 : (expression1Str + "." + expression2));
 	}
 

@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  *
  * @param <T>
  */
-public abstract class PropertyProcessor<T> extends Processor<PropertyElement, JsonNode> {
+public abstract class PropertyProcessor extends Processor<PropertyElement, JsonNode> {
 
 	public PropertyProcessor(Context context, PropertyElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
@@ -45,7 +45,7 @@ public abstract class PropertyProcessor<T> extends Processor<PropertyElement, Js
 			final Object newValue = optional.orElse(value);
 			Class<?> valueClass = newValue.getClass();
 			if (support(valueClass)) {
-				handle(parentNode, newValue, showName);
+				handle(parentNode, valueClass, newValue, showName);
 			}
 		});
 
@@ -63,9 +63,10 @@ public abstract class PropertyProcessor<T> extends Processor<PropertyElement, Js
 	 * 扩展点：在Json树状结构上构造Node
 	 * 
 	 * @param parentNode
+	 * @param clazz
 	 * @param value
 	 * @param showName
 	 */
-	protected abstract void handle(ObjectNode parentNode, Object value, String showName);
+	protected abstract void handle(ObjectNode parentNode, Class<?> clazz, Object value, String showName);
 
 }
