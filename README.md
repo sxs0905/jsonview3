@@ -133,6 +133,19 @@ Jsonview jsonview = jsonviewConfiguration.extractJsonview("namespace", "id");
 ```
 JsonviewPackage jsonviewPackage = jsonviewConfiguration.getJsonviewPackageByNamespace("namespace");
 ```
+#### **3.1.8. 异常**
+Jsonview框架的所有异常类。
+
+|异常|说明|
+|---|---|
+|JsonviewException|jsonview顶级异常|
+|JsonviewExpressionException|表达式不正确异常|
+|JsonviewNoSuchFieldException|没有字段异常|
+|JsonviewNotFoundException|jsonview视图不存在异常|
+|JsonviewPackageNotFoundException|命名空间不存在异常|
+|JsonviewParseXmlException|配置文件解析错误异常|
+|LinkObjectSizeNotEqualException|使用link-object时数组大小不相等异常|
+|ResourceNotUniqueException|资源定义不唯一异常|
 
 ### **3.2. XML概览**
 #### **3.2.1. 结构**
