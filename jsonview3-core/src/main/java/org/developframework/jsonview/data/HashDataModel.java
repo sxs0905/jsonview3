@@ -18,6 +18,7 @@ import org.developframework.jsonview.utils.ExpressionUtils;
  */
 public class HashDataModel implements DataModel {
 
+	private static final long serialVersionUID = 1824745473338821506L;
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
 
 	public HashDataModel() {
@@ -41,6 +42,10 @@ public class HashDataModel implements DataModel {
 	@Override
 	public Optional<Object> getData(String expression) {
 		return getData(Expression.buildObjectExpression(expression));
+	}
+
+	public Map<String, Object> getDataMap() {
+		return dataMap;
 	}
 
 	@Override

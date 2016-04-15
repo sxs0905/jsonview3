@@ -1,6 +1,7 @@
 package org.developframework.jsonview.core;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import org.developframework.jsonview.core.element.JsonviewConfiguration;
@@ -22,6 +23,7 @@ public class JsonviewFactory {
 	private ObjectMapper objectMapper;
 
 	public JsonviewFactory(String... configs) {
+		Objects.requireNonNull(configs);
 		Set<ConfigurationSource> sources = new HashSet<>();
 		for (String config : configs) {
 			sources.add(new FileConfigurationSource(config));
@@ -32,6 +34,7 @@ public class JsonviewFactory {
 	}
 
 	public JsonviewFactory(Set<String> configs) {
+		Objects.requireNonNull(configs);
 		Set<ConfigurationSource> sources = new HashSet<>();
 		for (String config : configs) {
 			sources.add(new FileConfigurationSource(config));
@@ -42,6 +45,7 @@ public class JsonviewFactory {
 	}
 
 	public JsonviewFactory(JsonviewConfiguration jsonviewConfiguration) {
+		Objects.requireNonNull(jsonviewConfiguration);
 		this.jsonviewConfiguration = jsonviewConfiguration;
 		this.objectMapper = new ObjectMapper();
 	}

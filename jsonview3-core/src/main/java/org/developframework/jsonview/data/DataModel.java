@@ -1,5 +1,6 @@
 package org.developframework.jsonview.data;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,7 +10,7 @@ import java.util.Optional;
  * @author qiuzhenhao
  *
  */
-public interface DataModel {
+public interface DataModel extends Serializable {
 
 	/**
 	 * 压入数据
