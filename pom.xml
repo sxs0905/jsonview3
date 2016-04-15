@@ -9,7 +9,6 @@
 	<modules>
 		<module>jsonview3-core</module>
 		<module>jsonview3-spring-support</module>
-		<module>jsonview-demo</module>
 		<module>jsonview3-springmvc</module>
 	</modules>
 
