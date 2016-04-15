@@ -1,0 +1,12 @@
+<jsonview-configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.developframework.org/schema/jsonview3" 
+	xsi:schemaLocation="
+	http://www.developframework.org/schema/jsonview3 
+	http://www.developframework.org/schema/jsonview3/jsonview-configuration-3.0.xsd">
+	<jsonview-package namespace="jsonview-account">
+		<jsonview id="account-detail">
+			<property data="username"/>
+			<property data="password"/>
+		</jsonview>
+	</jsonview-package>
+</jsonview-configuration>
