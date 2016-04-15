@@ -133,6 +133,19 @@ Jsonview jsonview = jsonviewConfiguration.extractJsonview("namespace", "id");
 ```
 JsonviewPackage jsonviewPackage = jsonviewConfiguration.getJsonviewPackageByNamespace("namespace");
 ```
+#### **3.1.8. 异常**
+Jsonview框架的所有异常类。
+
+|异常|说明|
+|---|---|
+|JsonviewException|jsonview顶级异常|
+|JsonviewExpressionException|表达式不正确异常|
+|JsonviewNoSuchFieldException|没有字段异常|
+|JsonviewNotFoundException|jsonview视图不存在异常|
+|JsonviewPackageNotFoundException|命名空间不存在异常|
+|JsonviewParseXmlException|配置文件解析错误异常|
+|LinkObjectSizeNotEqualException|使用link-object时数组大小不相等异常|
+|ResourceNotUniqueException|资源定义不唯一异常|
 
 ### **3.2. XML概览**
 #### **3.2.1. 结构**
@@ -911,5 +924,133 @@ applicationContext.xml
 	
 </beans>
 ```
-此方法需要添加命名空间`xmlns:jsonview="http://www.developframework.org/schema/jsonview"`
-`classpath:jsonview/*.xml`为通配加载jsonview文件夹下的所有配置文件。
+
++ 此方法需要添加命名空间`xmlns:jsonview="http://www.developframework.org/schema/jsonview"`
++ `classpath:jsonview/*.xml`为通配加载jsonview文件夹下的所有配置文件。
+
+## **8. 整合SpringMVC**
+不使用Jsonview框架时的情景：
+```
+@Controller
+@RequestMapping("students")
+public class StudentController {
+
+	@Resource
+	private StudentService studentService;
+	
+    @ResponseBody
+	@RequestMapping(value = "{id}", method = RequestMethod.GET)
+	public Student studentDetail(@PathVariable("id") int id) {
+		Student student = studentService.queryStudentDetail(id);
+		return student;
+	}
+}
+```
+同时dispatcher-servlet.xml开启了`<mvc:annotation-driven />`自动装载
+`RequestMappingHandlerMapping`和`RequestMappingHandlerAdapter`。
+并且SpringMVC为我们装载了一系列的`HttpMessageConverter`：
+
++ `ByteArrayHttpMessageConverter`
++ `StringHttpMessageConverter`
++ `ResourceHttpMessageConverter`
++ `SourceHttpMessageConverter`
++ `AllEncompassingFormHttpMessageConverter`
++ `Jaxb2RootElementHttpMessageConverter`
++ `MappingJackson2HttpMessageConverter`
+
+### **8.1. 引入方式**
+maven
+```
+<dependency>
+	<groupId>org.developframework</groupId>
+	<artifactId>jsonview3-springmvc</artifactId>
+</dependency>
+```
+
+### **8.2. JsonviewHttpMessageConverter**
+Jsonview框架提供了
+`org.developframework.jsonview.springmvc.JsonviewHttpMessageConverter`类。该类实现HttpMessageConverter接口，并继承于`MappingJackson2HttpMessageConverter`，实现使用Jsonview框架完成json的生成过程。
+
+### **8.3. JsonviewResponse**
+抽象类`org.developframework.jsonview.springmvc.res.JsonviewResponse`封装了Controller方法需要响应的json视图所需的`namesapce`、`id`、`dataModel`。
+```
+@ResponseBody
+@RequestMapping(value = "{id}", method = RequestMethod.GET)
+public JsonviewResponse studentDetail(@PathVariable("id") int id) {
+	Student student = studentService.queryStudentDetail(id);
+	return new JsonviewEmptyResponse("jsonview-student", "student-detail").putData("student", student);
+}
+```
+
++ `JsonviewEmptyResponse` 最基础的实现类，仅包含一个空元素的dataModel
+
+我们可以继承`JsonviewEmptyResponse`实现自定义的视图响应。
+
++ **假如Controller方法返回的不是JsonviewResponse对象**，程序也能正常执行，只是使用原本模式，不使用Jsonview框架。
+
+### **8.4. 配置**
+#### **8.4.1. 传统XML配置**
+dispatcher-servlet.xml
+```
+<jsonview:scan id="jsonviewFactory" locations="classpath:jsonview/*.xml" />
+	
+<bean id="jsonviewHttpMessageConverter" class="org.developframework.jsonview.support.web.JsonviewHttpMessageConverter">
+	<property name="objectMapper">
+		<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+			<property name="propertyNamingStrategy">
+			    <!-- 此参数为自动驼峰转换下划线 -->
+				<bean class="com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy" />
+			</property>
+		</bean>
+	</property>
+	<!-- 配置支持的媒体类型列表 -->
+	<property name="supportedMediaTypes">
+		<list>
+			<value>application/json;charset=UTF-8</value>
+		</list>
+	</property>
+</bean>
+
+<mvc:annotation-driven>
+	<mvc:message-converters>
+		<ref bean="jsonviewHttpMessageConverter"/>
+	</mvc:message-converters>
+</mvc:annotation-driven>
+```
+其实和手动配置MappingJackson2HttpMessageConverter是相同的。
+
+#### **8.4.2. Spring Boot + Servlet3.0配置**
+```
+import java.util.List;
+import org.developframework.jsonview.spring.JsonviewScanLoader;
+import org.developframework.jsonview.springmvc.JsonviewHttpMessageConverter;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+
+@EnableWebMvc
+@Configuration
+@ComponentScan(basePackages = "demo.controller,demo.service")
+@EnableAutoConfiguration
+public class WebMvcConfigurer extends WebMvcConfigurerAdapter {
+
+	@Override
+	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+		// 此处务必添加到首位，领先于MappingJackson2HttpMessageConverter
+		converters.add(0, getJsonviewHttpMessageConverter());
+	}
+
+	private JsonviewHttpMessageConverter getJsonviewHttpMessageConverter() {
+		JsonviewScanLoader loader = new JsonviewScanLoader("classpath:jsonview/*.xml");
+		JsonviewHttpMessageConverter jsonviewHttpMessageConverter = new JsonviewHttpMessageConverter(loader.createJsonviewFactory());
+		jsonviewHttpMessageConverter.getObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+		return jsonviewHttpMessageConverter;
+	}
+}
+```
+
++ 这里需要注意的是`JsonviewHttpMessageConverter`的装载**必须在SpringMVC默认装载的`MappingJackson2HttpMessageConverter`之前**，否则不起作用，因为这两者配置的`supportedMediaTypes`属性均为`application/json`。SpringMVC框架是按该列表顺序找寻所需要的HttpMessageConverter。
