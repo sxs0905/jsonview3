@@ -5,6 +5,12 @@ import java.util.Set;
 import org.developframework.jsonview.core.JsonviewFactory;
 import org.springframework.beans.factory.FactoryBean;
 
+/**
+ * JsonviewFactory的FactoryBean
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class JsonviewFactoryBean implements FactoryBean<JsonviewFactory> {
 
 	private Set<String> configs;

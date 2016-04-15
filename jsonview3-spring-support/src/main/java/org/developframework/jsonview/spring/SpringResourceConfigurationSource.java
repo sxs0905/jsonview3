@@ -6,6 +6,12 @@ import java.io.InputStream;
 import org.developframework.jsonview.core.xml.ConfigurationSource;
 import org.springframework.core.io.Resource;
 
+/**
+ * 来自org.springframework.core.io.Resource的配置源
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class SpringResourceConfigurationSource implements ConfigurationSource {
 
 	private Resource resource;
