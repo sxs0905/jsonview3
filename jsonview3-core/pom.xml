@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.developframework</groupId>
 		<artifactId>jsonview3</artifactId>
-		<version>3.0.0-SNAPSHOT</version>
+		<version>3.0.0-RELEASE</version>
 	</parent>
 
 	<dependencies>
