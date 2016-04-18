@@ -184,6 +184,7 @@ Jsonview configuration文档不是唯一的，Jsonview框架允许你拥有多�
 + `<mapping-object>`
 + `<virtual-object>`
 + `<ignore-property>`
++ `<extend-port>` (since 3.1.0)
 
 拓展型标签
 
@@ -198,11 +199,12 @@ Jsonview configuration文档不是唯一的，Jsonview框架允许你拥有多�
 <jsonview id="" data="" for-class=""></jsonview>
 ```
 
-|属性|功能|是否必须|
-|---|---|---|
-|id|声明模板编号，在命名空间中唯一|是|
-|data|取值表达式|否|
-|for-class|声明data表达式指向的对象类型|否|
+|属性|功能|是否必须|版本|
+|---|---|---|---|
+|id|声明模板编号，在命名空间中唯一|是||
+|data|取值表达式|否||
+|for-class|声明data表达式指向的对象类型|否||
+|extend|声明继承的jsonview和端口，格式为namespace.id:port（namespace不填时默认为当前namespace）|否|since 3.1.0|
 
 ###### b) object
 当你需要在json中构建一个对象结构时，你将会使用到`<object>`标签。
@@ -297,6 +299,14 @@ Jsonview框架提供模块化设计json结构视图的功能。在一个`<jsonvi
 |属性|功能|是否必须|
 |---|---|---|
 |name|类中忽略的属性名称|是|
+###### f) extend-port
+从3.1.0版本引入`<extend-port>`标签，此标签位置作为子jsonview的接入位置。详见[5.3.2节](#chapter532)
+```
+<extend-port port-name=""/>
+```
+|属性|功能|是否必须|
+|---|---|---|
+|port-name|端口名称|是|
 ##### **3.2.2.3. 拓展型标签**
 ###### a) property-date
 该标签拓展于`<property>`，针对时间日期类型，使用`pattern`属性来格式化日期时间。详见[4.3.1.节](#chapter431)
@@ -662,7 +672,8 @@ System.out.println(json);
   }
 }
 ```
-### <a name="chapter53">**5.3. 模块化**</a>
+### **5.3. 模块化**
+#### <a name="chapter531">**5.3.1 引用**</a>
 使用`<import>`标签引用其它`<jsonview>`模板，从而可实现模块化设计，避免重复定义视图。
 修改4.1.节的代码
 ```
@@ -686,6 +697,79 @@ System.out.println(json);
     <property-date data="birthday" pattern="yyyy-MM-dd"/>
 </jsonview>
 ```
+
+#### <a name="chapter532">**5.3.2 继承**</a>
+从 **3.1.0版本** Jsonview框架引入继承的概念，在`<jsonview>`标签可以添加属性`extend`指定继承的jsonview和继承的端口。继承的概念可以理解为反向import，调用子jsonview视图，会优先从父jsonview开始构造结构，当遇到匹配端口名的`<extend-port>`标签时才会构造子jsonview视图。
+
+**注意：**假如单独调用了有`<extend-port>`标签的父jsonview视图或者端口没有与之对应的子jsonview实现，则`<extend-port>`标签被忽略。
+
+范例：实现一个通用的分页列表视图
+jsonview-common.xml
+```
+<jsonview-package namespace="jsonview-common">
+	<jsonview id="common-pager">
+		<virtual-object alias="pager_info">
+			<property data="index" />
+			<property data="size" />
+			<property data="total" />
+		</virtual-object>
+		<!-- 指定子jsonview从该端口处引入 -->
+		<extend-port port-name="list-port"/>
+	</jsonview>
+</jsonview-package>
+```
+jsonview-student.xml
+```
+<jsonview id="student-pager-view" extend="jsonview-common.common-pager:list-port">
+	<array data="students">
+		<import id="student-detail"/>
+	</array>
+</jsonview>
+
+<jsonview id="student-detail">
+	<property data="id"/>
+	<property data="name"/>
+	<property data="classId"/>
+	<property-date data="birthday" pattern="yyyy-MM-dd"/>
+</jsonview>
+```
+其中`extend`的值`jsonview-common.common-pager:list-port`指定了父jsonview视图的namespace和id，还有接入的端口名称。
+```
+DataModel dataModel = new HashDataModel();
+Student student1 = new Student(1, "Peter", 1, "2016-01-01");
+Student student2 = new Student(2, "Tom", 1, "2016-02-02");
+Student[] students = new Student[]{student1, student2};
+dataModel.putData("students", students);
+dataModel.putData("index", 1);
+dataModel.putData("size", 10);
+dataModel.putData("total", students.length);
+JsonCreator jsonCreator = jsonviewFactory.getJsonCreator();
+//此处调用的是子jsonview : student-pager-view
+String json = jsonCreator.createJson(dataModel, "jsonview-student", "student-pager-view", true);
+System.out.println(json);
+```
+运行结果：
+```
+{
+    "pager_info" : {
+        "index" : 1,
+        "size" : 10,
+        "total" : 2
+    },
+    "students" : [ {
+        "id" : 1,
+        "name" : "Peter",
+        "class_id" : 1,
+        "birthday" : "2016-01-01"
+    }, {
+        "id" : 2,
+        "name" : "Tom",
+        "class_id" : 1,
+        "birthday" : "2016-02-02"
+    } ]
+}
+```
+
 ### **5.4. 链接与映射**
 #### <a name="chapter541">**5.4.1. 一对一数组链接**</a>
 使用`<link-object>`标签可以在数组间一对一链接对象。**该标签仅能在`<array>`下使用。**当`<link-object>`的data属性所指的数组和父`<array>`数组个数不相同时将会抛出`LinkObjectSizeNotEqualException`。
