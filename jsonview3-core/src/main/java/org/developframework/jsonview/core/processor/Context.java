@@ -1,5 +1,9 @@
 package org.developframework.jsonview.core.processor;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
 import org.developframework.jsonview.core.element.JsonviewConfiguration;
 import org.developframework.jsonview.data.DataModel;
 
@@ -16,6 +20,7 @@ public class Context {
 	private ObjectMapper objectMapper;
 	private DataModel dataModel;
 	private JsonviewConfiguration jsonviewConfiguration;
+	private Map<String, ExtendPortProcessor.ExtendCallback> extendPortMap = new HashMap<>();
 
 	public ObjectMapper getObjectMapper() {
 		return objectMapper;
@@ -39,6 +44,14 @@ public class Context {
 
 	public void setJsonviewConfiguration(JsonviewConfiguration jsonviewConfiguration) {
 		this.jsonviewConfiguration = jsonviewConfiguration;
+	}
+
+	public void pushExtendCallback(String portName, ExtendPortProcessor.ExtendCallback callback) {
+		extendPortMap.put(portName, callback);
+	}
+
+	public Optional<ExtendPortProcessor.ExtendCallback> getExtendCallback(String port) {
+		return Optional.ofNullable(extendPortMap.get(port));
 	}
 
 }

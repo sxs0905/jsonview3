@@ -1,6 +1,6 @@
 package org.developframework.jsonview.core.xml;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.developframework.jsonview.core.element.JsonviewConfiguration;
@@ -22,7 +22,7 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	private ParserContext context;
 
 	public JsonviewConfigurationXMLParseHandler(JsonviewConfiguration configuration) {
-		this.elementSaxParsers = new LinkedList<>();
+		this.elementSaxParsers = new ArrayList<>(14);
 		this.context = new ParserContext(configuration);
 		init();
 	}
@@ -43,6 +43,7 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 		registerElementSaxParser(new LinkObjectElementSaxParser());
 		registerElementSaxParser(new JsonviewElementSaxParser());
 		registerElementSaxParser(new ImportElementSaxParser());
+		registerElementSaxParser(new ExtendPortElementSaxParser());
 		registerElementSaxParser(new JsonviewPackageElementSaxParser());
 	}
 
