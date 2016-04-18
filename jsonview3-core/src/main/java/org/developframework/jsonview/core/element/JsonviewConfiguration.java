@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.developframework.jsonview.exception.JsonviewPackageNotFoundException;
+import org.developframework.jsonview.exception.ResourceNotUniqueException;
 
 /**
  * jsonview配置项
@@ -27,7 +28,11 @@ public class JsonviewConfiguration {
 	 * @param jsonviewPackage
 	 */
 	public void addJsonviewPackage(JsonviewPackage jsonviewPackage) {
-		this.jsonviewPackages.put(jsonviewPackage.getNamespace(), jsonviewPackage);
+		String namespace = jsonviewPackage.getNamespace();
+		if (this.jsonviewPackages.containsKey(namespace)) {
+			throw new ResourceNotUniqueException(String.format("JsonviewPackage namespace \"%s\" is exist.", namespace));
+		}
+		this.jsonviewPackages.put(namespace, jsonviewPackage);
 	}
 
 	/**

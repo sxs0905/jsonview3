@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import org.developframework.jsonview.exception.JsonviewNotFoundException;
+import org.developframework.jsonview.exception.ResourceNotUniqueException;
 
 /**
  * jsonview的分包（命名空间）
@@ -35,7 +36,7 @@ public class JsonviewPackage extends HashMap<String, Jsonview> {
 	public Jsonview getJsonviewById(String id) {
 		Jsonview jsonview = get(id);
 		if (Objects.isNull(jsonview)) {
-			new JsonviewNotFoundException(id, namespace);
+			throw new JsonviewNotFoundException(id, namespace);
 		}
 		return jsonview;
 	}
@@ -46,6 +47,10 @@ public class JsonviewPackage extends HashMap<String, Jsonview> {
 	 * @param jsonview
 	 */
 	public void push(Jsonview jsonview) {
+		String id = jsonview.getId();
+		if (super.containsKey(id)) {
+			throw new ResourceNotUniqueException(String.format("Jsonview id \"%s\" is exist.", id));
+		}
 		super.put(jsonview.getId(), jsonview);
 	}
 

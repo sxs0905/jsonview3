@@ -25,9 +25,14 @@ class JsonviewElementSaxParser extends ContainerElementSaxParser<Jsonview> {
 	public void handleAtStartElement(ParserContext context, Attributes attributes) {
 		final String id = attributes.getValue("id").trim();
 		final String data = attributes.getValue("data");
+		final String extend = attributes.getValue("extend");
 		final Jsonview jsonview = new Jsonview(context.getJsonviewPackage().getNamespace(), id);
 		if (StringUtils.isNotBlank(data)) {
 			jsonview.setData(data.trim());
+		}
+		if (StringUtils.isNotBlank(extend)) {
+			String defaultNamespace = context.getJsonviewPackage().getNamespace();
+			jsonview.setExtend(jsonview.new Extend(extend.trim(), defaultNamespace));
 		}
 		forClass(jsonview, attributes);
 		context.getStack().push(jsonview);
