@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>org.developframework</groupId>
 		<artifactId>jsonview3</artifactId>
-		<version>3.0.1-SNAPSHOT</version>
+		<version>3.0.1-RELEASE</version>
 	</parent>
 	<artifactId>jsonview3-spring-support</artifactId>
 	
