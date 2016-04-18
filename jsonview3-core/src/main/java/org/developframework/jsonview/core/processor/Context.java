@@ -2,6 +2,7 @@ package org.developframework.jsonview.core.processor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.developframework.jsonview.core.element.JsonviewConfiguration;
 import org.developframework.jsonview.data.DataModel;
@@ -49,8 +50,8 @@ public class Context {
 		extendPortMap.put(portName, callback);
 	}
 
-	public ExtendPortProcessor.ExtendCallback getExtendCallback(String port) {
-		return extendPortMap.get(port);
+	public Optional<ExtendPortProcessor.ExtendCallback> getExtendCallback(String port) {
+		return Optional.ofNullable(extendPortMap.get(port));
 	}
 
 }

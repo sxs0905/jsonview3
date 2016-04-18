@@ -20,10 +20,15 @@ public class ExtendPortProcessor extends Processor<ExtendPortElement, JsonNode> 
 
 	@Override
 	protected void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
-		ExtendCallback extendCallback = context.getExtendCallback(element.getPortName());
-		extendCallback.call(parentProcessor);
+		context.getExtendCallback(element.getPortName()).ifPresent(extendCallback -> extendCallback.call(parentProcessor));
 	}
 
+	/**
+	 * 继承端口回调函数
+	 * 
+	 * @author qiuzhenhao
+	 * @since 3.1.0
+	 */
 	public interface ExtendCallback {
 
 		public void call(Processor<? extends Element, ? extends JsonNode> parentProcessor);
