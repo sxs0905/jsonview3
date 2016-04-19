@@ -25,7 +25,7 @@ public class JsonviewConfiguration {
 	/**
 	 * 增加包
 	 * 
-	 * @param jsonviewPackage
+	 * @param jsonviewPackage 包
 	 */
 	public void addJsonviewPackage(JsonviewPackage jsonviewPackage) {
 		String namespace = jsonviewPackage.getNamespace();
@@ -38,8 +38,8 @@ public class JsonviewConfiguration {
 	/**
 	 * 获取包
 	 * 
-	 * @param namespace
-	 * @return
+	 * @param namespace 命名空间
+	 * @return 包
 	 */
 	public JsonviewPackage getJsonviewPackageByNamespace(String namespace) {
 		JsonviewPackage jsonviewPackage = jsonviewPackages.get(namespace);
@@ -52,9 +52,9 @@ public class JsonviewConfiguration {
 	/**
 	 * 提取jsonview视图
 	 * 
-	 * @param namespace
-	 * @param id
-	 * @return
+	 * @param namespace 命名空间
+	 * @param id jsonviewId
+	 * @return jsonview
 	 */
 	public Jsonview extractJsonview(String namespace, String id) {
 		return getJsonviewPackageByNamespace(namespace).getJsonviewById(id);

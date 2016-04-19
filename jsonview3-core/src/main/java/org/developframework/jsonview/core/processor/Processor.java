@@ -12,8 +12,8 @@ import com.fasterxml.jackson.databind.JsonNode;
  * 
  * @author qiuzhenhao
  *
- * @param <ELEMENT>
- * @param <NODE>
+ * @param <ELEMENT> XML节点
+ * @param <NODE> JsonNode节点
  */
 public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> {
 
@@ -35,9 +35,8 @@ public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> 
 	/**
 	 * 创建表达式
 	 * 
-	 * @param parentExpression
-	 *            父节点表达式
-	 * @return
+	 * @param parentExpression 父节点表达式
+	 * @return 表达式
 	 */
 	protected Expression createExpression(Expression parentExpression) {
 		final String data = element.getData();
@@ -50,8 +49,7 @@ public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> 
 	/**
 	 * 处理子节点的操作
 	 * 
-	 * @param parentProcessor
-	 *            父节点处理器对象
+	 * @param parentProcessor 父节点处理器对象
 	 */
 	protected abstract void process(Processor<? extends Element, ? extends JsonNode> parentProcessor);
 

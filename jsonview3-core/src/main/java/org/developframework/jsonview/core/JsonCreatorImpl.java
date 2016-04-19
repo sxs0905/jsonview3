@@ -30,10 +30,10 @@ class JsonCreatorImpl implements JsonCreator {
 	/**
 	 * 构造json树结构
 	 * 
-	 * @param dataModel
-	 * @param namespace
-	 * @param id
-	 * @return
+	 * @param dataModel 数据模型
+	 * @param namespace 命名空间
+	 * @param id jsonviewId
+	 * @return json字符串
 	 */
 	private ObjectNode constructJson(DataModel dataModel, String namespace, String id) {
 		Jsonview jsonview = this.jsonviewConfiguration.extractJsonview(namespace, id);
@@ -51,10 +51,10 @@ class JsonCreatorImpl implements JsonCreator {
 	/**
 	 * 创建json字符串
 	 * 
-	 * @param dataModel
-	 * @param namespace
-	 * @param id
-	 * @return
+	 * @param dataModel 数据模型
+	 * @param namespace 命名空间
+	 * @param id jsonviewId
+	 * @return json字符串
 	 */
 	@Override
 	public String createJson(DataModel dataModel, String namespace, String id) {
@@ -62,13 +62,13 @@ class JsonCreatorImpl implements JsonCreator {
 	}
 
 	/**
-	 * 创建json字符串，isPretty=true时美化json
+	 * 创建json字符串
 	 * 
-	 * @param dataModel
-	 * @param namespace
-	 * @param id
-	 * @param isPretty
-	 * @return
+	 * @param dataModel 数据模型
+	 * @param namespace 命名空间
+	 * @param id jsonviewId
+	 * @param isPretty true时美化json
+	 * @return json字符串
 	 */
 	@Override
 	public String createJson(DataModel dataModel, String namespace, String id, boolean isPretty) {
@@ -88,10 +88,10 @@ class JsonCreatorImpl implements JsonCreator {
 	/**
 	 * 向JsonGenerator输出json
 	 * 
-	 * @param generator
-	 * @param dataModel
-	 * @param namespace
-	 * @param id
+	 * @param generator 发生器
+	 * @param dataModel 数据模型
+	 * @param namespace 命名空间
+	 * @param id jsonviewId
 	 */
 	@Override
 	public void printJson(JsonGenerator generator, DataModel dataModel, String namespace, String id) {

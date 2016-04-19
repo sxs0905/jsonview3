@@ -39,7 +39,7 @@ public class ObjectProcessor extends ContainerProcessor<ObjectElement, ObjectNod
 	/**
 	 * 扩展点：下一节点处理器的其他操作
 	 * 
-	 * @param nextProcessor
+	 * @param nextProcessor 下一节点处理器
 	 */
 	protected void nextProcessorOtherOperate(Processor<? extends Element, ? extends JsonNode> nextProcessor) {
 		if (nextProcessor instanceof MappingObjectProcessor) {

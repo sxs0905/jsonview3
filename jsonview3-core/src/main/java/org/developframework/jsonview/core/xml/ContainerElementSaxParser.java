@@ -10,15 +10,15 @@ import org.xml.sax.Attributes;
  * 
  * @author qiuzhenhao
  *
- * @param <T>
+ * @param <T> 容器节点类型
  */
 abstract class ContainerElementSaxParser<T extends ContainerElement> extends DescribeContentElementSaxParser<T> {
 
 	/**
 	 * 添加forclass处理
 	 * 
-	 * @param element
-	 * @param attributes
+	 * @param element 容器节点
+	 * @param attributes 属性集
 	 */
 	protected final void forClass(ContainerElement element, Attributes attributes) {
 		final String className = attributes.getValue("for-class");

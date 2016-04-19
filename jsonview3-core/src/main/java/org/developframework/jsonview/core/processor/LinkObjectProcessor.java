@@ -26,7 +26,7 @@ public class LinkObjectProcessor extends ObjectProcessor {
 	/**
 	 * 检查数组元素个数是否相同
 	 * 
-	 * @param parentArraySize
+	 * @param parentArraySize 父数组大小
 	 */
 	public void checkSize(int parentArraySize) {
 		Optional<Object> objOptional = context.getDataModel().getData(expression);

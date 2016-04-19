@@ -14,15 +14,15 @@ public interface ConfigurationSource {
 	/**
 	 * 获得输入流
 	 * 
-	 * @return
-	 * @throws IOException
+	 * @return 输入流
+	 * @throws IOException IO异常
 	 */
 	public InputStream getInputStream() throws IOException;
 
 	/**
 	 * 获得源的名称
 	 * 
-	 * @return
+	 * @return 源的名称
 	 */
 	public String getSourceName();
 }

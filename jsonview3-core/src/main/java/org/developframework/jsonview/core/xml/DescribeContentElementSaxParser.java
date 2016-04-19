@@ -7,9 +7,9 @@ import org.xml.sax.Attributes;
 /**
  * 描述内容型节点解析器
  * 
- * @author Administrator
+ * @author qiuzhenhao
  *
- * @param <T>
+ * @param <T> XML节点类型
  */
 abstract class DescribeContentElementSaxParser<T extends Element> implements ElementSaxParser {
 
@@ -40,25 +40,25 @@ abstract class DescribeContentElementSaxParser<T extends Element> implements Ele
 	/**
 	 * 扩展： 获取节点实例
 	 * 
-	 * @param data
-	 * @param alias
-	 * @return
+	 * @param data 数据绑定字符串
+	 * @param alias 别名
+	 * @return 节点实例
 	 */
 	protected abstract T getElementInstance(String data, String alias);
 
 	/**
 	 * 扩展： 增加其它属性处理
 	 * 
-	 * @param element
-	 * @param attributes
+	 * @param element 节点
+	 * @param attributes 属性集
 	 */
 	protected abstract void addOtherAttributes(T element, Attributes attributes);
 
 	/**
 	 * 扩展： 其它操作
 	 * 
-	 * @param context
-	 * @param element
+	 * @param context 上下文
+	 * @param element 属性集
 	 */
 	protected abstract void otherOperation(ParserContext context, T element);
 }

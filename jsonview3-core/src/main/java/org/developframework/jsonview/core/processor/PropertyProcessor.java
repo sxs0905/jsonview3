@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  * 
  * @author qiuzhenhao
  *
- * @param <T>
  */
 public abstract class PropertyProcessor extends Processor<PropertyElement, JsonNode> {
 
@@ -54,18 +53,18 @@ public abstract class PropertyProcessor extends Processor<PropertyElement, JsonN
 	/**
 	 * 扩展点： 判断是否支持某一类型的值
 	 * 
-	 * @param sourceClass
-	 * @return
+	 * @param sourceClass 源类型
+	 * @return boolean
 	 */
 	protected abstract boolean support(Class<?> sourceClass);
 
 	/**
 	 * 扩展点：在Json树状结构上构造Node
 	 * 
-	 * @param parentNode
-	 * @param clazz
-	 * @param value
-	 * @param showName
+	 * @param parentNode 父节点
+	 * @param clazz 值类型
+	 * @param value 值
+	 * @param showName 显示的名称
 	 */
 	protected abstract void handle(ObjectNode parentNode, Class<?> clazz, Object value, String showName);
 

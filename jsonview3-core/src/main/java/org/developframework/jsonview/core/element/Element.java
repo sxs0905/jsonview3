@@ -34,20 +34,17 @@ public abstract class Element {
 	/**
 	 * 为节点创建处理器
 	 * 
-	 * @param context
-	 *            上下文
-	 * @param parentNode
-	 *            父树节点
-	 * @param parentExpression
-	 *            父表达式
-	 * @return
+	 * @param context 上下文
+	 * @param parentNode 父树节点
+	 * @param parentExpression 父表达式
+	 * @return 处理器Optional实例
 	 */
 	public abstract Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression);
 
 	/**
 	 * 显示的名称
 	 * 
-	 * @return
+	 * @return 名称
 	 */
 	public String showName() {
 		if (StringUtils.isNotBlank(alias)) {

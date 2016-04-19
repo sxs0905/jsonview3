@@ -10,8 +10,8 @@ import com.fasterxml.jackson.databind.JsonNode;
  * 
  * @author qiuzhenhao
  *
- * @param <ELEMENT>
- * @param <NODE>
+ * @param <ELEMENT> XML节点
+ * @param <NODE> JsonNode节点
  */
 public abstract class ContainerProcessor<ELEMENT extends ContainerElement, NODE extends JsonNode> extends Processor<ELEMENT, NODE> {
 

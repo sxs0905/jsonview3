@@ -30,8 +30,8 @@ public class JsonviewPackage extends HashMap<String, Jsonview> {
 	/**
 	 * 获取jsonview
 	 * 
-	 * @param id
-	 * @return
+	 * @param id jsonviewId
+	 * @return jsonview
 	 */
 	public Jsonview getJsonviewById(String id) {
 		Jsonview jsonview = get(id);
@@ -44,7 +44,7 @@ public class JsonviewPackage extends HashMap<String, Jsonview> {
 	/**
 	 * 压入jsonview视图
 	 * 
-	 * @param jsonview
+	 * @param jsonview jsonview视图
 	 */
 	public void push(Jsonview jsonview) {
 		String id = jsonview.getId();

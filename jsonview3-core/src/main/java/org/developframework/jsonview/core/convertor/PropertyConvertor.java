@@ -4,7 +4,7 @@ package org.developframework.jsonview.core.convertor;
  * 
  * @author qiuzhenhao
  *
- * @param <TARGET>
+ * @param <TARGET> 目标类型
  */
 public interface PropertyConvertor<TARGET> {
 

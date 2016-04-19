@@ -50,7 +50,7 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	/**
 	 * 注册解析器
 	 * 
-	 * @param parser
+	 * @param parser 解析器
 	 */
 	private void registerElementSaxParser(ElementSaxParser parser) {
 		elementSaxParsers.add(parser);

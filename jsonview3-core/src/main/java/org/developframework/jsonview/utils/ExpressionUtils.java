@@ -28,9 +28,9 @@ public final class ExpressionUtils {
 	/**
 	 * 根据表达式从对象中提取值
 	 * 
-	 * @param source
-	 * @param expression
-	 * @return
+	 * @param source 数据源
+	 * @param expression 表达式
+	 * @return 值
 	 */
 	public static Object getValue(Object source, Expression expression) {
 		return getValue(source, expression.toString());
@@ -53,9 +53,9 @@ public final class ExpressionUtils {
 	/**
 	 * 根据属性名取值
 	 * 
-	 * @param source
-	 * @param property
-	 * @return
+	 * @param source 数据源
+	 * @param property 属性名
+	 * @return 值
 	 */
 	private static Object getPropertyValue(Object source, String property) {
 		if (Objects.isNull(source))
@@ -74,9 +74,9 @@ public final class ExpressionUtils {
 	/**
 	 * 从数组中取值
 	 * 
-	 * @param source
-	 * @param property
-	 * @return
+	 * @param source 数据源
+	 * @param property 属性名
+	 * @return 值
 	 */
 	private static Object getPropertyValueFromArray(Object source, String property) {
 		final String propertyName = StringUtils.substringBefore(property, "[");
@@ -93,9 +93,9 @@ public final class ExpressionUtils {
 	/**
 	 * 从对象或Map取值
 	 * 
-	 * @param source
-	 * @param property
-	 * @return
+	 * @param source 数据源
+	 * @param property 属性名
+	 * @return 值
 	 */
 	@SuppressWarnings("unchecked")
 	private static Object getPropertyValueFromObjectOrMap(Object source, String property) {

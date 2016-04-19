@@ -32,7 +32,7 @@ public class MappingObjectProcessor extends ObjectProcessor {
 	/**
 	 * 设置父数组表达式
 	 * 
-	 * @param parentArrayExpression
+	 * @param parentArrayExpression 父数组表达式
 	 */
 	public void setParentArrayExpression(Expression parentArrayExpression) {
 		MappingObjectElement mappingObjectElement = (MappingObjectElement) element;

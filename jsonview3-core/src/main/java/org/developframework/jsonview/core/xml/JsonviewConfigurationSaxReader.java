@@ -41,7 +41,7 @@ public class JsonviewConfigurationSaxReader {
 	/**
 	 * 读取配置
 	 * 
-	 * @return
+	 * @return 配置
 	 */
 	public JsonviewConfiguration readConfiguration() {
 		JsonviewConfiguration jsonviewConfiguration = new JsonviewConfiguration();

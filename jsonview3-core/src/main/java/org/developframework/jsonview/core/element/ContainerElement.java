@@ -28,7 +28,7 @@ public abstract class ContainerElement extends Element {
 	/**
 	 * 增加子节点
 	 * 
-	 * @param element
+	 * @param element 子节点
 	 */
 	public void addChildElement(Element element) {
 		childElements.add(element);
@@ -37,7 +37,7 @@ public abstract class ContainerElement extends Element {
 	/**
 	 * 增加被忽略的属性名称
 	 * 
-	 * @param propertyName
+	 * @param propertyName 被忽略的属性名称
 	 */
 	public void addIgnoreProperty(String propertyName) {
 		ignorePropertyNames.add(propertyName);
@@ -46,8 +46,8 @@ public abstract class ContainerElement extends Element {
 	/**
 	 * 判断是否忽略该属性字段
 	 * 
-	 * @param field
-	 * @return
+	 * @param field 字段
+	 * @return boolean
 	 */
 	public boolean isIgnore(Field field) {
 		return ignorePropertyNames.contains(field.getName());
@@ -73,7 +73,7 @@ public abstract class ContainerElement extends Element {
 	/**
 	 * 复制其它的容器节点的子节点集到自己
 	 * 
-	 * @param containerElement
+	 * @param containerElement 容器节点
 	 */
 	public void copyChildElement(ContainerElement containerElement) {
 		this.childElements.addAll(containerElement.childElements);
@@ -82,7 +82,7 @@ public abstract class ContainerElement extends Element {
 	/**
 	 * 返回子节点集的迭代器
 	 * 
-	 * @return
+	 * @return 子节点集的迭代器
 	 */
 	public Iterator<Element> elementIterator() {
 		return childElements.iterator();
@@ -91,7 +91,7 @@ public abstract class ContainerElement extends Element {
 	/**
 	 * 判断子节点集是否为空集
 	 * 
-	 * @return
+	 * @return boolean
 	 */
 	public boolean isChildEmpty() {
 		return childElements.isEmpty();

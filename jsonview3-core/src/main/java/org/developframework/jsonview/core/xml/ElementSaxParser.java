@@ -13,22 +13,22 @@ interface ElementSaxParser {
 	/**
 	 * 获取节点qName
 	 * 
-	 * @return
+	 * @return IOException
 	 */
 	public String qName();
 
 	/**
 	 * 处理SAX节点开始时的操作
 	 * 
-	 * @param context
-	 * @param attributes
+	 * @param context 上下文
+	 * @param attributes 属性集
 	 */
 	public void handleAtStartElement(ParserContext context, Attributes attributes);
 
 	/**
 	 * 处理SAX节点关闭时的操作
 	 * 
-	 * @param context
+	 * @param context 上下文
 	 */
 	public void handleAtEndElement(ParserContext context);
 

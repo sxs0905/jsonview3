@@ -27,8 +27,8 @@ public class Expression {
 	/**
 	 * 生成对象表达式
 	 * 
-	 * @param property
-	 * @return
+	 * @param property 属性
+	 * @return 新表达式
 	 */
 	public static Expression buildObjectExpression(String property) {
 		return new Expression(property);
@@ -37,9 +37,9 @@ public class Expression {
 	/**
 	 * 生成数组表达式
 	 * 
-	 * @param property
-	 * @param index
-	 * @return
+	 * @param property 表达式
+	 * @param index 数组索引
+	 * @return 新表达式
 	 */
 	public static Expression buildArrayExpression(String property, int index) {
 		return new Expression(property, index);
@@ -48,9 +48,9 @@ public class Expression {
 	/**
 	 * 生成数组表达式
 	 * 
-	 * @param expression
-	 * @param index
-	 * @return
+	 * @param expression 表达式
+	 * @param index 数组索引
+	 * @return 新表达式
 	 */
 	public static Expression buildArrayExpression(Expression expression, int index) {
 		return new Expression(expression.toString(), index);
@@ -59,9 +59,9 @@ public class Expression {
 	/**
 	 * 连接两个表达式
 	 * 
-	 * @param expression1
-	 * @param expression2
-	 * @return
+	 * @param expression1 表达式1
+	 * @param expression2 表达式2
+	 * @return 新表达式
 	 */
 	public static Expression concatExpression(Expression expression1, Expression expression2) {
 		String expression1Str = Objects.isNull(expression1) ? null : expression1.toString();
@@ -71,9 +71,9 @@ public class Expression {
 	/**
 	 * 连接两个表达式
 	 * 
-	 * @param expression1
-	 * @param expression2
-	 * @return
+	 * @param expression1 表达式1
+	 * @param expression2 表达式2
+	 * @return 新表达式
 	 */
 	public static Expression concatExpression(Expression expression1, String expression2) {
 		String expression1Str = Objects.isNull(expression1) ? null : expression1.toString();
