@@ -16,13 +16,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  * @author qiuzhenhao
  *
  */
-public class ImportElement extends Element {
+public class ImportElement extends FunctionalElement {
 
 	private String namespace;
 	private String id;
 
 	public ImportElement(String namespace, String id) {
-		super(null, null);
 		this.namespace = namespace;
 		this.id = id;
 	}

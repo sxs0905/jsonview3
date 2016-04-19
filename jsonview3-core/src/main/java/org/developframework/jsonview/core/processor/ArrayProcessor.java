@@ -28,7 +28,7 @@ public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> 
 	}
 
 	@Override
-	protected void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
+	protected void process(DescribeContentProcessor<? extends Element, ? extends JsonNode> parentProcessor) {
 		final DataModel dataModel = parentProcessor.getContext().getDataModel();
 		final Optional<Object> objOptional = dataModel.getData(expression);
 		if (objOptional.isPresent()) {

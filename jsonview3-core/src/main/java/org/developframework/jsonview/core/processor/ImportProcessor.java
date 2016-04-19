@@ -15,19 +15,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  * @author qiuzhenhao
  *
  */
-public class ImportProcessor extends Processor<ImportElement, ObjectNode> {
+public class ImportProcessor extends FunctionalProcessor<ImportElement, ObjectNode> {
 
 	public ImportProcessor(Context context, ImportElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
 	}
 
 	@Override
-	protected Expression createExpression(Expression parentExpression) {
-		return parentExpression;
-	}
-
-	@Override
-	protected void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
+	protected void process(DescribeContentProcessor<? extends Element, ? extends JsonNode> parentProcessor) {
 		JsonviewConfiguration jsonviewConfiguration = super.context.getJsonviewConfiguration();
 		Jsonview jsonview = jsonviewConfiguration.extractJsonview(element.getNamespace(), element.getId());
 		final String data = parentProcessor.getElement().getData();

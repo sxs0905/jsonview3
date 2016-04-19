@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.JsonNode;
  * @param <ELEMENT> XML element
  * @param <NODE> JsonNode
  */
-public abstract class ContainerProcessor<ELEMENT extends ContainerElement, NODE extends JsonNode> extends Processor<ELEMENT, NODE> {
+public abstract class ContainerProcessor<ELEMENT extends ContainerElement, NODE extends JsonNode> extends DescribeContentProcessor<ELEMENT, NODE> {
 
 	public ContainerProcessor(Context context, ELEMENT element, Expression parentExpression) {
 		super(context, element, parentExpression);

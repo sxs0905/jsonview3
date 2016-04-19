@@ -12,7 +12,7 @@ import org.developframework.jsonview.exception.JsonviewExpressionException;
  * @author qiuhenhao
  *
  */
-public abstract class PropertyElement extends Element {
+public abstract class PropertyElement extends DescribeContentElement {
 
 	protected PropertyConvertor<?> convertor;
 

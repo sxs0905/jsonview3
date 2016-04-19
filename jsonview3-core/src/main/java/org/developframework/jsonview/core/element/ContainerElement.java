@@ -12,7 +12,7 @@ import java.util.Objects;
  * @author qiuzhenhao
  *
  */
-public abstract class ContainerElement extends Element {
+public abstract class ContainerElement extends DescribeContentElement {
 
 	// The child elements set
 	protected List<Element> childElements = new ArrayList<>();

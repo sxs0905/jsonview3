@@ -42,7 +42,7 @@ public class MappingObjectProcessor extends ObjectProcessor {
 	}
 
 	@Override
-	public void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
+	public void process(DescribeContentProcessor<? extends Element, ? extends JsonNode> parentProcessor) {
 		if (Objects.nonNull(sourceValue)) {
 			Optional<List<Expression>> optional = context.getDataModel().getData(expression, target, sourceValue);
 			optional.ifPresent(list -> {
@@ -69,7 +69,7 @@ public class MappingObjectProcessor extends ObjectProcessor {
 		}
 	}
 
-	private void objectProcess(Processor<? extends Element, ? extends JsonNode> parentProcessor, List<Expression> list, MappingObjectElement mappingObjectElement) {
+	private void objectProcess(DescribeContentProcessor<? extends Element, ? extends JsonNode> parentProcessor, List<Expression> list, MappingObjectElement mappingObjectElement) {
 		ObjectElement objectElement = mappingObjectElement.getChildObjectElement();
 		objectElement.setData(list.get(0).toString());
 		objectElement.createProcessor(context, (ObjectNode) parentProcessor.getNode(), null).ifPresent(processor -> {
@@ -77,7 +77,7 @@ public class MappingObjectProcessor extends ObjectProcessor {
 		});
 	}
 
-	private void arrayProcess(Processor<? extends Element, ? extends JsonNode> parentProcessor, List<Expression> list, MappingObjectElement mappingObjectElement) {
+	private void arrayProcess(DescribeContentProcessor<? extends Element, ? extends JsonNode> parentProcessor, List<Expression> list, MappingObjectElement mappingObjectElement) {
 		ArrayElement arrayElement = mappingObjectElement.getChildArrayElement();
 		arrayElement.createProcessor(context, (ObjectNode) parentProcessor.getNode(), null).ifPresent(processor -> {
 			((ArrayProcessor) processor).process(parentProcessor, list);

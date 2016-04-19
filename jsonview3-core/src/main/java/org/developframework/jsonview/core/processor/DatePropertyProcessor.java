@@ -99,5 +99,4 @@ public class DatePropertyProcessor extends PropertyProcessor {
 		}
 		return date;
 	}
-
 }

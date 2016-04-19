@@ -16,14 +16,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  * @author qiuzhenhao
  *
  */
-public abstract class PropertyProcessor extends Processor<PropertyElement, JsonNode> {
+public abstract class PropertyProcessor extends DescribeContentProcessor<PropertyElement, JsonNode> {
 
 	public PropertyProcessor(Context context, PropertyElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
 	}
 
 	@Override
-	protected final void process(Processor<? extends Element, ? extends JsonNode> parentNodeProcessor) {
+	protected final void process(DescribeContentProcessor<? extends Element, ? extends JsonNode> parentNodeProcessor) {
 		DataModel dataModel = parentNodeProcessor.getContext().getDataModel();
 		Optional<Object> valueOptional = dataModel.getData(expression);
 		ObjectNode parentNode = (ObjectNode) parentNodeProcessor.getNode();

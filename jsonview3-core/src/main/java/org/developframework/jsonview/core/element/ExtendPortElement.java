@@ -14,14 +14,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  * extend-port
  * 
  * @author qiuzhenhao
- * @since 3.1.0
  */
-public class ExtendPortElement extends Element {
+public class ExtendPortElement extends FunctionalElement {
 
 	private String portName;
 
 	public ExtendPortElement(String portName) {
-		super(null, null);
 		this.portName = portName;
 	}
 

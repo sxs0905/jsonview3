@@ -23,7 +23,7 @@ public class ObjectProcessor extends ContainerProcessor<ObjectElement, ObjectNod
 	}
 
 	@Override
-	public void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
+	public void process(DescribeContentProcessor<? extends Element, ? extends JsonNode> parentProcessor) {
 		for (Iterator<Element> iterator = element.elementIterator(); iterator.hasNext();) {
 			final Element childElement = iterator.next();
 			final Optional<Processor<? extends Element, ? extends JsonNode>> nextProcessorOptional = childElement.createProcessor(context, node, expression);

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.developframework</groupId>
 	<artifactId>jsonview3</artifactId>
-	<version>3.1.0-SNAPSHOT</version>
+	<version>3.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<name>Jsonview3 Framework</name>
@@ -36,7 +36,7 @@
 		<connection>scm:git:git@github.com:developframework/jsonview3.git</connection>
 		<developerConnection>scm:git:git@github.com:developframework/jsonview3.git</developerConnection>
 		<url>https://github.com/developframework/jsonview3</url>
-		<tag>3.1.0-SNAPSHOT</tag>
+		<tag>3.0.0-SNAPSHOT</tag>
 	</scm>
 
 	<modules>

@@ -37,7 +37,7 @@ public class JsonviewProcessor extends ObjectProcessor {
 	 * @since 3.1.0
 	 */
 	@Override
-	public void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
+	public void process(DescribeContentProcessor<? extends Element, ? extends JsonNode> parentProcessor) {
 		// To handle inheritance jsonview first
 		Optional<Extend> extendOptional = ((Jsonview) element).getExtend();
 		if (extendOptional.isPresent()) {

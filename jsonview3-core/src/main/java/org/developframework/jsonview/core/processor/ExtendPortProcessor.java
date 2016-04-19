@@ -10,16 +10,15 @@ import com.fasterxml.jackson.databind.JsonNode;
  * A processor for extend port structure
  * 
  * @author qiuzhenhao
- * @since 3.1.0
  */
-public class ExtendPortProcessor extends Processor<ExtendPortElement, JsonNode> {
+public class ExtendPortProcessor extends FunctionalProcessor<ExtendPortElement, JsonNode> {
 
 	public ExtendPortProcessor(Context context, ExtendPortElement element, Expression parentExpression) {
 		super(context, element, parentExpression);
 	}
 
 	@Override
-	protected void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
+	protected void process(DescribeContentProcessor<? extends Element, ? extends JsonNode> parentProcessor) {
 		context.getExtendCallback(element.getPortName()).ifPresent(extendCallback -> extendCallback.call(parentProcessor));
 	}
 
@@ -27,11 +26,10 @@ public class ExtendPortProcessor extends Processor<ExtendPortElement, JsonNode> 
 	 * extend callback interface
 	 * 
 	 * @author qiuzhenhao
-	 * @since 3.1.0
 	 */
 	public interface ExtendCallback {
 
-		public void call(Processor<? extends Element, ? extends JsonNode> parentProcessor);
+		public void call(DescribeContentProcessor<? extends Element, ? extends JsonNode> parentProcessor);
 	}
 
 }
