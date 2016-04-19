@@ -7,7 +7,7 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
- * 数组内的对象类型节点处理器
+ * A processor for object in array structure
  * 
  * @author qiuzhenhao
  *
@@ -22,7 +22,7 @@ public class ObjectInArrayProcessor extends ObjectProcessor {
 	}
 
 	/**
-	 * 扩展： 需要处理LinkObjectProcessor和MappingObjectProcessor
+	 * Need handle LinkObjectProcessor and MappingObjectProcessor
 	 */
 	@Override
 	protected void nextProcessorOtherOperate(Processor<? extends Element, ? extends JsonNode> nextProcessor) {

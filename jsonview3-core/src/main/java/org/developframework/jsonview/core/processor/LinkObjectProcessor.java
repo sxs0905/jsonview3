@@ -9,14 +9,14 @@ import org.developframework.jsonview.data.Expression;
 import org.developframework.jsonview.exception.LinkObjectSizeNotEqualException;
 
 /**
- * 一对一链接型处理器
+ * A processor for link-object structure
  * 
  * @author qiuzhenhao
  *
  */
 public class LinkObjectProcessor extends ObjectProcessor {
 
-	// 数组索引号
+	// array index
 	private int index;
 
 	public LinkObjectProcessor(Context context, ObjectElement element, Expression parentExpression) {
@@ -24,9 +24,9 @@ public class LinkObjectProcessor extends ObjectProcessor {
 	}
 
 	/**
-	 * 检查数组元素个数是否相同
+	 * Check whether the number of array elements is the same
 	 * 
-	 * @param parentArraySize 父数组大小
+	 * @param parentArraySize parent array size
 	 */
 	public void checkSize(int parentArraySize) {
 		Optional<Object> objOptional = context.getDataModel().getData(expression);

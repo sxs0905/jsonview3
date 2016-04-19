@@ -8,22 +8,18 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
- * 抽象处理器
+ * abstract root processor
  * 
  * @author qiuzhenhao
  *
- * @param <ELEMENT> XML节点
- * @param <NODE> JsonNode节点
+ * @param <ELEMENT> XML element Type
+ * @param <NODE> JsonNode
  */
 public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> {
 
-	// 上下文
 	protected Context context;
-	// 节点信息
 	protected ELEMENT element;
-	// 树节点
 	protected NODE node;
-	// 表达式
 	protected Expression expression;
 
 	public Processor(Context context, ELEMENT element, Expression parentExpression) {
@@ -33,10 +29,10 @@ public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> 
 	}
 
 	/**
-	 * 创建表达式
+	 * create expression
 	 * 
-	 * @param parentExpression 父节点表达式
-	 * @return 表达式
+	 * @param parentExpression parent element expression
+	 * @return new expression
 	 */
 	protected Expression createExpression(Expression parentExpression) {
 		final String data = element.getData();
@@ -47,9 +43,9 @@ public abstract class Processor<ELEMENT extends Element, NODE extends JsonNode> 
 	}
 
 	/**
-	 * 处理子节点的操作
+	 * Deal with the operation of child element
 	 * 
-	 * @param parentProcessor 父节点处理器对象
+	 * @param parentProcessor parent element processor
 	 */
 	protected abstract void process(Processor<? extends Element, ? extends JsonNode> parentProcessor);
 

@@ -12,18 +12,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * jsonview节点
+ * jsonview
  * 
  * @author qiuzhenhao
  *
  */
 public class Jsonview extends ObjectElement {
 
-	// 命名空间
 	private String namespace;
-	// jsonview id
 	private String id;
-	// 继承视图
 	private Extend extend;
 
 	public Jsonview(String namespace, String id) {
@@ -54,7 +51,7 @@ public class Jsonview extends ObjectElement {
 	}
 
 	/**
-	 * 继承信息封装实体
+	 * Extend information encapsulation entities
 	 * 
 	 * @author qiuzhenhao
 	 * @since 3.1.0

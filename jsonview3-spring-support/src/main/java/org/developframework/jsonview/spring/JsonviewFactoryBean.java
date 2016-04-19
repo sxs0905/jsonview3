@@ -6,7 +6,7 @@ import org.developframework.jsonview.core.JsonviewFactory;
 import org.springframework.beans.factory.FactoryBean;
 
 /**
- * JsonviewFactory的FactoryBean
+ * JsonviewFactory's spring FactoryBean
  * 
  * @author qiuzhenhao
  *

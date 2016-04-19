@@ -15,7 +15,7 @@ import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonGenerator;
 
 /**
- * jsonview框架的HttpMessageConverter
+ * jsonview framework HttpMessageConverter
  * 
  * @author qiuzhenhao
  *

@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 普通型属性节点
+ * property
  * 
  * @author qiuhenhao
  *
@@ -22,9 +22,6 @@ public class NormalPropertyElement extends PropertyElement {
 		super(data, alias);
 	}
 
-	/**
-	 * 实现： 创建处理器
-	 */
 	@Override
 	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression) {
 		NormalPropertyProcessor processor = new NormalPropertyProcessor(context, this, parentExpression);

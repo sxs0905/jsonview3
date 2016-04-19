@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 一对多映射型处理器
+ * A processor for mapping-object structure
  * 
  * @author qiuzhenhao
  *
@@ -30,9 +30,9 @@ public class MappingObjectProcessor extends ObjectProcessor {
 	}
 
 	/**
-	 * 设置父数组表达式
+	 * set parent array expression
 	 * 
-	 * @param parentArrayExpression 父数组表达式
+	 * @param parentArrayExpression parent array expression
 	 */
 	public void setParentArrayExpression(Expression parentArrayExpression) {
 		MappingObjectElement mappingObjectElement = (MappingObjectElement) element;
@@ -41,9 +41,6 @@ public class MappingObjectProcessor extends ObjectProcessor {
 		valueOptional.ifPresent(v -> sourceValue = v);
 	}
 
-	/**
-	 * 实现： 处理子节点的操作
-	 */
 	@Override
 	public void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
 		if (Objects.nonNull(sourceValue)) {

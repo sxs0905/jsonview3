@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 布尔型属性节点
+ * property-boolean element
  * 
  * @author qiuzhenhao
  *

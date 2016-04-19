@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 数组处理器
+ * A processor for array structure
  * 
  * @author qiuzhenhao
  *
@@ -27,9 +27,6 @@ public class ArrayProcessor extends ContainerProcessor<ArrayElement, ArrayNode> 
 		super(context, element, parentExpression);
 	}
 
-	/**
-	 * 实现： 处理子节点的操作
-	 */
 	@Override
 	protected void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
 		final DataModel dataModel = parentProcessor.getContext().getDataModel();

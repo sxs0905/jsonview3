@@ -8,7 +8,7 @@ import org.springframework.util.StringUtils;
 import org.w3c.dom.Element;
 
 /**
- * Spring扫描jsonview命名空间标签解析器
+ * Spring scanning jsonview namespace tag parser
  * 
  * @author qiuzhenhao
  *

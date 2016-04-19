@@ -7,14 +7,13 @@ import java.util.Objects;
 import org.developframework.jsonview.exception.ConfigurationFileNotFoundException;
 
 /**
- * 文件型配置源
+ * File type configuration source
  * 
  * @author qiuzhenhao
  *
  */
 public class FileConfigurationSource implements ConfigurationSource {
 
-	// 文件名称
 	private String filename;
 
 	public FileConfigurationSource(String filename) {

@@ -6,7 +6,7 @@ import org.developframework.jsonview.exception.ResourceNotUniqueException;
 import org.xml.sax.Attributes;
 
 /**
- * jsonview节点解析器
+ * A parser for xml element: jsonview
  * 
  * @author qiuzhenhao
  *
@@ -18,9 +18,6 @@ class JsonviewElementSaxParser extends ContainerElementSaxParser<Jsonview> {
 		return "jsonview";
 	}
 
-	/**
-	 * 实现：处理SAX节点开始时的操作
-	 */
 	@Override
 	public void handleAtStartElement(ParserContext context, Attributes attributes) {
 		final String id = attributes.getValue("id").trim();
@@ -38,9 +35,6 @@ class JsonviewElementSaxParser extends ContainerElementSaxParser<Jsonview> {
 		context.getStack().push(jsonview);
 	}
 
-	/**
-	 * 实现：处理SAX节点关闭时的操作
-	 */
 	@Override
 	public void handleAtEndElement(ParserContext context) {
 		Jsonview jsonview = (Jsonview) context.getStack().pop();
@@ -51,21 +45,15 @@ class JsonviewElementSaxParser extends ContainerElementSaxParser<Jsonview> {
 		context.getJsonviewPackage().push(jsonview);
 	}
 
-	/**
-	 * 实现： 获取节点实例
-	 */
 	@Override
 	protected Jsonview getElementInstance(String data, String alias) {
-		// no opration
+		// no operation
 		return null;
 	}
 
-	/**
-	 * 实现：增加其它属性处理
-	 */
 	@Override
 	protected void addOtherAttributes(Jsonview element, Attributes attributes) {
-		// no opration
+		// no operation
 	}
 
 }

@@ -12,18 +12,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 抽象节点
+ * abstract element
  * 
  * @author qiuzhenhao
  *
  */
 public abstract class Element {
 
-	// 绑定数据
 	protected String data;
-	// 别名
 	protected String alias;
-	// null时是否隐藏
 	protected boolean nullHidden;
 
 	public Element(String data, String alias) {
@@ -32,19 +29,19 @@ public abstract class Element {
 	}
 
 	/**
-	 * 为节点创建处理器
+	 * Create the processor for the element
 	 * 
-	 * @param context 上下文
-	 * @param parentNode 父树节点
-	 * @param parentExpression 父表达式
-	 * @return 处理器Optional实例
+	 * @param context processor's context
+	 * @param parentNode parent node
+	 * @param parentExpression parent expression
+	 * @return processor's optional instance
 	 */
 	public abstract Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression);
 
 	/**
-	 * 显示的名称
+	 * show name
 	 * 
-	 * @return 名称
+	 * @return name to display in json string
 	 */
 	public String showName() {
 		if (StringUtils.isNotBlank(alias)) {
@@ -56,6 +53,12 @@ public abstract class Element {
 		return camelCaseToUnderline(data);
 	}
 
+	/**
+	 * ignore head sign "#"
+	 * 
+	 * @param data
+	 * @return
+	 */
 	private final String ignoreHeadSign(String data) {
 		Objects.requireNonNull(data);
 		if (data.startsWith("#")) {
@@ -64,6 +67,12 @@ public abstract class Element {
 		return data;
 	}
 
+	/**
+	 * camel case string to underline string
+	 * 
+	 * @param camelCaseStr camel case string
+	 * @return underline string
+	 */
 	private final String camelCaseToUnderline(String camelCaseStr) {
 		final StringBuffer sb = new StringBuffer();
 		for (int i = 0, size = camelCaseStr.length(); i < size; i++) {
@@ -81,26 +90,54 @@ public abstract class Element {
 		return sb.toString();
 	}
 
+	/**
+	 * get data
+	 * 
+	 * @return data
+	 */
 	public String getData() {
 		return data;
 	}
 
+	/**
+	 * set data
+	 * 
+	 * @param data data string
+	 */
 	public void setData(String data) {
 		this.data = data;
 	}
 
+	/**
+	 * get alias
+	 * 
+	 * @return alias
+	 */
 	public String getAlias() {
 		return alias;
 	}
 
+	/**
+	 * check nullHidden
+	 * 
+	 * @return boolean
+	 */
 	public boolean isNullHidden() {
 		return nullHidden;
 	}
 
+	/**
+	 * set nullHidden
+	 * 
+	 * @param nullHiddenStr nullHidden value
+	 */
 	public void setNullHidden(String nullHiddenStr) {
 		this.nullHidden = StringUtils.isBlank(nullHiddenStr) ? false : new Boolean(nullHiddenStr).booleanValue();
 	}
 
+	/**
+	 * rewrite: equals
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof Element) {

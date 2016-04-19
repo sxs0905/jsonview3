@@ -7,7 +7,7 @@ import org.developframework.jsonview.exception.JsonviewNotFoundException;
 import org.developframework.jsonview.exception.ResourceNotUniqueException;
 
 /**
- * jsonview的分包（命名空间）
+ * jsonview-package
  * 
  * @author qiuhenhao
  *
@@ -15,7 +15,6 @@ import org.developframework.jsonview.exception.ResourceNotUniqueException;
 public class JsonviewPackage extends HashMap<String, Jsonview> {
 
 	private static final long serialVersionUID = -7671014418821915082L;
-	// 命名空间
 	private String namespace;
 
 	public JsonviewPackage(String namespace) {
@@ -28,7 +27,7 @@ public class JsonviewPackage extends HashMap<String, Jsonview> {
 	}
 
 	/**
-	 * 获取jsonview
+	 * get jsonview
 	 * 
 	 * @param id jsonviewId
 	 * @return jsonview
@@ -42,9 +41,9 @@ public class JsonviewPackage extends HashMap<String, Jsonview> {
 	}
 
 	/**
-	 * 压入jsonview视图
+	 * push jsonview
 	 * 
-	 * @param jsonview jsonview视图
+	 * @param jsonview jsonview
 	 */
 	public void push(Jsonview jsonview) {
 		String id = jsonview.getId();

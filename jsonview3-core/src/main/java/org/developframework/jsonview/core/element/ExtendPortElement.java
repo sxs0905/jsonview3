@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 继承端口节点
+ * extend-port
  * 
  * @author qiuzhenhao
  * @since 3.1.0

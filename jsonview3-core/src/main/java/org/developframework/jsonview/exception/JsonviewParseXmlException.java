@@ -1,6 +1,6 @@
 package org.developframework.jsonview.exception;
 /**
- * 配置文件解析错误异常
+ * The exception for configuration file parsing error
  * 
  * @author qiuzhenhao
  *

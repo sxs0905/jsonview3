@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * jsonview总异常
+ * jsonview root exception
  * 
  * @author qiuzhenhao
  *

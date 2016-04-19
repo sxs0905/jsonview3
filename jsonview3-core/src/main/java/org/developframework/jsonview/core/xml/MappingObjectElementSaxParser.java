@@ -5,7 +5,7 @@ import org.developframework.jsonview.core.element.MappingObjectElement.MappingTy
 import org.xml.sax.Attributes;
 
 /**
- * 一对多映射型解析器
+ * A parser for xml element: mapping-object
  * 
  * @author qiuzhenhao
  *
@@ -17,17 +17,11 @@ public class MappingObjectElementSaxParser extends ContainerElementSaxParser<Map
 		return "mapping-object";
 	}
 
-	/**
-	 * 实现：处理SAX节点开始时的操作
-	 */
 	@Override
 	protected MappingObjectElement getElementInstance(String data, String alias) {
 		return new MappingObjectElement(data, alias);
 	}
 
-	/**
-	 * 实现：处理SAX节点关闭时的操作
-	 */
 	@Override
 	protected void addOtherAttributes(MappingObjectElement element, Attributes attributes) {
 		element.setSource(attributes.getValue("source"));

@@ -7,18 +7,17 @@ import org.developframework.jsonview.core.element.JsonviewConfiguration;
 import org.developframework.jsonview.core.element.JsonviewPackage;
 
 /**
- * 解析器上下文
+ * parser's context
  * 
- * @author Administrator
+ * @author qiuzhenhao
  *
  */
 final class ParserContext {
 
-	// 配置项
 	private JsonviewConfiguration configuration;
-	// 当前包
+	// current jsonviewPackage
 	private JsonviewPackage jsonviewPackage;
-	// 节点栈
+	// element stack
 	private Stack<Element> stack;
 
 	public ParserContext(JsonviewConfiguration configuration) {

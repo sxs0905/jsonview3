@@ -9,16 +9,16 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * XML配置解析句柄（核心） SAX解析方式
+ * SAX Handler
  * 
  * @author qiuzhenhao
  *
  */
 class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 
-	// 解析器组
+	// ElementSaxParser list
 	private List<ElementSaxParser> elementSaxParsers;
-	// 解析器上下文
+	// context
 	private ParserContext context;
 
 	public JsonviewConfigurationXMLParseHandler(JsonviewConfiguration configuration) {
@@ -28,7 +28,7 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	}
 
 	/**
-	 * 初始化
+	 * initialize for register all ElementSaxParser
 	 */
 	private void init() {
 		registerElementSaxParser(new PropertyElementSaxParser());
@@ -48,16 +48,16 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	}
 
 	/**
-	 * 注册解析器
+	 * register parser
 	 * 
-	 * @param parser 解析器
+	 * @param parser parser
 	 */
 	private void registerElementSaxParser(ElementSaxParser parser) {
 		elementSaxParsers.add(parser);
 	}
 
 	/**
-	 * xml文档开始事件
+	 * sax start document
 	 */
 	@Override
 	public void startDocument() throws SAXException {
@@ -65,7 +65,7 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	}
 
 	/**
-	 * xml节点开始事件
+	 * sax start element
 	 */
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -77,7 +77,7 @@ class JsonviewConfigurationXMLParseHandler extends DefaultHandler {
 	}
 
 	/**
-	 * xml节点关闭事件
+	 * sax end element
 	 */
 	@Override
 	public void endElement(String uri, String localName, String qName) throws SAXException {

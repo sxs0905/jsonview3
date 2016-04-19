@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 导入处理器
+ * A processor for import structure
  * 
  * @author qiuzhenhao
  *
@@ -26,9 +26,6 @@ public class ImportProcessor extends Processor<ImportElement, ObjectNode> {
 		return parentExpression;
 	}
 
-	/**
-	 * 实现： 处理子节点的操作
-	 */
 	@Override
 	protected void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
 		JsonviewConfiguration jsonviewConfiguration = super.context.getJsonviewConfiguration();

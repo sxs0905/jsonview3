@@ -5,7 +5,7 @@ import java.io.Serializable;
 import org.developframework.jsonview.data.DataModel;
 
 /**
- * 抽象Jsonview响应
+ * abstract jsonview response
  * 
  * @author qiuzhenhao
  *
@@ -35,6 +35,13 @@ public abstract class JsonviewResponse implements Serializable {
 		return dataModel;
 	}
 
+	/**
+	 * push data
+	 * 
+	 * @param dataName data name
+	 * @param data data value
+	 * @return
+	 */
 	public JsonviewResponse putData(String dataName, Object data) {
 		dataModel.putData(dataName, data);
 		return this;

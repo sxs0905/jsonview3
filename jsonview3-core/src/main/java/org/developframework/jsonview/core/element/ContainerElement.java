@@ -7,18 +7,18 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * 容器节点
+ * container element
  * 
  * @author qiuzhenhao
  *
  */
 public abstract class ContainerElement extends Element {
 
-	// 子节点集
+	// The child elements set
 	protected List<Element> childElements = new ArrayList<>();
-	// for-class指向的类
+	// for-class class
 	protected Class<?> clazz;
-	// 忽略的属性名称列表
+	// List of property names are ignored
 	protected List<String> ignorePropertyNames = new ArrayList<>();
 
 	public ContainerElement(String data, String alias) {
@@ -26,27 +26,27 @@ public abstract class ContainerElement extends Element {
 	}
 
 	/**
-	 * 增加子节点
+	 * add child element
 	 * 
-	 * @param element 子节点
+	 * @param element child element
 	 */
 	public void addChildElement(Element element) {
 		childElements.add(element);
 	}
 
 	/**
-	 * 增加被忽略的属性名称
+	 * add ignore property
 	 * 
-	 * @param propertyName 被忽略的属性名称
+	 * @param propertyName ignore property name
 	 */
 	public void addIgnoreProperty(String propertyName) {
 		ignorePropertyNames.add(propertyName);
 	}
 
 	/**
-	 * 判断是否忽略该属性字段
+	 * Determine whether to ignore the property field
 	 * 
-	 * @param field 字段
+	 * @param field field
 	 * @return boolean
 	 */
 	public boolean isIgnore(Field field) {
@@ -54,7 +54,7 @@ public abstract class ContainerElement extends Element {
 	}
 
 	/**
-	 * 加载类所有属性
+	 * Load classes all properties
 	 */
 	public void loadClassProperty() {
 		if (Objects.nonNull(clazz)) {
@@ -71,25 +71,25 @@ public abstract class ContainerElement extends Element {
 	}
 
 	/**
-	 * 复制其它的容器节点的子节点集到自己
+	 * Copy other child of a container element set to self
 	 * 
-	 * @param containerElement 容器节点
+	 * @param containerElement container element
 	 */
 	public void copyChildElement(ContainerElement containerElement) {
 		this.childElements.addAll(containerElement.childElements);
 	}
 
 	/**
-	 * 返回子节点集的迭代器
+	 * Return the element set of iterators
 	 * 
-	 * @return 子节点集的迭代器
+	 * @return the element set of iterators
 	 */
 	public Iterator<Element> elementIterator() {
 		return childElements.iterator();
 	}
 
 	/**
-	 * 判断子节点集是否为空集
+	 * Determine whether a child element set to an empty set
 	 * 
 	 * @return boolean
 	 */

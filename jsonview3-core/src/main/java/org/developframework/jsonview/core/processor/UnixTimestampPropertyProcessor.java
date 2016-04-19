@@ -8,7 +8,7 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 时间日期属性型节点处理器
+ * A processor for unixtimestamp property structure
  * 
  * @author qiuzhenhao
  *
@@ -19,9 +19,6 @@ public class UnixTimestampPropertyProcessor extends DatePropertyProcessor {
 		super(context, element, parentExpression);
 	}
 
-	/**
-	 * 实现扩展点：在Json树状结构上构造Node
-	 */
 	@Override
 	protected void handle(ObjectNode parentNode, Class<?> clazz, Object value, String showName) {
 		java.util.Date date = transformDate(clazz, value);

@@ -7,7 +7,7 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
- * 继承端口处理器
+ * A processor for extend port structure
  * 
  * @author qiuzhenhao
  * @since 3.1.0
@@ -24,7 +24,7 @@ public class ExtendPortProcessor extends Processor<ExtendPortElement, JsonNode> 
 	}
 
 	/**
-	 * 继承端口回调函数
+	 * extend callback interface
 	 * 
 	 * @author qiuzhenhao
 	 * @since 3.1.0

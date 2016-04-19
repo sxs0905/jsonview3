@@ -4,7 +4,7 @@ import org.developframework.jsonview.core.element.ObjectElement;
 import org.developframework.jsonview.data.Expression;
 
 /**
- * 虚拟对象处理器
+ * A processor for virtual object structure
  * 
  * @author qiuzhenhao
  *

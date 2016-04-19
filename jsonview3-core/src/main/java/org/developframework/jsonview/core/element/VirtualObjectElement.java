@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 虚拟对象节点
+ * virtual-object
  * 
  * @author qiuzhenhao
  *

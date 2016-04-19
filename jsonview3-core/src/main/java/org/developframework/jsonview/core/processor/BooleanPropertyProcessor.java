@@ -9,14 +9,14 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 布尔型属性处理器
+ * A processor for boolean property structure
  * 
  * @author qiuzhenhao
  *
  */
 public class BooleanPropertyProcessor extends PropertyProcessor {
 
-	// 支持的类型列表
+	// List of support class
 	private static final List<Class<?>> ACCEPT_CLASS_LIST = new ArrayList<>(8);
 
 	public BooleanPropertyProcessor(Context context, PropertyElement element, Expression parentExpression) {
@@ -31,17 +31,11 @@ public class BooleanPropertyProcessor extends PropertyProcessor {
 		ACCEPT_CLASS_LIST.add(Short.class);
 	}
 
-	/**
-	 * 实现扩展点：判断是否支持某一类型的值
-	 */
 	@Override
 	protected boolean support(Class<?> sourceClass) {
 		return ACCEPT_CLASS_LIST.contains(sourceClass);
 	}
 
-	/**
-	 * 实现扩展点：在Json树状结构上构造Node
-	 */
 	@Override
 	protected void handle(ObjectNode parentNode, Class<?> clazz, Object value, String showName) {
 		boolean v = false;

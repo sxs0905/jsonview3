@@ -6,7 +6,7 @@ import org.developframework.jsonview.core.element.ImportElement;
 import org.xml.sax.Attributes;
 
 /**
- * 导入节点解析器
+ * A parser for xml element: import
  * 
  * @author qiuzhenhao
  *
@@ -18,9 +18,6 @@ class ImportElementSaxParser implements ElementSaxParser {
 		return "import";
 	}
 
-	/**
-	 * 实现：处理SAX节点开始时的操作
-	 */
 	@Override
 	public void handleAtStartElement(ParserContext context, Attributes attributes) {
 		final String id = attributes.getValue("id").trim();
@@ -30,12 +27,9 @@ class ImportElementSaxParser implements ElementSaxParser {
 		((ContainerElement) context.getStack().peek()).addChildElement(importElement);
 	}
 
-	/**
-	 * 实现：处理SAX节点关闭时的操作
-	 */
 	@Override
 	public void handleAtEndElement(ParserContext context) {
-		// no opration
+		// no operation
 	}
 
 }

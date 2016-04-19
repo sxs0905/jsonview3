@@ -11,7 +11,7 @@ import org.developframework.jsonview.exception.JsonviewNoSuchFieldException;
 import org.developframework.jsonview.utils.ExpressionUtils;
 
 /**
- * 哈希数据模型
+ * A dataModel implementation for Hash
  * 
  * @author qiuzhenhao
  *
@@ -21,9 +21,17 @@ public class HashDataModel implements DataModel {
 	private static final long serialVersionUID = 1824745473338821506L;
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
 
+	/**
+	 * empty constructor
+	 */
 	public HashDataModel() {
 	}
 
+	/**
+	 * copy other data in map
+	 * 
+	 * @param dataMap other map
+	 */
 	public HashDataModel(Map<String, Object> dataMap) {
 		this.dataMap.putAll(dataMap);
 	}

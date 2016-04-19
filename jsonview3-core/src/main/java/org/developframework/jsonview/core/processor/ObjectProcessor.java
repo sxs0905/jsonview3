@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 对象类型节点处理器
+ * A processor for object structure
  * 
  * @author qiuzhenhao
  *
@@ -28,18 +28,18 @@ public class ObjectProcessor extends ContainerProcessor<ObjectElement, ObjectNod
 			final Element childElement = iterator.next();
 			final Optional<Processor<? extends Element, ? extends JsonNode>> nextProcessorOptional = childElement.createProcessor(context, node, expression);
 			nextProcessorOptional.ifPresent((nextProcessor) -> {
-				// 扩展点：下一节点处理器的其他操作
+				// extension: other operations in the next element processor
 				nextProcessorOtherOperate(nextProcessor);
-				// 执行下一节点处理任务
+				// execute next element processor
 				nextProcessor.process(this);
 			});
 		}
 	}
 
 	/**
-	 * 扩展点：下一节点处理器的其他操作
+	 * extension: other operations in the next element processor
 	 * 
-	 * @param nextProcessor 下一节点处理器
+	 * @param nextProcessor next element processor
 	 */
 	protected void nextProcessorOtherOperate(Processor<? extends Element, ? extends JsonNode> nextProcessor) {
 		if (nextProcessor instanceof MappingObjectProcessor) {

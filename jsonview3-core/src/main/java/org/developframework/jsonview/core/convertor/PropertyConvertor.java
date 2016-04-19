@@ -1,12 +1,18 @@
 package org.developframework.jsonview.core.convertor;
 /**
- * 属性转换器
+ * Properties of the converter
  * 
  * @author qiuzhenhao
  *
- * @param <TARGET> 目标类型
+ * @param <TARGET> target Type
  */
 public interface PropertyConvertor<TARGET> {
 
+	/**
+	 * convert handle
+	 * 
+	 * @param source source
+	 * @return target value after convert
+	 */
 	public TARGET convert(Object source);
 }

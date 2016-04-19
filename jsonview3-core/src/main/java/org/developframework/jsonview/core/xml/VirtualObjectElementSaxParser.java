@@ -4,7 +4,7 @@ import org.developframework.jsonview.core.element.VirtualObjectElement;
 import org.xml.sax.Attributes;
 
 /**
- * 虚拟对象解析器
+ * A parser for xml element: virtual-object
  * 
  * @author qiuzhenhao
  *
@@ -23,7 +23,7 @@ public class VirtualObjectElementSaxParser extends ContainerElementSaxParser<Vir
 
 	@Override
 	protected void addOtherAttributes(VirtualObjectElement element, Attributes attributes) {
-		// no opration
+		// no operation
 	}
 
 }

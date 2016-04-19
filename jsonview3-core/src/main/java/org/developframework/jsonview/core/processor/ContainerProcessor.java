@@ -6,12 +6,12 @@ import org.developframework.jsonview.data.Expression;
 import com.fasterxml.jackson.databind.JsonNode;
 
 /**
- * 容器处理器
+ * A processor for container structure
  * 
  * @author qiuzhenhao
  *
- * @param <ELEMENT> XML节点
- * @param <NODE> JsonNode节点
+ * @param <ELEMENT> XML element
+ * @param <NODE> JsonNode
  */
 public abstract class ContainerProcessor<ELEMENT extends ContainerElement, NODE extends JsonNode> extends Processor<ELEMENT, NODE> {
 

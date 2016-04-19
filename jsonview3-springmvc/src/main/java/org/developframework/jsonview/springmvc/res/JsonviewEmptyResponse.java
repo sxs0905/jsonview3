@@ -3,7 +3,7 @@ package org.developframework.jsonview.springmvc.res;
 import org.developframework.jsonview.data.HashDataModel;
 
 /**
- * 空的Jsonview响应
+ * empty jsonview response
  * 
  * @author qiuzhenhao
  *

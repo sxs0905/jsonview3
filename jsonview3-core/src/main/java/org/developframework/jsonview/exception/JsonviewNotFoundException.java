@@ -1,6 +1,6 @@
 package org.developframework.jsonview.exception;
 /**
- * jsonview视图不存在异常
+ * The exception for not found jsonview element
  * 
  * @author qiuzhenhao
  *

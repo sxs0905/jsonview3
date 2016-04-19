@@ -4,7 +4,7 @@ import org.developframework.jsonview.core.element.BooleanPropertyElement;
 import org.xml.sax.Attributes;
 
 /**
- * 布尔属性节点解析器
+ * A parser for xml element: property-boolean
  * 
  * @author qiuzhenhao
  *
@@ -16,26 +16,17 @@ public class BooleanPropertyElementSaxParser extends DescribeContentElementSaxPa
 		return "property-boolean";
 	}
 
-	/**
-	 * 实现： 获取节点实例
-	 */
 	@Override
 	protected BooleanPropertyElement getElementInstance(String data, String alias) {
 		return new BooleanPropertyElement(data, alias);
 	}
 
-	/**
-	 * 实现：增加其它属性处理
-	 */
 	@Override
 	protected void addOtherAttributes(BooleanPropertyElement element, Attributes attributes) {
 		element.setNullHidden(attributes.getValue("null-hidden"));
 		element.setConvertor(attributes.getValue("convertor"));
 	}
 
-	/**
-	 * 实现：其它处理
-	 */
 	@Override
 	protected void otherOperation(ParserContext context, BooleanPropertyElement element) {
 		// no operation

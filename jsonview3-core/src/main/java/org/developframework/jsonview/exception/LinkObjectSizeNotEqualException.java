@@ -1,6 +1,6 @@
 package org.developframework.jsonview.exception;
 /**
- * 使用链接对象时数组大小不相等异常
+ * The exception for using link-object array size is not equal
  * 
  * @author qiuzhenhao
  *

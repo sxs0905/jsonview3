@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 一对一链接型功能节点
+ * link-object
  * 
  * @author qiuhenhao
  *
@@ -22,9 +22,6 @@ public class LinkObjectElement extends ObjectElement {
 		super(data, alias);
 	}
 
-	/**
-	 * 实现： 创建处理器
-	 */
 	@Override
 	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression) {
 		LinkObjectProcessor processor = new LinkObjectProcessor(context, this, parentExpression);

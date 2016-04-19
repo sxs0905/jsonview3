@@ -13,14 +13,13 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 /**
- * jsonview配置扫描加载器
+ * Jsonview configuration scanning loader
  * 
  * @author qiuzhenhao
  *
  */
 public class JsonviewScanLoader {
 
-	// 扫描地址
 	private String locations;
 
 	public JsonviewScanLoader(String locations) {
@@ -28,9 +27,9 @@ public class JsonviewScanLoader {
 	}
 
 	/**
-	 * 创建配置
+	 * create jsonviewConfiguration
 	 * 
-	 * @return
+	 * @return jsonviewConfiguration
 	 */
 	public JsonviewConfiguration createJsonviewConfiguration() {
 		final ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
@@ -49,9 +48,9 @@ public class JsonviewScanLoader {
 	}
 
 	/**
-	 * 创建工厂
+	 * create JsonviewFactory
 	 * 
-	 * @return
+	 * @return JsonviewFactory
 	 */
 	public JsonviewFactory createJsonviewFactory() {
 		return new JsonviewFactory(createJsonviewConfiguration());

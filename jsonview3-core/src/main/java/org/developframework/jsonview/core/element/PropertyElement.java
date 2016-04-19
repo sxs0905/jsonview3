@@ -7,14 +7,13 @@ import org.developframework.jsonview.core.convertor.PropertyConvertor;
 import org.developframework.jsonview.exception.JsonviewExpressionException;
 
 /**
- * 基本属性节点
+ * The basic property element
  * 
  * @author qiuhenhao
  *
  */
 public abstract class PropertyElement extends Element {
 
-	// 转换器
 	protected PropertyConvertor<?> convertor;
 
 	public PropertyElement(String data, String alias) {

@@ -11,23 +11,19 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * 时间日期型属性节点
+ * property-date
  * 
  * @author qiuzhenhao
  *
  */
 public class DatePropertyElement extends PropertyElement {
 
-	// 模板
 	private String pattern;
 
 	public DatePropertyElement(String data, String alias) {
 		super(data, alias);
 	}
 
-	/**
-	 * 实现：创建处理器
-	 */
 	@Override
 	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression) {
 		DatePropertyProcessor processor = new DatePropertyProcessor(context, this, parentExpression, pattern);

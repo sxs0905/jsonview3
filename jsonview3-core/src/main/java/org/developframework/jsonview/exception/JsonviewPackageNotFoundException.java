@@ -1,6 +1,6 @@
 package org.developframework.jsonview.exception;
 /**
- * 命名空间不存在异常
+ * The exception for not found jsonview-package element
  * 
  * @author qiuzhenhao
  *

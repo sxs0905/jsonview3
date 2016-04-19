@@ -1,6 +1,6 @@
 package org.developframework.jsonview.exception;
 /**
- * 配置文件没找到异常
+ * The exception for configuration file not found
  * 
  * @author qiuzhenhao
  *

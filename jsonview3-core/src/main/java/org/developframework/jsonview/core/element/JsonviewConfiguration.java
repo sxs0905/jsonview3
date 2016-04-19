@@ -8,14 +8,13 @@ import org.developframework.jsonview.exception.JsonviewPackageNotFoundException;
 import org.developframework.jsonview.exception.ResourceNotUniqueException;
 
 /**
- * jsonview配置项
+ * jsonview-configuration
  * 
  * @author qiuhenhao
  *
  */
 public class JsonviewConfiguration {
 
-	// jsonview包集
 	private Map<String, JsonviewPackage> jsonviewPackages;
 
 	public JsonviewConfiguration() {
@@ -23,9 +22,9 @@ public class JsonviewConfiguration {
 	}
 
 	/**
-	 * 增加包
+	 * add jsonview-package
 	 * 
-	 * @param jsonviewPackage 包
+	 * @param jsonviewPackage jsonviewPackage
 	 */
 	public void addJsonviewPackage(JsonviewPackage jsonviewPackage) {
 		String namespace = jsonviewPackage.getNamespace();
@@ -36,10 +35,10 @@ public class JsonviewConfiguration {
 	}
 
 	/**
-	 * 获取包
+	 * get package
 	 * 
-	 * @param namespace 命名空间
-	 * @return 包
+	 * @param namespace namespace
+	 * @return JsonviewPackage
 	 */
 	public JsonviewPackage getJsonviewPackageByNamespace(String namespace) {
 		JsonviewPackage jsonviewPackage = jsonviewPackages.get(namespace);
@@ -50,9 +49,9 @@ public class JsonviewConfiguration {
 	}
 
 	/**
-	 * 提取jsonview视图
+	 * extract jsonview
 	 * 
-	 * @param namespace 命名空间
+	 * @param namespace namespace
 	 * @param id jsonviewId
 	 * @return jsonview
 	 */

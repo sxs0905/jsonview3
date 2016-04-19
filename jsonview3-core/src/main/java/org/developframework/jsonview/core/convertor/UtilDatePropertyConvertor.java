@@ -4,6 +4,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * A convertor for java.util.Date property to string property
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public class UtilDatePropertyConvertor implements PropertyConvertor<String> {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

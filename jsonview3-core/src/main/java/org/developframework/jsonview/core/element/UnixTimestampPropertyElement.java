@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * Unix时间戳型属性节点
+ * property-unixtimestamp
  * 
  * @author qiuzhenhao
  *
@@ -22,9 +22,6 @@ public class UnixTimestampPropertyElement extends PropertyElement {
 		super(data, alias);
 	}
 
-	/**
-	 * 实现：创建处理器
-	 */
 	@Override
 	public Optional<Processor<? extends Element, ? extends JsonNode>> createProcessor(Context context, ObjectNode parentNode, Expression parentExpression) {
 		UnixTimestampPropertyProcessor processor = new UnixTimestampPropertyProcessor(context, this, parentExpression);

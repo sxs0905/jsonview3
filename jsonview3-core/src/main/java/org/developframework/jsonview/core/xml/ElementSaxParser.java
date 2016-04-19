@@ -3,7 +3,7 @@ package org.developframework.jsonview.core.xml;
 import org.xml.sax.Attributes;
 
 /**
- * 节点解析器
+ * The xml parser interface
  * 
  * @author qiuzhenhao
  *
@@ -11,24 +11,24 @@ import org.xml.sax.Attributes;
 interface ElementSaxParser {
 
 	/**
-	 * 获取节点qName
+	 * catch element's qName value
 	 * 
-	 * @return IOException
+	 * @return qName value
 	 */
 	public String qName();
 
 	/**
-	 * 处理SAX节点开始时的操作
+	 * handle operrate at sax elememt start
 	 * 
-	 * @param context 上下文
-	 * @param attributes 属性集
+	 * @param context parserContext
+	 * @param attributes sax attributes
 	 */
 	public void handleAtStartElement(ParserContext context, Attributes attributes);
 
 	/**
-	 * 处理SAX节点关闭时的操作
+	 * handle operrate at sax elememt end
 	 * 
-	 * @param context 上下文
+	 * @param context parserContext
 	 */
 	public void handleAtEndElement(ParserContext context);
 

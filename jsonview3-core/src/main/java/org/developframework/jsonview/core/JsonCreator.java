@@ -4,36 +4,42 @@ import org.developframework.jsonview.data.DataModel;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 
+/**
+ * json creator interface
+ * 
+ * @author qiuzhenhao
+ *
+ */
 public interface JsonCreator {
 
 	/**
-	 * 创建json字符串
+	 * create json string
 	 * 
-	 * @param dataModel 数据模型
-	 * @param namespace 命名空间
-	 * @param id jsonviewId
-	 * @return json字符串
+	 * @param dataModel data model
+	 * @param namespace namespace
+	 * @param id jsonview id
+	 * @return json string
 	 */
 	public String createJson(DataModel dataModel, String namespace, String id);
 
 	/**
-	 * 创建json字符串
+	 * create json string
 	 * 
-	 * @param dataModel 数据模型
-	 * @param namespace 命名空间
-	 * @param id jsonviewId
-	 * @param isPretty true时美化json
-	 * @return json字符串
+	 * @param dataModel data model
+	 * @param namespace namespace
+	 * @param id jsonview id
+	 * @param isPretty pretty json when the value is true
+	 * @return json string
 	 */
 	public String createJson(DataModel dataModel, String namespace, String id, boolean isPretty);
 
 	/**
-	 * 向JsonGenerator输出json
+	 * to JsonGenerator output json
 	 * 
-	 * @param generator 发生器
-	 * @param dataModel 数据模型
-	 * @param namespace 命名空间
-	 * @param id jsonviewId
+	 * @param generator generator
+	 * @param dataModel data model
+	 * @param namespace namespace
+	 * @param id jsonview id
 	 */
 	public void printJson(JsonGenerator generator, DataModel dataModel, String namespace, String id);
 }

@@ -3,7 +3,7 @@ package org.developframework.jsonview.spring;
 import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
 
 /**
- * 注册spring配置项的命名空间
+ * To register the spring configuration namespace
  * 
  * @author qiuzhenhao
  *

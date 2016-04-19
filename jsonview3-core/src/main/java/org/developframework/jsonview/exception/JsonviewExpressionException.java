@@ -1,6 +1,6 @@
 package org.developframework.jsonview.exception;
 /**
- * 表达式不正确异常
+ * The Exception for expression is not correctly
  * 
  * @author qiuzhenhao
  *

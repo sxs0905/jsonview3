@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 配置解析读取器
+ * The jsonview configuration reader
  * 
  * @author qiuzhenhao
  *
@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 public class JsonviewConfigurationSaxReader {
 
 	private static final Logger logger = LoggerFactory.getLogger(JsonviewConfigurationSaxReader.class);
-	// 配置源数组
+	// source set
 	private Set<ConfigurationSource> sources;
 
 	public JsonviewConfigurationSaxReader(String config) {
@@ -39,21 +39,27 @@ public class JsonviewConfigurationSaxReader {
 	}
 
 	/**
-	 * 读取配置
+	 * read configuration
 	 * 
-	 * @return 配置
+	 * @return jsonviewConfiguration
 	 */
 	public JsonviewConfiguration readConfiguration() {
 		JsonviewConfiguration jsonviewConfiguration = new JsonviewConfiguration();
 		JsonviewConfigurationXMLParseHandler handler = new JsonviewConfigurationXMLParseHandler(jsonviewConfiguration);
 		for (ConfigurationSource source : sources) {
-			// 读单个配置源
+			// read sinple configuration file
 			readOneFile(handler, source);
 			logger.info("Jsonview framework loaded the configuration file \"{}\".", source.getSourceName());
 		}
 		return jsonviewConfiguration;
 	}
 
+	/**
+	 * read sinple configuration file
+	 * 
+	 * @param handler SAX handler
+	 * @param source configurationSource
+	 */
 	private void readOneFile(JsonviewConfigurationXMLParseHandler handler, ConfigurationSource source) {
 		try {
 			InputStream is = source.getInputStream();

@@ -7,7 +7,7 @@ import org.developframework.jsonview.core.xml.ConfigurationSource;
 import org.springframework.core.io.Resource;
 
 /**
- * 来自org.springframework.core.io.Resource的配置源
+ * From org.springframework.core.io.Resource configuration source
  * 
  * @author qiuzhenhao
  *

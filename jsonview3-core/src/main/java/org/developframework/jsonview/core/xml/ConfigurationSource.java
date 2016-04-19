@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * 配置源接口
+ * Configuration source interface
  * 
  * @author qiuzhenhao
  *
@@ -12,17 +12,17 @@ import java.io.InputStream;
 public interface ConfigurationSource {
 
 	/**
-	 * 获得输入流
+	 * get source inputsteam
 	 * 
-	 * @return 输入流
-	 * @throws IOException IO异常
+	 * @return inputsteam instance
+	 * @throws IOException IOException
 	 */
 	public InputStream getInputStream() throws IOException;
 
 	/**
-	 * 获得源的名称
+	 * get source name
 	 * 
-	 * @return 源的名称
+	 * @return source name string
 	 */
 	public String getSourceName();
 }

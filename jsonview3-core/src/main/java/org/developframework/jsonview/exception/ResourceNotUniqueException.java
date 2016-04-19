@@ -1,6 +1,6 @@
 package org.developframework.jsonview.exception;
 /**
- * 资源定义不唯一异常
+ * The exception for resource definition is not only one
  * 
  * @author qiuzhenhao
  *

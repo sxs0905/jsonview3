@@ -1,6 +1,6 @@
 package org.developframework.jsonview.exception;
 /**
- * 没有字段异常
+ * The exception for no such field
  * 
  * @author qiuzhenhao
  *

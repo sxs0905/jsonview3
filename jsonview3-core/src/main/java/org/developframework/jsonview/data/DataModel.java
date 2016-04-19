@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * 数据模型
+ * A data container interface
  * 
  * @author qiuzhenhao
  *
@@ -13,36 +13,36 @@ import java.util.Optional;
 public interface DataModel extends Serializable {
 
 	/**
-	 * 压入数据
+	 * put data in container
 	 * 
-	 * @param dataName 数据绑定名称
-	 * @param data 数据值
+	 * @param dataName data's name
+	 * @param data data's value
 	 */
 	public void putData(String dataName, Object data);
 
 	/**
-	 * 获取数据
+	 * get data from container by expression type instance
 	 * 
-	 * @param expression 表达式
-	 * @return 数据的Optional对象
+	 * @param expression expression for data
+	 * @return data's Optional instance
 	 */
 	public Optional<Object> getData(Expression expression);
 
 	/**
-	 * 获取数据
+	 * get data from container by expression string
 	 * 
-	 * @param expression 表达式
-	 * @return 数据的Optional对象
+	 * @param expression expression for data
+	 * @return data's Optional instance
 	 */
 	public Optional<Object> getData(String expression);
 
 	/**
-	 * 获取数据
+	 * get data from container by expression type instance and target
 	 * 
-	 * @param expression 表达式
-	 * @param target 目标
-	 * @param sourceValue 源值
-	 * @return 数据的Optional对象
+	 * @param expression expression for data
+	 * @param target target
+	 * @param sourceValue source value
+	 * @return data's Optional instance
 	 */
 	public Optional<List<Expression>> getData(Expression expression, String target, Object sourceValue);
 }

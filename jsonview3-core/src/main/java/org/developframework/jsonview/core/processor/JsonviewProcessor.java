@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * jsonview处理器
+ * A processor for jsonview structure
  * 
  * @author qiuzhenhao
  *
@@ -38,13 +38,13 @@ public class JsonviewProcessor extends ObjectProcessor {
 	 */
 	@Override
 	public void process(Processor<? extends Element, ? extends JsonNode> parentProcessor) {
-		// 先处理继承的jsonview
+		// To handle inheritance jsonview first
 		Optional<Extend> extendOptional = ((Jsonview) element).getExtend();
 		if (extendOptional.isPresent()) {
 			Extend extend = extendOptional.get();
-			// 提取父jsonview
+			// Extract the parent jsonview
 			Jsonview extendJsonview = context.getJsonviewConfiguration().extractJsonview(extend.getNamesapce(), extend.getJsonviewId());
-			// 定义继承端口需要执行的回调函数
+			// Define extend callback implemention
 			final ExtendPortProcessor.ExtendCallback callback = parentProcessorInCallback -> super.process(parentProcessorInCallback);
 			context.pushExtendCallback(extend.getPort(), callback);
 			extendJsonview.createProcessor(context, node, expression).ifPresent(processor -> processor.process(parentProcessor));

@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 /**
- * json生成器
+ * json creator implemention
  * 
  * @author qiuzhenhao
  *
@@ -27,14 +27,6 @@ class JsonCreatorImpl implements JsonCreator {
 		this.objectMapper = objectMapper;
 	}
 
-	/**
-	 * 构造json树结构
-	 * 
-	 * @param dataModel 数据模型
-	 * @param namespace 命名空间
-	 * @param id jsonviewId
-	 * @return json字符串
-	 */
 	private ObjectNode constructJson(DataModel dataModel, String namespace, String id) {
 		Jsonview jsonview = this.jsonviewConfiguration.extractJsonview(namespace, id);
 		ObjectNode root = objectMapper.createObjectNode();
@@ -48,28 +40,11 @@ class JsonCreatorImpl implements JsonCreator {
 		return root;
 	}
 
-	/**
-	 * 创建json字符串
-	 * 
-	 * @param dataModel 数据模型
-	 * @param namespace 命名空间
-	 * @param id jsonviewId
-	 * @return json字符串
-	 */
 	@Override
 	public String createJson(DataModel dataModel, String namespace, String id) {
 		return createJson(dataModel, namespace, id, false);
 	}
 
-	/**
-	 * 创建json字符串
-	 * 
-	 * @param dataModel 数据模型
-	 * @param namespace 命名空间
-	 * @param id jsonviewId
-	 * @param isPretty true时美化json
-	 * @return json字符串
-	 */
 	@Override
 	public String createJson(DataModel dataModel, String namespace, String id, boolean isPretty) {
 		ObjectNode root = constructJson(dataModel, namespace, id);
@@ -85,14 +60,6 @@ class JsonCreatorImpl implements JsonCreator {
 		return null;
 	}
 
-	/**
-	 * 向JsonGenerator输出json
-	 * 
-	 * @param generator 发生器
-	 * @param dataModel 数据模型
-	 * @param namespace 命名空间
-	 * @param id jsonviewId
-	 */
 	@Override
 	public void printJson(JsonGenerator generator, DataModel dataModel, String namespace, String id) {
 		ObjectNode root = constructJson(dataModel, namespace, id);
