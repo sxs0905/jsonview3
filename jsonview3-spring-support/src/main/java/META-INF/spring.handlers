@@ -1,1 +1,1 @@
-http\://www.developframework.org/schema/jsonview=org.developframework.jsonview.spring.JsonviewNamespaceHandler
+https\://github.com/developframework/jsonview3/schema=com.github.developframework.jsonview.spring.JsonviewNamespaceHandler

@@ -1,5 +1,5 @@
-<xs:schema xmlns="http://www.developframework.org/schema/jsonview3"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.developframework.org/schema/jsonview3"
+<xs:schema xmlns="https://github.com/developframework/jsonview3"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://github.com/developframework/jsonview3"
 	elementFormDefault="qualified">
 	<xs:element name="jsonview-configuration">
 		<xs:complexType>
@@ -14,7 +14,6 @@
 									<xs:attribute name="id" type="xs:string" use="required" />
 									<xs:attribute name="data" type="xs:string" />
 									<xs:attribute name="for-class" type="xs:string" />
-									<!-- extend attribute since 3.1.0 -->
 									<xs:attribute name="extend" type="xs:string" />
 								</xs:complexType>
 							</xs:element>
@@ -123,7 +122,6 @@
 						<xs:attribute name="id" type="xs:string" use="required" />
 					</xs:complexType>
 				</xs:element>
-				<!-- extend-port element since 3.1.0 -->
 				<xs:element name="extend-port">
 					<xs:complexType>
 						<xs:attribute name="port-name" type="xs:string" use="required" />
