@@ -9,7 +9,7 @@ JDK8及以上
 maven
 ```
 <dependency>
-	<groupId>org.developframework</groupId>
+	<groupId>com.github.developframework</groupId>
 	<artifactId>jsonview3-core</artifactId>
 	<version>${jsonview.version}</version>
 </dependency>
@@ -25,10 +25,10 @@ maven
 ## **2. HelloWorld**
 一个最简单的jsonview使用示例：
 ```
-import org.developframework.jsonview.core.JsonCreator;
-import org.developframework.jsonview.core.JsonviewFactory;
-import org.developframework.jsonview.data.DataModel;
-import org.developframework.jsonview.data.HashDataModel;
+import com.github.developframework.jsonview.core.JsonCreator;
+import com.github.developframework.jsonview.core.JsonviewFactory;
+import com.github.developframework.jsonview.data.DataModel;
+import com.github.developframework.jsonview.data.HashDataModel;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,10 +54,10 @@ public class JunitTest {
 你需要一份jsonview XML配置，位置在上述声明的/jsonview/jsonview-demo.xml：
 ```
 <jsonview-configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://www.developframework.org/schema/jsonview3" 
+	xmlns="https://github.com/developframework/jsonview3/schema" 
 	xsi:schemaLocation="
-	http://www.developframework.org/schema/jsonview3 
-	http://www.developframework.org/schema/jsonview3/jsonview-configuration-3.0.xsd">
+	https://github.com/developframework/jsonview3/schema
+	https://github.com/developframework/jsonview3/schema/jsonview-configuration-3.0.xsd">
 	<jsonview-package namespace="jsonview-demo">
 		<jsonview id="first-view">
 			<property data="sayHello"/>
@@ -73,8 +73,8 @@ public class JunitTest {
 ## **3. 概览**
 ### **3.1. java概览**
 #### **3.1.1. DataModel**
-`org.developframework.jsonview.data.DataModel`接口是jsonview框架的数据模型。用于装载需要在json视图中渲染的数据，数据由键值对构成。接口提供存入和取出数据的方法。
-目前实现类仅有`org.developframework.jsonview.data.HashDataModel`
+`com.github.developframework.jsonview.data.DataModel`接口是jsonview框架的数据模型。用于装载需要在json视图中渲染的数据，数据由键值对构成。接口提供存入和取出数据的方法。
+目前实现类仅有`com.github.developframework.jsonview.data.HashDataModel`
 存取数据范例：
 ```
 DataModel dataModel = new HashDataModel();
@@ -84,7 +84,7 @@ value.ifPresent(System.out::println);
 ```
 #### **3.1.2. Expression**
 
-`org.developframework.jsonview.data.Expression`类是jsonview框架从DataModel中提取数据的表达式。不论dataModel存的是java实体类还是Map对象都可以使用表达式取值。
+`com.github.developframework.jsonview.data.Expression`类是jsonview框架从DataModel中提取数据的表达式。不论dataModel存的是java实体类还是Map对象都可以使用表达式取值。
 范例：
 
 + `student` 你可以从DataModel对象内取得名为student的对象
@@ -94,19 +94,19 @@ value.ifPresent(System.out::println);
 + `student[0].name` 你可以从DataModel对象内取得名为students的数组内的第1个元素的name属性值
 
 #### **3.1.3. JsonviewFactory**
-`org.developframework.jsonview.core.JsonviewFactory`类是jsonview框架的构建工厂。使用jsonview框架的第一步就是建立该对象。
+`com.github.developframework.jsonview.core.JsonviewFactory`类是jsonview框架的构建工厂。使用jsonview框架的第一步就是建立该对象。
 建立该对象需要提供配置文件路径的字符串，多份配置文件可以采用字符串数组。
 ```
 final String[] configs = {"config1.xml", "config2.xml"};
 JsonviewFactory jsonviewFactory = new JsonviewFactory(configs);
 ```
 #### **3.1.4. JsonviewConfiguration**
-`org.developframework.jsonview.core.element.JsonviewConfiguration`类为Jsonview框架的总配置文件，可以从JsonviewFactory中得到该对象。
+`com.github.developframework.jsonview.core.element.JsonviewConfiguration`类为Jsonview框架的总配置文件，可以从JsonviewFactory中得到该对象。
 ```
 JsonviewConfiguration jsonviewConfiguration = jsonviewFactory.getJsonviewConfiguration();
 ```
 #### **3.1.5. JsonCreator**
-`org.developframework.jsonview.core.JsonCreator`接口是json字符串建造类，执行一次生成json字符串的操作需要构建该对象。JsonCreator由JsonviewFactory生成。
+`com.github.developframework.jsonview.core.JsonCreator`接口是json字符串建造类，执行一次生成json字符串的操作需要构建该对象。JsonCreator由JsonviewFactory生成。
 该对象提供三个构建json字符串的方法：
 ```
 public String createJson(DataModel dataModel, String namespace, String id, boolean isPretty);
@@ -124,12 +124,12 @@ public void printJson(JsonGenerator generator, DataModel dataModel, String names
 将json输出到ObjectMapper的generator对象
 
 #### **3.1.6. Jsonview**
-`org.developframework.jsonview.core.element.Jsonview`类，一个Jsonview类的实例代表一种json的视图模板。它由`namespace`和`id`唯一确定。可以通过以下方法得到Jsonview实例：
+`com.github.developframework.jsonview.core.element.Jsonview`类，一个Jsonview类的实例代表一种json的视图模板。它由`namespace`和`id`唯一确定。可以通过以下方法得到Jsonview实例：
 ```
 Jsonview jsonview = jsonviewConfiguration.extractJsonview("namespace", "id");
 ```
 #### **3.1.7. JsonviewPackage**
-`org.developframework.jsonview.core.element.JsonviewPackage`类，一个JsonviewPackage实例是一个命名空间，可以装载若干个Jsonview实例。推荐将Jsonview按功能有序存放于JsonviewPackage。通过以下方法得到JsonviewPackage对象：
+`com.github.developframework.jsonview.core.element.JsonviewPackage`类，一个JsonviewPackage实例是一个命名空间，可以装载若干个Jsonview实例。推荐将Jsonview按功能有序存放于JsonviewPackage。通过以下方法得到JsonviewPackage对象：
 ```
 JsonviewPackage jsonviewPackage = jsonviewConfiguration.getJsonviewPackageByNamespace("namespace");
 ```
@@ -393,10 +393,10 @@ public class SchoolClass {
 /jsonview/jsonview-student.xml
 ```
 <jsonview-configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://www.developframework.org/schema/jsonview3" 
+	xmlns="https://github.com/developframework/jsonview3/schema" 
 	xsi:schemaLocation="
-	http://www.developframework.org/schema/jsonview3 
-	http://www.developframework.org/schema/jsonview3/jsonview-configuration-3.0.xsd">
+	https://github.com/developframework/jsonview3/schema
+	https://github.com/developframework/jsonview3/schema/jsonview-configuration-3.0.xsd">
 	<jsonview-package namespace="jsonview-student">
 		<jsonview id="student-detail-view" data="student">
 			<property data="id"/>
@@ -593,10 +593,10 @@ System.out.println(json);
 ```
 ## **5. 高级功能**
 ### **5.1. Property的转换器**
-`org.developframework.jsonview.core.convertor.PropertyConvertor`
+`com.github.developframework.jsonview.core.convertor.PropertyConvertor`
 接口可以对表达式选取的属性值进行自定义转换。
 ```
-package org.developframework.jsonview.core.convertor;
+package com.github.developframework.jsonview.core.convertor;
 
 public interface PropertyConvertor<TARGET> {
 
@@ -610,7 +610,7 @@ public interface PropertyConvertor<TARGET> {
 
 *此为Jsonview框架内置实现类*
 ```
-package org.developframework.jsonview.core.convertor;
+package com.github.developframework.jsonview.core.convertor;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -630,7 +630,7 @@ public class UtilDatePropertyConvertor implements PropertyConvertor<String> {
 }
 ```
 ```
-<property data="birthday" convertor="org.developframework.jsonview.core.convertor.UtilDatePropertyConvertor"/>
+<property data="birthday" convertor="com.github.developframework.jsonview.core.convertor.UtilDatePropertyConvertor"/>
 ```
 运行结果：
 ```
@@ -958,7 +958,7 @@ logback.xml
 			</pattern>
 		</encoder>
 	</appender>
-	<logger name="org.developframework.jsonview" level="INFO" additivity="false">
+	<logger name="com.github.developframework.jsonview" level="INFO" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 </configuration>
@@ -974,7 +974,7 @@ logback.xml
 maven
 ```
 <dependency>
-	<groupId>org.developframework</groupId>
+	<groupId>com.github.developframework</groupId>
 	<artifactId>jsonview3-spring-support</artifactId>
 	<version>${jsonview.version}</version>
 </dependency>
@@ -983,7 +983,7 @@ maven
 使用spring加载JsonviewFactory对象。
 applicationContext.xml
 ```
-<bean id="jsonviewFactory" class="org.developframework.jsonview.spring.JsonviewFactoryBean">
+<bean id="jsonviewFactory" class="com.github.developframework.jsonview.spring.JsonviewFactoryBean">
 	<property name="configs">
 		<set>
 			<value>/jsonview/jsonview-student.xml</value>
@@ -999,17 +999,19 @@ applicationContext.xml
 ```
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jsonview="http://www.developframework.org/schema/jsonview"
+	xmlns:jsonview="https://github.com/developframework/jsonview3/schema"
 	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
-		http://www.developframework.org/schema/jsonview http://www.developframework.org/schema/jsonview/jsonview-spring-namespace.xsd">	
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		https://github.com/developframework/jsonview3/schema
+		https://github.com/developframework/jsonview3/schema/jsonview-spring.xsd">	
 	
 	<jsonview:scan id="jsonviewFactory" locations="classpath:jsonview/*.xml" />
 	
 </beans>
 ```
 
-+ 此方法需要添加命名空间`xmlns:jsonview="http://www.developframework.org/schema/jsonview"`
++ 此方法需要添加命名空间`xmlns:jsonview="https://github.com/developframework/jsonview3/schema"`
 + `classpath:jsonview/*.xml`为通配加载jsonview文件夹下的所有配置文件。
 
 ## **8. 整合SpringMVC**
@@ -1046,17 +1048,17 @@ public class StudentController {
 maven
 ```
 <dependency>
-	<groupId>org.developframework</groupId>
+	<groupId>com.github.developframework</groupId>
 	<artifactId>jsonview3-springmvc</artifactId>
 </dependency>
 ```
 
 ### **8.2. JsonviewHttpMessageConverter**
 Jsonview框架提供了
-`org.developframework.jsonview.springmvc.JsonviewHttpMessageConverter`类。该类实现HttpMessageConverter接口，并继承于`MappingJackson2HttpMessageConverter`，实现使用Jsonview框架完成json的生成过程。
+`com.github.developframework.jsonview.springmvc.JsonviewHttpMessageConverter`类。该类实现HttpMessageConverter接口，并继承于`MappingJackson2HttpMessageConverter`，实现使用Jsonview框架完成json的生成过程。
 
 ### **8.3. JsonviewResponse**
-抽象类`org.developframework.jsonview.springmvc.res.JsonviewResponse`封装了Controller方法需要响应的json视图所需的`namesapce`、`id`、`dataModel`。
+抽象类`com.github.developframework.jsonview.springmvc.res.JsonviewResponse`封装了Controller方法需要响应的json视图所需的`namesapce`、`id`、`dataModel`。
 ```
 @ResponseBody
 @RequestMapping(value = "{id}", method = RequestMethod.GET)
@@ -1078,7 +1080,7 @@ dispatcher-servlet.xml
 ```
 <jsonview:scan id="jsonviewFactory" locations="classpath:jsonview/*.xml" />
 	
-<bean id="jsonviewHttpMessageConverter" class="org.developframework.jsonview.support.web.JsonviewHttpMessageConverter">
+<bean id="jsonviewHttpMessageConverter" class="com.github.developframework.jsonview.springmvc.JsonviewHttpMessageConverter">
 	<property name="objectMapper">
 		<bean class="com.fasterxml.jackson.databind.ObjectMapper">
 			<property name="propertyNamingStrategy">
@@ -1106,8 +1108,8 @@ dispatcher-servlet.xml
 #### **8.4.2. Spring Boot + Servlet3.0配置**
 ```
 import java.util.List;
-import org.developframework.jsonview.spring.JsonviewScanLoader;
-import org.developframework.jsonview.springmvc.JsonviewHttpMessageConverter;
+import com.github.developframework.jsonview.spring.JsonviewScanLoader;
+import com.github.developframework.jsonview.springmvc.JsonviewHttpMessageConverter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
