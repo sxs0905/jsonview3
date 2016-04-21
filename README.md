@@ -232,13 +232,13 @@ Jsonview configuration文档不是唯一的，Jsonview框架允许你拥有多�
 ###### d) property
 当你需要在json中构建一个普通属性结构时， 你将会使用到`<property>`标签。
 ```
-<property data="" alias="" convertor="" null-hidden="true"/>
+<property data="" alias="" converter="" null-hidden="true"/>
 ```
 |属性|功能|是否必须|
 |---|---|---|
 |data|取值表达式|是|
 |alias|别名，你可以重新定义显示名|否|
-|convertor|类型转换器全限定类名|否|
+|converter|类型转换器全限定类名|否|
 |null-hidden|true时表示表达式取的值为null时隐藏该节点，默认为false|否|
 
 ##### **3.2.2.2. 功能型标签**
@@ -593,12 +593,12 @@ System.out.println(json);
 ```
 ## **5. 高级功能**
 ### **5.1. Property的转换器**
-`com.github.developframework.jsonview.core.convertor.PropertyConvertor`
+`com.github.developframework.jsonview.core.converter.PropertyConverter`
 接口可以对表达式选取的属性值进行自定义转换。
 ```
-package com.github.developframework.jsonview.core.convertor;
+package com.github.developframework.jsonview.core.converter;
 
-public interface PropertyConvertor<TARGET> {
+public interface PropertyConverter<TARGET> {
 
 	public TARGET convert(Object source);
 }
@@ -610,13 +610,13 @@ public interface PropertyConvertor<TARGET> {
 
 *此为Jsonview框架内置实现类*
 ```
-package com.github.developframework.jsonview.core.convertor;
+package com.github.developframework.jsonview.core.converter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-public class UtilDatePropertyConvertor implements PropertyConvertor<String> {
+public class UtilDatePropertyConverter implements PropertyConverter<String> {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -630,7 +630,7 @@ public class UtilDatePropertyConvertor implements PropertyConvertor<String> {
 }
 ```
 ```
-<property data="birthday" convertor="com.github.developframework.jsonview.core.convertor.UtilDatePropertyConvertor"/>
+<property data="birthday" converter="com.github.developframework.jsonview.core.converter.UtilDatePropertyConverter"/>
 ```
 运行结果：
 ```
