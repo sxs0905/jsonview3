@@ -1,4 +1,4 @@
-package com.github.developframework.jsonview.core.convertor;
+package com.github.developframework.jsonview.core.converter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,7 +10,7 @@ import java.util.Objects;
  * @author qiuzhenhao
  *
  */
-public class UtilDatePropertyConvertor implements PropertyConvertor<String> {
+public class UtilDatePropertyConverter implements PropertyConverter<String> {
 
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

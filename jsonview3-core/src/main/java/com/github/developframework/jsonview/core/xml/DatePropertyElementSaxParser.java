@@ -26,7 +26,7 @@ class DatePropertyElementSaxParser extends DescribeContentElementSaxParser<DateP
 	protected void addOtherAttributes(DatePropertyElement element, Attributes attributes) {
 		element.setPattern(attributes.getValue("pattern"));
 		element.setNullHidden(attributes.getValue("null-hidden"));
-		element.setConvertor(attributes.getValue("convertor"));
+		element.setConverter(attributes.getValue("converter"));
 	}
 
 	@Override

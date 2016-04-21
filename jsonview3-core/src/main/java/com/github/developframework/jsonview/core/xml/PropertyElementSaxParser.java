@@ -26,7 +26,7 @@ class PropertyElementSaxParser extends DescribeContentElementSaxParser<PropertyE
 	@Override
 	protected void addOtherAttributes(PropertyElement element, Attributes attributes) {
 		element.setNullHidden(attributes.getValue("null-hidden"));
-		element.setConvertor(attributes.getValue("convertor"));
+		element.setConverter(attributes.getValue("converter"));
 	}
 
 	@Override

@@ -1,4 +1,5 @@
-package com.github.developframework.jsonview.core.convertor;
+package com.github.developframework.jsonview.core.converter;
+
 /**
  * Properties of the converter
  * 
@@ -6,7 +7,7 @@ package com.github.developframework.jsonview.core.convertor;
  *
  * @param <TARGET> target Type
  */
-public interface PropertyConvertor<TARGET> {
+public interface PropertyConverter<TARGET> {
 
 	/**
 	 * convert handle

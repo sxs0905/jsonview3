@@ -31,7 +31,7 @@
 	</xs:attributeGroup>
 	<xs:attributeGroup name="attrGroupForPropertyElement">
 		<xs:attributeGroup ref="attrGroupForElement"></xs:attributeGroup>
-		<xs:attribute name="convertor" type="xs:string" />
+		<xs:attribute name="converter" type="xs:string" />
 	</xs:attributeGroup>
 	<xs:complexType name="containerElementType">
 		<xs:group ref="elementGroup"></xs:group>

@@ -25,7 +25,7 @@ class UnixTimestampPropertyElementSaxParser extends DescribeContentElementSaxPar
 	@Override
 	protected void addOtherAttributes(UnixTimestampPropertyElement element, Attributes attributes) {
 		element.setNullHidden(attributes.getValue("null-hidden"));
-		element.setConvertor(attributes.getValue("convertor"));
+		element.setConverter(attributes.getValue("converter"));
 	}
 
 	@Override

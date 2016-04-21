@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.github.developframework.jsonview.core.convertor.PropertyConvertor;
+import com.github.developframework.jsonview.core.converter.PropertyConverter;
 import com.github.developframework.jsonview.exception.JsonviewExpressionException;
 
 /**
@@ -15,23 +15,23 @@ import com.github.developframework.jsonview.exception.JsonviewExpressionExceptio
  */
 public abstract class PropertyElement extends DescribeContentElement {
 
-	protected PropertyConvertor<?> convertor;
+	protected PropertyConverter<?> converter;
 
 	public PropertyElement(String data, String alias) {
 		super(data, alias);
 	}
 
-	public Optional<PropertyConvertor<?>> getConvertor() {
-		return Optional.ofNullable(convertor);
+	public Optional<PropertyConverter<?>> getConverter() {
+		return Optional.ofNullable(converter);
 	}
 
-	public void setConvertor(String convertor) {
-		if (StringUtils.isBlank(convertor)) {
+	public void setConverter(String converter) {
+		if (StringUtils.isBlank(converter)) {
 			return;
 		}
 		try {
-			Class<?> clazz = Class.forName(convertor);
-			this.convertor = (PropertyConvertor<?>) clazz.newInstance();
+			Class<?> clazz = Class.forName(converter);
+			this.converter = (PropertyConverter<?>) clazz.newInstance();
 		} catch (ClassNotFoundException e) {
 			throw new JsonviewExpressionException(e.getMessage() + " is not found.");
 		} catch (InstantiationException e) {

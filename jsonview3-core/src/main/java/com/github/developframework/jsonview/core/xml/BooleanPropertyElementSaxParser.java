@@ -25,7 +25,7 @@ public class BooleanPropertyElementSaxParser extends DescribeContentElementSaxPa
 	@Override
 	protected void addOtherAttributes(BooleanPropertyElement element, Attributes attributes) {
 		element.setNullHidden(attributes.getValue("null-hidden"));
-		element.setConvertor(attributes.getValue("convertor"));
+		element.setConverter(attributes.getValue("converter"));
 	}
 
 	@Override

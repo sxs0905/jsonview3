@@ -36,7 +36,7 @@ public abstract class PropertyProcessor extends DescribeContentProcessor<Propert
 		}
 		valueOptional.ifPresent(value -> {
 			// Processing converter
-			Optional<Object> optional = element.getConvertor().map(convertor -> convertor.convert(value));
+			Optional<Object> optional = element.getConverter().map(converter -> converter.convert(value));
 			final Object newValue = optional.orElse(value);
 			Class<?> valueClass = newValue.getClass();
 			if (support(valueClass)) {
