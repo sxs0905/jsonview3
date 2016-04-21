@@ -54,14 +54,24 @@ public class JsonviewFactory {
 	}
 
 	/**
+	 * constructor for jsonviewConfiguration and custom objectMapper
+	 * 
+	 * @param jsonviewConfiguration jsonviewConfiguration
+	 * @param objectMapper objectMapper
+	 */
+	public JsonviewFactory(JsonviewConfiguration jsonviewConfiguration, ObjectMapper objectMapper) {
+		Objects.requireNonNull(jsonviewConfiguration);
+		this.jsonviewConfiguration = jsonviewConfiguration;
+		this.objectMapper = objectMapper;
+	}
+
+	/**
 	 * constructor for jsonviewConfiguration
 	 * 
 	 * @param jsonviewConfiguration jsonviewConfiguration
 	 */
 	public JsonviewFactory(JsonviewConfiguration jsonviewConfiguration) {
-		Objects.requireNonNull(jsonviewConfiguration);
-		this.jsonviewConfiguration = jsonviewConfiguration;
-		this.objectMapper = new ObjectMapper();
+		this(jsonviewConfiguration, new ObjectMapper());
 	}
 
 	/**
