@@ -184,7 +184,7 @@ Jsonview configuration文档不是唯一的，Jsonview框架允许你拥有多�
 + `<mapping-object>`
 + `<virtual-object>`
 + `<ignore-property>`
-+ `<extend-port>` (since 3.1.0)
++ `<extend-port>`
 
 拓展型标签
 
@@ -699,7 +699,7 @@ System.out.println(json);
 ```
 
 #### <a name="chapter532">**5.3.2 继承**</a>
-从 **3.1.0版本** Jsonview框架引入继承的概念，在`<jsonview>`标签可以添加属性`extend`指定继承的jsonview和继承的端口。继承的概念可以理解为反向import，调用子jsonview视图，会优先从父jsonview开始构造结构，当遇到匹配端口名的`<extend-port>`标签时才会构造子jsonview视图。
+Jsonview框架的继承的概念，在`<jsonview>`标签可以添加属性`extend`指定继承的jsonview和继承的端口。继承的概念可以理解为反向import，调用子jsonview视图，会优先从父jsonview开始构造结构，当遇到匹配端口名的`<extend-port>`标签时才会构造子jsonview视图。
 
 **注意：**假如单独调用了有`<extend-port>`标签的父jsonview视图或者端口没有与之对应的子jsonview实现，则`<extend-port>`标签被忽略。
 
