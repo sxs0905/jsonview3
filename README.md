@@ -1078,18 +1078,17 @@ public JsonviewResponse studentDetail(@PathVariable("id") int id) {
 #### **8.4.1. 传统XML配置**
 dispatcher-servlet.xml
 ```
-<jsonview:scan id="jsonviewFactory" locations="classpath:jsonview/*.xml" />
-	
-<bean id="jsonviewHttpMessageConverter" class="com.github.developframework.jsonview.springmvc.JsonviewHttpMessageConverter">
-	<property name="objectMapper">
-		<bean class="com.fasterxml.jackson.databind.ObjectMapper">
-			<property name="propertyNamingStrategy">
-			    <!-- 此参数为自动驼峰转换下划线 -->
-				<bean class="com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy" />
-			</property>
-		</bean>
+<bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
+	<property name="propertyNamingStrategy">
+		<!-- 此参数为自动驼峰转换下划线 -->
+		<bean class="com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseWithUnderscoresStrategy" />
 	</property>
-	<!-- 配置支持的媒体类型列表 -->
+</bean>
+<jsonview:scan id="jsonviewFactory" locations="classpath:jsonview/*.xml" object-mapper-ref="objectMapper" />
+	
+<bean id="jsonviewHttpMessageConverter"
+	class="com.github.developframework.jsonview.springmvc.JsonviewHttpMessageConverter">
+	<property name="jsonviewFactory" ref="jsonviewFactory"></property>
 	<property name="supportedMediaTypes">
 		<list>
 			<value>application/json;charset=UTF-8</value>
