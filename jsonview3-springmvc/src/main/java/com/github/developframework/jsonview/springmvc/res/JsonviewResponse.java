@@ -40,7 +40,7 @@ public abstract class JsonviewResponse implements Serializable {
 	 * 
 	 * @param dataName data name
 	 * @param data data value
-	 * @return
+	 * @return this jsonviewResponse
 	 */
 	public JsonviewResponse putData(String dataName, Object data) {
 		dataModel.putData(dataName, data);
