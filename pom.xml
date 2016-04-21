@@ -46,12 +46,10 @@
 	</modules>
 
 	<properties>
-		<junit.version>4.12</junit.version>
 		<spring.version>4.2.5.RELEASE</spring.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
 		<jackson.version>2.6.5</jackson.version>
-		<servlet-api.version>3.1.0</servlet-api.version>
 		<common-lang3.version>3.4</common-lang3.version>
 	</properties>
 
@@ -109,18 +107,8 @@
 				<artifactId>spring-web</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-test</artifactId>
-				<version>${spring.version}</version>
-			</dependency>
 			<!-- spring-framework end -->
 
-			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${junit.version}</version>
-			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
