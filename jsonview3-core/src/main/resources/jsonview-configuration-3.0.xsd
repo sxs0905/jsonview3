@@ -1,5 +1,5 @@
-<xs:schema xmlns="https://github.com/developframework/jsonview3"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://github.com/developframework/jsonview3"
+<xs:schema xmlns="https://github.com/developframework/jsonview3/schema"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="https://github.com/developframework/jsonview3/schema"
 	elementFormDefault="qualified">
 	<xs:element name="jsonview-configuration">
 		<xs:complexType>
