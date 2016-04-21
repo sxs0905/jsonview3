@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Jsonview3 by developframework</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Jsonview3</h1>
+      <h2 class="project-tagline">Configurable design json structure.</h2>
+      <a href="https://github.com/developframework/jsonview3" class="btn">View on GitHub</a>
+      <a href="https://github.com/developframework/jsonview3/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/developframework/jsonview3/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="jsonview3-framework" class="anchor" href="#jsonview3-framework" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Jsonview3 Framework</h1>
+
+<h3>
+<a id="jsonview3-framework-built-on-jackson-frameworkimplementation-through-xml-configuration-file-to-customize-the-json-structure-greatly-improved-the-java-generates-a-json-string-freedom-let-the-development-more-convenient-quickly" class="anchor" href="#jsonview3-framework-built-on-jackson-frameworkimplementation-through-xml-configuration-file-to-customize-the-json-structure-greatly-improved-the-java-generates-a-json-string-freedom-let-the-development-more-convenient-quickly" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Jsonview3 framework built on Jackson framework,Implementation through XML configuration file to customize the json structure, greatly improved the Java generates a json string freedom, let the development more convenient quickly.</h3>
+
+<h2>
+<a id="minimum-requirements" class="anchor" href="#minimum-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Minimum requirements</h2>
+
+<p>JDK8+</p>
+
+<h2>
+<a id="quick-start" class="anchor" href="#quick-start" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick Start</h2>
+
+<p>Choose a dependency for your project：</p>
+
+<p>java project</p>
+
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.github.developframework&lt;/groupId&gt;
+    &lt;artifactId&gt;jsonview3-core&lt;/artifactId&gt;
+    &lt;version&gt;3.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>Design json in spring Ioc</p>
+
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.github.developframework&lt;/groupId&gt;
+    &lt;artifactId&gt;jsonview3-spring-support&lt;/artifactId&gt;
+    &lt;version&gt;3.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<p>Make RESTful API with springMVC</p>
+
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.github.developframework&lt;/groupId&gt;
+    &lt;artifactId&gt;jsonview3-springmvc&lt;/artifactId&gt;
+    &lt;version&gt;3.0.0&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+
+<h3>
+<a id="hello-world" class="anchor" href="#hello-world" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hello World</h3>
+
+<p><code>JunitTest.java</code></p>
+
+<pre><code>import com.github.developframework.jsonview.core.JsonCreator;
+import com.github.developframework.jsonview.core.JsonviewFactory;
+import com.github.developframework.jsonview.data.DataModel;
+import com.github.developframework.jsonview.data.HashDataModel;
+import org.junit.Before;
+import org.junit.Test;
+
+public class JunitTest {
+
+    private JsonviewFactory jsonviewFactory;
+
+    @Before
+    public void init() {
+        jsonviewFactory = new JsonviewFactory("/jsonview/jsonview-demo.xml");
+    }
+
+    @Test
+    public void test() {
+        JsonCreator jsonCreator = jsonviewFactory.getJsonCreator();
+        DataModel dataModel = new HashDataModel();
+        dataModel.putData("sayHello", "Hello Jsonview!");
+        String json = jsonCreator.createJson(dataModel, "jsonview-demo", "first-view");
+        System.out.println(json);
+    }
+}
+</code></pre>
+
+<p><code>/jsonview/jsonview-demo.xml</code></p>
+
+<pre><code>&lt;jsonview-configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://github.com/developframework/jsonview3/schema" 
+    xsi:schemaLocation="
+    https://github.com/developframework/jsonview3/schema
+    https://github.com/developframework/jsonview3/schema/jsonview-configuration-3.0.xsd"&gt;
+    &lt;jsonview-package namespace="jsonview-demo"&gt;
+        &lt;jsonview id="first-view"&gt;
+            &lt;property data="sayHello"/&gt;
+        &lt;/jsonview&gt;
+    &lt;/jsonview-package&gt;
+&lt;/jsonview-configuration&gt;
+</code></pre>
+
+<p>result:</p>
+
+<pre><code>{"say_hello":"Hello Jsonview!"}
+</code></pre>
+
+<p>Please click <a href="https://github.com/developframework/jsonview3/blob/master/README.md">README.md</a> to read more explanation about Jsonview3 Framework.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/developframework/jsonview3">Jsonview3</a> is maintained by <a href="https://github.com/developframework">developframework</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
