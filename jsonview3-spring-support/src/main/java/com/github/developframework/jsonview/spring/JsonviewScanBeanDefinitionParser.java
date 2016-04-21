@@ -24,10 +24,14 @@ public class JsonviewScanBeanDefinitionParser extends AbstractSingleBeanDefiniti
 	@Override
 	protected void doParse(Element element, BeanDefinitionBuilder builder) {
 		final String locations = element.getAttribute("locations");
+		final String objectMapperRef = element.getAttribute("object-mapper-ref");
 		if (StringUtils.hasText(locations)) {
 			JsonviewScanLoader loader = new JsonviewScanLoader(locations);
 			JsonviewConfiguration jsonviewConfiguration = loader.createJsonviewConfiguration();
 			builder.addConstructorArgValue(jsonviewConfiguration);
+			if (StringUtils.hasText(objectMapperRef)) {
+				builder.addConstructorArgReference(objectMapperRef);
+			}
 		}
 	}
 
